@@ -6,12 +6,12 @@
 /*   By: rkrief <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 11:04:44 by rkrief            #+#    #+#             */
-/*   Updated: 2018/05/17 20:20:19 by rkrief           ###   ########.fr       */
+/*   Updated: 2018/05/17 20:32:12 by rkrief           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../lem-in/libft/libft.h"
-#include "../includes/op.h"
+#include "../libft/libft.h"
+#include "../op.h"
 #include <stdio.h>
 
 

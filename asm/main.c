@@ -6,11 +6,11 @@
 /*   By: rkrief <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 18:35:51 by rkrief            #+#    #+#             */
-/*   Updated: 2018/05/15 14:08:10 by rkrief           ###   ########.fr       */
+/*   Updated: 2018/05/17 20:32:35 by rkrief           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../lem-in/libft/libft.h"
+#include "../libft/libft.h"
 #include <fcntl.h>
 void	ft_parsing(char *str);
 
