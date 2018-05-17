@@ -6,7 +6,7 @@
 /*   By: rkrief <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 16:05:57 by rkrief            #+#    #+#             */
-/*   Updated: 2018/05/15 20:15:35 by rkrief           ###   ########.fr       */
+/*   Updated: 2018/05/17 11:55:20 by rkrief           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <stdio.h>
 
 void    ft_is_an_error(char *str, int i);
+void    ft_get_in_chain(char *str, int j);
 
 int		ft_complete_name(char *str, int i, header_t *header)
 {
@@ -71,7 +72,7 @@ void	ft_pass_comment(char *str, int *i)
 	{
 		while (str[*i] && str[*i] != '\n')
 			*i = *i + 1;
-		if (str[*i + 1] && str[*i + 1] != '#')
+		if (str[*i + 1] && (str[*i + 1] != '#' && str[*i + 1] != '\n'))
 		{
 			*i = *i + 1;
 			return ;
@@ -81,7 +82,7 @@ void	ft_pass_comment(char *str, int *i)
 	}
 }
 
-void	ft_get_comment_then_name(header_t *header, char *str, int i)
+int		ft_get_comment_then_name(header_t *header, char *str, int i)
 {
 	char	*tmp;
 	int		j;
@@ -95,12 +96,13 @@ void	ft_get_comment_then_name(header_t *header, char *str, int i)
 	ft_pass_comment(str, &i);
 	tmp = ft_strnmdup(str, i, i + 5);
 	if (!ft_strequ(NAME_CMD_STRING, tmp))
-		ft_is_an_error(str, i + );
-	if (!ft_complete_name(str, i + 5, header))
+		ft_is_an_error(str, i + 5);
+	if (!(j = ft_complete_name(str, i + 5, header)))
 		ft_is_an_error(str, i);
+	return (j);
 }
 
-void	ft_get_name_then_comment(header_t *header, char *str, int i)
+int		ft_get_name_then_comment(header_t *header, char *str, int i)
 {
 	char	*tmp;
 	int		j;
@@ -115,13 +117,15 @@ void	ft_get_name_then_comment(header_t *header, char *str, int i)
 	tmp = ft_strnmdup(str, i, i + 8);
 	if (!ft_strequ(COMMENT_CMD_STRING, tmp))
 		ft_is_an_error(str, i);
-	if (!ft_complete_comment(str, i + 8, header))
+	if (!(j = ft_complete_comment(str, i + 8, header)))
 		ft_is_an_error(str, i);
+	return (j);
 }
 
 void	ft_parsing(char *str, header_t *header)
 {
 	int		i;
+	int		j;
 	char	*tmp;
 	char	*tmpp;
 
@@ -137,11 +141,12 @@ void	ft_parsing(char *str, header_t *header)
 		ft_is_an_error(str, ft_strlen(tmp));
 	}	
 	if (ft_strequ(NAME_CMD_STRING, tmp))
-		ft_get_name_then_comment(header, str, i);
+		j = ft_get_name_then_comment(header, str, i);
 	else if (ft_strequ(COMMENT_CMD_STRING, tmpp))
-		ft_get_comment_then_name(header, str, i);
+		j = ft_get_comment_then_name(header, str, i);
 	else
 		ft_is_an_error(str, i);
+	ft_get_in_chain(str, j);
 	ft_putstr("le name est : ");
 	ft_putendl(header->prog_name);
 	ft_putendl("fin");

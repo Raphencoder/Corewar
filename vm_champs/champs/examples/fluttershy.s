@@ -4,6 +4,8 @@
 .name		"fluttershy"
 .comment	"oh, my, what a scary project"
 
+#
+
 entry:
 	fork	%:coregeni
 	st		r1, 6
@@ -36,7 +38,7 @@ ardefwrite:
 ardefl1:
 	live	%295423
 	sti		r4, %:ardeftgt, r2
-	add		r2, r3, r2
+	add		r2     , r3, r2
 	sti		r4, %:ardeftgt, r2
 	add		r2, r3, r2
 ardefchk:

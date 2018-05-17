@@ -6,7 +6,7 @@
 /*   By: zaz <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2018/05/14 15:48:10 by rkrief           ###   ########.fr       */
+/*   Updated: 2018/05/17 13:11:11 by rkrief           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,14 @@ typedef char	t_arg_type;
 #define PROG_NAME_LENGTH		(128)
 #define COMMENT_LENGTH			(2048)
 #define COREWAR_EXEC_MAGIC		0xea83f3
+
+typedef struct		chain_s
+{
+	unsigned int	nb_col;
+	unsigned int	nb_lines;
+	char			*content;
+	struct chain_s	*next;
+}
 
 typedef struct		header_s
 {
