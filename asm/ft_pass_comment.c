@@ -1,0 +1,34 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_pass_comment.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rkrief <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/05/18 10:42:10 by rkrief            #+#    #+#             */
+/*   Updated: 2018/05/18 10:42:53 by rkrief           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../libft/libft.h"
+#include "../op.h"
+#include <stdio.h>
+
+void    ft_is_an_error(char *str, int i);
+void    ft_get_in_chain(char *str, int j);
+
+void	ft_pass_comment(char *str, int *i)
+{
+	while (str[*i])
+	{
+		while (str[*i] && str[*i] != '\n')
+			*i = *i + 1;
+		if (str[*i + 1] && (str[*i + 1] != '#' && str[*i + 1] != '\n'))
+		{
+			*i = *i + 1;
+			return ;
+		}
+		if (str[*i + 1])
+			*i = *i + 1;
+	}
+}

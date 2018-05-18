@@ -6,7 +6,7 @@
 /*   By: rkrief <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 16:05:57 by rkrief            #+#    #+#             */
-/*   Updated: 2018/05/17 20:33:35 by rkrief           ###   ########.fr       */
+/*   Updated: 2018/05/18 10:43:50 by rkrief           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 
 void    ft_is_an_error(char *str, int i);
 void    ft_get_in_chain(char *str, int j);
+void    ft_pass_comment(char *str, int *i);
 
 int		ft_complete_name(char *str, int i, header_t *header)
 {
@@ -64,22 +65,6 @@ int		ft_complete_comment(char *str, int i, header_t *header)
 		return (-1);
 	header->comment[j] = '\0';
 	return (i);
-}
-
-void	ft_pass_comment(char *str, int *i)
-{
-	while (str[*i])
-	{
-		while (str[*i] && str[*i] != '\n')
-			*i = *i + 1;
-		if (str[*i + 1] && (str[*i + 1] != '#' && str[*i + 1] != '\n'))
-		{
-			*i = *i + 1;
-			return ;
-		}
-		if (str[*i + 1])
-			*i = *i + 1;		
-	}
 }
 
 int		ft_get_comment_then_name(header_t *header, char *str, int i)

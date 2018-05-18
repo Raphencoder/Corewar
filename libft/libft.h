@@ -6,7 +6,7 @@
 /*   By: alecott <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 08:48:09 by alecott           #+#    #+#             */
-/*   Updated: 2018/05/02 13:00:22 by rkrief           ###   ########.fr       */
+/*   Updated: 2018/05/18 12:16:49 by rkrief           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int				ft_isalnum(int c);
 int				ft_isascii(int c);
 int				ft_isprint(int c);
 int				ft_toupper(int c);
+int				ft_isnumber(char *str);
 int				ft_tolower(int c);
 char			*ft_strcat(char *dest, const char *src);
 char			*ft_strncat(char *dest, const char *src, size_t n);
