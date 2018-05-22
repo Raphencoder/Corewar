@@ -6,17 +6,11 @@
 #    By: alecott <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/17 11:04:33 by alecott           #+#    #+#              #
-#    Updated: 2018/05/22 13:10:18 by alecott          ###   ########.fr        #
+#    Updated: 2018/05/22 13:40:41 by alecott          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CFLAGS = -Wall -Werror -Wextra -g
-
-LIB_NAME = libft.a
-
-CWR_NAME = corewar
-
-ASM_NAME = asm
 
 LIB_PATH = ./libft/
 
@@ -25,6 +19,12 @@ ASM_PATH = ./asm/
 CWR_PATH = ./corewar/
 
 INC_PATH = ./includes/
+
+ASM_NAME = ./asm/asm
+
+CWR_NAME = corewar
+
+LIB_NAME = libft.a
 
 LIB = $(addprefix $(LIB_PATH), $(LIB_NAME))
 
@@ -65,16 +65,16 @@ ASM_OBJ = $(ASM_SRCS:.c=.o)
 
 CWR_OBJ = $(CWR_SRCS:.c=.o)
 
-all: $(ASM_NAME)
+all: $(ASM_NAME) #$(CWR_NAME)
 
-$(CWR_NAME): $(CWR_OBJ) $(LIB_OBJ) $(LIB_INC) $(INC)
-	@$(MAKE) -C libft
-	@gcc $(CFLAGS) $(CWR_OBJ) -L libft -lft -o $(CWR_NAME)
-
-%.o:$(CWR_PATH)%.c
-	gcc -c $< -o $@ $(CFLAGS)
-
-$(ASM_NAME): $(ASM_OBJ) $(LIB_OBJ) $(LIB_INC) $(ASM_INC)
+#$(CWR_NAME): $(CWR_OBJ) $(LIB_OBJ) $(LIB_INC) $(INC)
+#	@$(MAKE) -C libft
+#	@gcc $(CFLAGS) $(CWR_OBJ) -L libft -lft -o $(CWR_NAME)
+#
+#%.o:$(CWR_PATH)%.c
+#	gcc -c $< -o $@ $(CFLAGS)
+#
+$(ASM_NAME): $(ASM_OBJ) #$(LIB_OBJ) $(LIB_INC) $(ASM_INC)
 	@$(MAKE) -C libft
 	@gcc $(CFLAGS) $(ASM_OBJ) -L libft -lft -o $(ASM_NAME)
 
@@ -83,12 +83,12 @@ $(ASM_NAME): $(ASM_OBJ) $(LIB_OBJ) $(LIB_INC) $(ASM_INC)
 
 clean:
 	@$(MAKE) -C libft $@
-	@/bin/rm -f $(ASM_OBJ) $(CWR_OBJ)
+	@/bin/rm -f $(ASM_OBJ) #$(CWR_OBJ)
 
 fclean: clean
 	@$(MAKE) -C libft $@
-	@/bin/rm -f $(CWR_NAME) $(ASM_NAME)
+	@/bin/rm -f $(ASM_NAME) #$(CWR_NAME)
 
-re: fclean $(NAME)
+re: fclean $(ASM_NAME) #$(CWR_NAME)
 
 .PHONY: all clean fclean re
