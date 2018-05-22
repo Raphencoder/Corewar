@@ -6,7 +6,7 @@
 /*   By: zaz <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2018/05/22 11:51:31 by alecott          ###   ########.fr       */
+/*   Updated: 2018/05/22 15:26:50 by rkrief           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,23 +44,45 @@
 #define NBR_LIVE				21
 #define MAX_CHECKS				10
 
-typedef char	t_arg_type;
+/*
+ * ** t_op
+ * */
 
-#define T_REG					1
-#define T_DIR					2
-#define T_IND					4
-#define T_LAB					8
+typedef struct			s_op
+{
+	char				*name;
+	int					nb_param;
+	int					param[3];
+	int					op_code;
+	int					nb_cycles;
+	char				*description;
+	int					ocp;
+	int					label_size;
+}						t_op;
 
-#define PROG_NAME_LENGTH		(128)
-#define COMMENT_LENGTH			(2048)
-#define COREWAR_EXEC_MAGIC		0xea83f3
+extern t_op				op_tab[];
 
-typedef struct		header_s
+typedef char			t_arg_type;
+
+# define T_REG					1
+# define T_DIR					2
+# define T_IND					4
+# define T_LAB					8
+
+/*
+ * ** prog
+ * */
+
+# define PROG_NAME_LENGTH		(128)
+# define COMMENT_LENGTH			(2048)
+# define COREWAR_EXEC_MAGIC		0xea83f3
+
+typedef struct			header_s
 {
 	unsigned int		magic;
 	char				prog_name[PROG_NAME_LENGTH + 1];
 	unsigned int		prog_size;
 	char				comment[COMMENT_LENGTH + 1];
-}					header_t;
+}						header_t;
 
 #endif

@@ -6,7 +6,7 @@
 #    By: alecott <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/17 11:04:33 by alecott           #+#    #+#              #
-#    Updated: 2018/05/22 13:40:41 by alecott          ###   ########.fr        #
+#    Updated: 2018/05/22 15:28:08 by rkrief           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,7 @@ ALL_LIB_SRCS = ft_atoi.c ft_isalnum.c ft_isascii.c ft_isprint.c ft_memset.c \
 		  ft_tabchr.c ft_tabstr.c ft_puttab.c ft_tabdup.c ft_strndup.c \
 		  ft_strnmdup.c ft_copy_tab.c 
 
-ALL_ASM_SRCS = ft_get_in_chain.c ft_is_an_error.c ft_parsing.c ft_pass_comment.c main.c
+ALL_ASM_SRCS = op.c ft_get_in_chain.c ft_is_an_error.c ft_parsing.c ft_pass_comment.c main.c
 
 ALL_CWR_SRCS = 
 
