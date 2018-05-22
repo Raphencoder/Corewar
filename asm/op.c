@@ -38,3 +38,35 @@ t_op	op_tab[17] =
 	{"aff", 1, {T_REG}, 16, 2, "aff", 1, 0},
 	{0, 0, {0}, 0, 0, 0, 0, 0}
 };
+
+t_op	ft_get_op_tab(void)
+{
+	return (op_tab);	
+}
+
+t_op	ft_search_op(char *str)
+{
+	size_t	i;
+	
+	i  = 0;
+	while (i < 17)
+	{
+		if (ft_strequ(op_tab[i].str), str)
+			return (op_tab + i)
+		i++;		
+	}
+}
+
+t_op	*ft_get_op(size_t opcode)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < 17)
+	{
+		if (op_tab[i].opcode == opcode)
+			return (op_tab + i);
+		i++;
+	}
+	return (NULL);
+}
