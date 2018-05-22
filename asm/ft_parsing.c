@@ -6,7 +6,7 @@
 /*   By: rkrief <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 16:05:57 by rkrief            #+#    #+#             */
-/*   Updated: 2018/05/22 14:25:34 by rkrief           ###   ########.fr       */
+/*   Updated: 2018/05/22 16:51:00 by rkrief           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ void	ft_parsing(char *str, header_t *header)
 {
 	int		i;
 	int		j;
+	t_chain	*block;
 	char	*tmp;
 	char	*tmpp;
 
@@ -127,7 +128,8 @@ void	ft_parsing(char *str, header_t *header)
 		j = ft_get_comment_then_name(header, str, i);
 	else
 		ft_is_an_error(str, i);
-	ft_get_in_chain(str, j);
+	block = ft_get_in_chain(str, j);
+	ft_verify_label(str, j, block);
 	ft_putstr("le name est : ");
 	ft_putendl(header->prog_name);
 	ft_putendl("fin");
