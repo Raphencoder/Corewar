@@ -6,16 +6,12 @@
 /*   By: rkrief <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/18 10:42:10 by rkrief            #+#    #+#             */
-/*   Updated: 2018/05/18 16:39:13 by rkrief           ###   ########.fr       */
+/*   Updated: 2018/05/22 12:57:44 by alecott          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft/libft.h"
-#include "../op.h"
-#include <stdio.h>
-
-void    ft_is_an_error(char *str, int i);
-void    ft_get_in_chain(char *str, int j);
+#include "../includes/asm.h"
 
 void	ft_pass_comment(char *str, int *i)
 {

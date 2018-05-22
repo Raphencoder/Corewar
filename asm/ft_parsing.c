@@ -6,17 +6,12 @@
 /*   By: rkrief <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 16:05:57 by rkrief            #+#    #+#             */
-/*   Updated: 2018/05/18 10:43:50 by rkrief           ###   ########.fr       */
+/*   Updated: 2018/05/22 12:56:47 by alecott          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft/libft.h"
-#include "../op.h"
-#include <stdio.h>
-
-void    ft_is_an_error(char *str, int i);
-void    ft_get_in_chain(char *str, int j);
-void    ft_pass_comment(char *str, int *i);
+#include "../includes/asm.h"
 
 int		ft_complete_name(char *str, int i, header_t *header)
 {

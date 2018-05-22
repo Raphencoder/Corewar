@@ -6,13 +6,12 @@
 /*   By: rkrief <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 17:07:56 by rkrief            #+#    #+#             */
-/*   Updated: 2018/05/17 20:33:25 by rkrief           ###   ########.fr       */
+/*   Updated: 2018/05/22 12:56:22 by alecott          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft/libft.h"
-#include "../op.h"
-#include <stdio.h>
+#include "../includes/asm.h"
 
 void	ft_is_an_error(char *str, int i)
 {

@@ -6,7 +6,7 @@
 #    By: alecott <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/17 11:04:33 by alecott           #+#    #+#              #
-#    Updated: 2018/05/17 15:24:05 by alecott          ###   ########.fr        #
+#    Updated: 2018/05/22 13:02:19 by alecott          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,11 +24,13 @@ ASM_PATH = ./asm/
 
 CWR_PATH = ./corewar/
 
+INC_PATH = ./includes/
+
 LIB = $(addprefix $(LIB_PATH), $(LIB_NAME))
 
 LIB_INC = $(addprefix $(LIB_PATH), libft.h)
 
-INC = corewar.h
+ASM_INC = $(addprefix $(INC_PATH), asm.h)
 
 ALL_LIB_SRCS = ft_atoi.c ft_isalnum.c ft_isascii.c ft_isprint.c ft_memset.c \
 		  ft_strcmp.c ft_strdup.c ft_strncat.c ft_strncpy.c ft_tolower.c \
@@ -47,7 +49,7 @@ ALL_LIB_SRCS = ft_atoi.c ft_isalnum.c ft_isascii.c ft_isprint.c ft_memset.c \
 		  ft_tabchr.c ft_tabstr.c ft_puttab.c ft_tabdup.c ft_strndup.c \
 		  ft_strnmdup.c ft_copy_tab.c 
 
-ALL_ASM_SRCS = ft_get_in_chain.c ft_is_an_error.c ft_parsing.c main.c
+ALL_ASM_SRCS = ft_get_in_chain.c ft_is_an_error.c ft_parsing.c ft_ pass_comment.c main.c
 
 ALL_CWR_SRCS = 
 
@@ -63,7 +65,7 @@ ASM_OBJ = $(ASM_SRCS:.c=.o)
 
 CWR_OBJ = $(CWR_SRCS:.c=.o)
 
-all: $(CWR_NAME) $(ASM_NAME)
+all: $(ASM_NAME)
 
 $(CWR_NAME): $(CWR_OBJ) $(LIB_OBJ) $(LIB_INC) $(INC)
 	@$(MAKE) -C libft
@@ -72,7 +74,7 @@ $(CWR_NAME): $(CWR_OBJ) $(LIB_OBJ) $(LIB_INC) $(INC)
 %.o:$(CWR_PATH)%.c
 	gcc -c $< -o $@ $(CFLAGS)
 
-$(ASM_NAME): $(ASM_OBJ) $(LIB_OBJ) $(LIB_INC) $(INC)
+$(ASM_NAME): $(ASM_OBJ) $(LIB_OBJ) $(LIB_INC) $(ASM_INC)
 	@$(MAKE) -C libft
 	@gcc $(CFLAGS) $(ASM_OBJ) -L libft -lft -o $(ASM_NAME)
 

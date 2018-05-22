@@ -6,20 +6,20 @@
 /*   By: rkrief <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 18:35:51 by rkrief            #+#    #+#             */
-/*   Updated: 2018/05/17 20:32:35 by rkrief           ###   ########.fr       */
+/*   Updated: 2018/05/22 13:02:22 by alecott          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft/libft.h"
-#include <fcntl.h>
-void	ft_parsing(char *str);
+#include "../includes/asm.h"
 
 int main(int argc, char **argv)
 {
-	int		fd;
-	char	*str;
-	char	*getall;
-	char	*tmp;
+	int			fd;
+	char		*str;
+	char		*getall;
+	header_t	*header;
+	char		*tmp;
 
 	getall = NULL;
 	if (!(fd = open(argv[1], O_RDONLY)))
@@ -38,6 +38,6 @@ int main(int argc, char **argv)
 				ft_strdel(&tmp);	
 			}
 	}
-	ft_parsing(getall);
+	ft_parsing(getall, header);
 	return (0);
 }
