@@ -6,17 +6,12 @@
 /*   By: rkrief <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 11:04:44 by rkrief            #+#    #+#             */
-/*   Updated: 2018/05/22 13:17:44 by rkrief           ###   ########.fr       */
+/*   Updated: 2018/05/22 13:50:10 by alecott          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft/libft.h"
-#include "../op.h"
-#include <stdio.h>
-
-
-void	ft_is_an_error(char *str, int i);
-void    ft_pass_comment(char *str, int *i);
+#include "../includes/op.h"
 
 int		ft_take_nb_argument(char *str, int i)
 {
