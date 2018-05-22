@@ -6,7 +6,7 @@
 /*   By: rkrief <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 16:05:57 by rkrief            #+#    #+#             */
-/*   Updated: 2018/05/22 12:56:47 by alecott          ###   ########.fr       */
+/*   Updated: 2018/05/22 13:09:57 by alecott          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ void	ft_parsing(char *str, header_t *header)
 	char	*tmpp;
 
 	i = 0;
+	j = 0;
 	if (str[i] == '#')
 		ft_pass_comment(str, &i);
 	tmp = ft_strnmdup(str, i, i + 5);
