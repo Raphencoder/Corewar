@@ -6,7 +6,7 @@
 /*   By: rkrief <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 11:04:44 by rkrief            #+#    #+#             */
-/*   Updated: 2018/05/18 17:00:26 by rkrief           ###   ########.fr       */
+/*   Updated: 2018/05/22 12:09:03 by rkrief           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,14 +52,18 @@ void	ft_complete_content(t_chain *block, char *str, int *i)
 	j = 0;
 	while (str[*i] == ' ' || str[*i] == '\t')
 		*i = *i + 1;
+	if (str[*i] == SEPARATOR_CHAR)
+		*i = *i + 1;
+	while (str[*i] == ' ' || str[*i] == '\t')
+		*i = *i + 1;
+	if (!ft_strchr(LABEL_CHARS, str[*i]) && str[*i] != DIRECT_CHAR)
+		ft_is_an_error(str, *i);
 	j = *i;
 	while (str[*i] > 32 && str[*i] != SEPARATOR_CHAR)
 	{
 		if (str[*i] == DIRECT_CHAR && (str[*i + 1] != LABEL_CHAR &&
-!ft_isnumber(str + (*i + 1)) && str[*i + 1] != '-' ))
+					!ft_isnumber(str + (*i + 1)) && str[*i + 1] != '-' ))
 		{
-			if (direct)
-				ft_is_an_error(str, *i);
 			ft_is_an_error(str, *i);
 			direct++;
 		}
@@ -74,21 +78,21 @@ void	ft_complete_content(t_chain *block, char *str, int *i)
 
 //int	ft_check_if_instruction(t_chain *block)
 /*{
-	int i;
+  int i;
 
-	i = 0;
-	while (i < 16)
-	{
-		if (ft_strequ(op_tab[i][0], block->content))
-		{
-			block->nb_op_tab = i;
-			return (1);
-		}
-		i++;	
-	}
-	return (0);
-}
-*/
+  i = 0;
+  while (i < 16)
+  {
+  if (ft_strequ(op_tab[i][0], block->content))
+  {
+  block->nb_op_tab = i;
+  return (1);
+  }
+  i++;	
+  }
+  return (0);
+  }
+  */
 int		ft_put_line_in_block(t_chain *block, int *i, char *str)
 {
 	int	nb_arg;
@@ -104,21 +108,28 @@ int		ft_put_line_in_block(t_chain *block, int *i, char *str)
 	block->content = ft_strnmdup(str, j, *i);
 	block->category = "INSTRUCTION";
 //	if (!(ft_check_if_instruction(block)))
-//		ft_is_an_error(str, j);
+	//		ft_is_an_error(str, j);
+	nb_arg = ft_take_nb_argument(str, *i);
 	while (str[*i] == ' ' || str[*i] == '\t')
 		*i = *i + 1;
-	nb_arg = ft_take_nb_argument(str, *i);
-//	if (nb_arg != op_tab[block->nb_op_tab][1])
-//	{
-//		ft_putendl("wrong number of argument");
-//		ft_is_an_error(str, *i);
-//	}
-//	if ((op_tab[block->nb_op_tab][2] == 1) && 
-//			(op_tab[block->nb_op_tab][3] == T_DIR && str[*i] != DIRECT_CHAR))
-//		ft_is_an_error(str, *i);
-//	else if ((block->nb_op_tab == 2 || block->nb_op_tab == 3 || block->nb_op_tab
-//				== 4 || block->nb_op_tab == 16 || block->nb_op_tab == 10) && ft_is_lib(str, *i))
-//		ft_is_an_error(str, *i);
+	if (ft_strequ(block->content, "add"))
+	{
+		ft_putstr("str[i] = ");
+		ft_putchar(str[*i]);
+		ft_putstr("-");
+	}
+	
+	//	if (nb_arg != op_tab[block->nb_op_tab][1])
+	//	{
+	//		ft_putendl("wrong number of argument");
+	//		ft_is_an_error(str, *i);
+	//	}
+	//	if ((op_tab[block->nb_op_tab][2] == 1) && 
+	//			(op_tab[block->nb_op_tab][3] == T_DIR && str[*i] != DIRECT_CHAR))
+	//		ft_is_an_error(str, *i);
+	//	else if ((block->nb_op_tab == 2 || block->nb_op_tab == 3 || block->nb_op_tab
+	//				== 4 || block->nb_op_tab == 16 || block->nb_op_tab == 10) && ft_is_lib(str, *i))
+	//		ft_is_an_error(str, *i);
 	block->next = ft_memalloc(sizeof(t_chain));
 	block = block->next;
 	clone = nb_arg;
@@ -142,6 +153,8 @@ void	ft_put_label_in_block(t_chain *block, int i, char *str, int j)
 
 	k = 0;
 	block->category = "LABEL";
+	if (!ft_strchr(LABEL_CHARS, str[i]))
+		i++;
 	block->content = ft_strnmdup(str, i, j + 1);
 	return ;
 }
@@ -153,13 +166,14 @@ int		ft_put_in_block(t_chain *block, int *j, char *str)
 	int nb_arg;
 
 	i = *j;
+	i = i - 1;
 	nb_arg = 0;
 	while (str[*j] != '\n')
 	{
 		if (str[*j] == LABEL_CHAR && str[*j - 1] != DIRECT_CHAR)
 		{
 			ft_put_label_in_block(block, i, str, *j);
-			*j = *j + 1;
+//			*j = *j + 1;
 			return (0);
 		}
 		*j = *j + 1;
@@ -212,25 +226,28 @@ void	ft_get_in_chain(char *str, int j)
 		else if ((!ft_strchr(LABEL_CHARS, str[j])) && str[j] != DIRECT_CHAR)
 			ft_is_an_error(str, j);
 		else
-			nb_arg = ft_put_in_block(block, &j, str);
-		while (nb_arg)
 		{
+			nb_arg = ft_put_in_block(block, &j, str);
+			while (nb_arg)
+			{
+				block = block->next;
+				nb_arg--;
+			}
+			block->next = ft_memalloc(sizeof(t_chain));
 			block = block->next;
-			nb_arg--;
+			block->content = ft_strdup("\n");
+			block->category = "INSTRUCTION";
+			block->next = ft_memalloc(sizeof(t_chain));
+			block = block->next;
 		}
-		block->next = ft_memalloc(sizeof(t_chain));
-		block = block->next;
-		block->content = ft_strdup("\n");
-		block->category = "INSTRUCTION";
-		block->next = ft_memalloc(sizeof(t_chain));
-		block = block->next;
 		j++;
 	}
 	block = start;
 	while (block->next)
 	{
+		ft_putstr(" |>");
 		ft_putstr(block->content);
-		ft_putchar(' ');
+		ft_putstr("<| ");
 		block = block->next;
 	}
 }
