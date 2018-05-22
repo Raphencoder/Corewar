@@ -6,7 +6,7 @@
 /*   By: rkrief <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 18:35:51 by rkrief            #+#    #+#             */
-/*   Updated: 2018/05/22 13:02:22 by alecott          ###   ########.fr       */
+/*   Updated: 2018/05/22 13:23:04 by rkrief           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ int main(int argc, char **argv)
 	header_t	*header;
 	char		*tmp;
 
+	(void)argc;
 	getall = NULL;
+	header = NULL;
 	if (!(fd = open(argv[1], O_RDONLY)))
 		return (0);
 	while (get_next_line(fd, &str))

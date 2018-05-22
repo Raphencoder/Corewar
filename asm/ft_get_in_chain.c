@@ -6,12 +6,17 @@
 /*   By: rkrief <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 11:04:44 by rkrief            #+#    #+#             */
-/*   Updated: 2018/05/22 13:04:16 by alecott          ###   ########.fr       */
+/*   Updated: 2018/05/22 13:17:44 by rkrief           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft/libft.h"
-#include "../includes/asm.h"
+#include "../op.h"
+#include <stdio.h>
+
+
+void	ft_is_an_error(char *str, int i);
+void    ft_pass_comment(char *str, int *i);
 
 int		ft_take_nb_argument(char *str, int i)
 {
@@ -83,7 +88,7 @@ void	ft_complete_content(t_chain *block, char *str, int *i)
   block->nb_op_tab = i;
   return (1);
   }
-  i++;	
+  i++;
   }
   return (0);
   }
@@ -95,6 +100,8 @@ int		ft_put_line_in_block(t_chain *block, int *i, char *str)
 	int clone;
 
 	nb_arg = 0;
+	if (str[*i] == '\n')
+		*i = *i + 1;
 	while (str[*i] == ' ' || str[*i] == '\t')
 		*i = *i + 1;
 	j = *i;
@@ -107,19 +114,12 @@ int		ft_put_line_in_block(t_chain *block, int *i, char *str)
 	nb_arg = ft_take_nb_argument(str, *i);
 	while (str[*i] == ' ' || str[*i] == '\t')
 		*i = *i + 1;
-	if (ft_strequ(block->content, "add"))
-	{
-		ft_putstr("str[i] = ");
-		ft_putchar(str[*i]);
-		ft_putstr("-");
-	}
-	
 	//	if (nb_arg != op_tab[block->nb_op_tab][1])
 	//	{
 	//		ft_putendl("wrong number of argument");
 	//		ft_is_an_error(str, *i);
 	//	}
-	//	if ((op_tab[block->nb_op_tab][2] == 1) && 
+	//	if ((op_tab[block->nb_op_tab][2] == 1) &&
 	//			(op_tab[block->nb_op_tab][3] == T_DIR && str[*i] != DIRECT_CHAR))
 	//		ft_is_an_error(str, *i);
 	//	else if ((block->nb_op_tab == 2 || block->nb_op_tab == 3 || block->nb_op_tab
@@ -157,7 +157,6 @@ void	ft_put_label_in_block(t_chain *block, int i, char *str, int j)
 int		ft_put_in_block(t_chain *block, int *j, char *str)
 {
 	int i;
-//	int	pos;
 	int nb_arg;
 
 	i = *j;
