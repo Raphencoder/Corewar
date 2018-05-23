@@ -6,11 +6,11 @@
 /*   By: zaz <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:43:01 by zaz               #+#    #+#             */
-/*   Updated: 2018/05/22 15:05:51 by rkrief           ###   ########.fr       */
+/*   Updated: 2018/05/23 09:31:52 by alecott          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/op.h"
+#include "../includes/asm.h"
 
 t_op	op_tab[17] =
 {
@@ -39,25 +39,26 @@ t_op	op_tab[17] =
 	{0, 0, {0}, 0, 0, 0, 0, 0}
 };
 
-t_op	ft_get_op_tab(void)
+t_op	*ft_get_op_tab(void)
 {
-	return (op_tab);	
+	return (op_tab);
 }
 
-t_op	ft_search_op(char *str)
+t_op	*ft_search_op(char *str)
 {
 	size_t	i;
-	
+
 	i  = 0;
 	while (i < 17)
 	{
-		if (ft_strequ(op_tab[i].str), str)
-			return (op_tab + i)
+		if (ft_strequ(op_tab[i].str, str))
+			return (op_tab + i);
 		i++;		
 	}
+	return (NULL);
 }
 
-t_op	*ft_get_op(size_t opcode)
+t_op	*ft_get_op(int opcode)
 {
 	size_t	i;
 

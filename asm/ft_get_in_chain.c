@@ -6,7 +6,7 @@
 /*   By: rkrief <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 11:04:44 by rkrief            #+#    #+#             */
-/*   Updated: 2018/05/22 16:52:12 by rkrief           ###   ########.fr       */
+/*   Updated: 2018/05/23 10:01:14 by alecott          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	ft_check_if_instruction(t_chain *block)
 	(void)block;
 	while (i < 16)
 	{
-		if (ft_strequ(op_tab[i].name, block->content))
+		if (ft_strequ(op_tab[i].str, block->content))
 		{
 			block->nb_op_tab = i;
 			return (1);
@@ -112,7 +112,7 @@ int		ft_put_line_in_block(t_chain *block, int *i, char *str)
 	while (str[*i] == ' ' || str[*i] == '\t')
 		*i = *i + 1;	
 	nb_arg = ft_take_nb_argument(str, *i);
-	if (nb_arg != op_tab[block->nb_op_tab].nb_param)
+	if (nb_arg != op_tab[block->nb_op_tab].nb_args)
 	{
 		ft_putendl("wrong number of argument");
 		ft_is_an_error(str, *i);
@@ -232,12 +232,15 @@ t_chain	*ft_get_in_chain(char *str, int j)
 	}
 	block->next = NULL;
 	block = start;
-	return (block);
 	while (block->next)
 	{
 		ft_putstr(" |>");
 		ft_putstr(block->content);
+		ft_putstr(" | ");
+		ft_putstr(block->category);
 		ft_putstr("<| ");
 		block = block->next;
 	}
+	block = start;
+	return (block);
 }
