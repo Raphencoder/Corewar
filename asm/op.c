@@ -6,7 +6,7 @@
 /*   By: zaz <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:43:01 by zaz               #+#    #+#             */
-/*   Updated: 2018/05/23 09:31:52 by alecott          ###   ########.fr       */
+/*   Updated: 2018/05/23 14:14:38 by alecott          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ t_op	*ft_search_op(char *str)
 	{
 		if (ft_strequ(op_tab[i].str, str))
 			return (op_tab + i);
-		i++;		
+		i++;
 	}
 	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: alecott <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 08:48:09 by alecott           #+#    #+#             */
-/*   Updated: 2018/05/18 12:16:49 by rkrief           ###   ########.fr       */
+/*   Updated: 2018/05/23 13:43:43 by alecott          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,5 +114,6 @@ int				ft_tabstr(char **tab, const char *s, int mode);
 void			ft_puttab(char **tab);
 char			**ft_tabdup(char **tab);
 char			**ft_copy_tab(char **tab);
+char			*ft_itoa_base(int nbr, int base);
 
 #endif

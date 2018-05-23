@@ -6,25 +6,38 @@
 /*   By: alecott <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/23 10:05:05 by alecott           #+#    #+#             */
-/*   Updated: 2018/05/23 12:12:05 by alecott          ###   ########.fr       */
+/*   Updated: 2018/05/23 14:17:21 by alecott          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/asm.h"
+/*
+void	ft_calcul_ocp(t_chain *block)
+{
+
+}
 
 void	ft_write_in_cor(int fd, t_chain *block, t_chain *start)
 {
+	t_op	*op;
+
 	while (block->next)
 	{
-		ft_putstr_fd(block->content, fd);
-		ft_putchar_fd('|', fd);
-		ft_putstr_fd(block->category, fd);
-		ft_putchar_fd('	', fd);
+		if (ft_strequ(block->category, "INSTRUCTION"))
+		{
+			op = ft_search_op(block->content);
+			ft_putstr(ft_itoa_base(op->opcode, 16));
+			if (op->ocp != 0)
+				ft_calcul_ocp(block);
+		}
+		else if (ft_strequ(block->category, "PARAM"))
+		else if (ft_strequ(block->category, "LABEL"))
+		else if (ft_strequ(block->category, "ENDL"))
 		block = block->next;
 	}
 	block = start;
 }
-
+*/
 void	ft_asm(char *str, t_chain *block)
 {
 	int		fd;
@@ -36,7 +49,7 @@ void	ft_asm(char *str, t_chain *block)
 	fd = open(str, O_WRONLY | O_CREAT, S_IROTH | S_IWUSR | S_IRUSR | S_IRGRP);
 	if (fd < 0)
 		return;
-	ft_write_in_cor(fd, block, start);
+//	ft_write_in_cor(fd, block, start);
 	ft_putstr("Writing output program to ");
 	ft_putstr(str);
 }
