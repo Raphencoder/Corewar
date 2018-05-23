@@ -6,7 +6,7 @@
 /*   By: rkrief <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 11:04:44 by rkrief            #+#    #+#             */
-/*   Updated: 2018/05/23 16:24:05 by Raphael          ###   ########.fr       */
+/*   Updated: 2018/05/23 16:31:33 by Raphael          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -226,6 +226,8 @@ t_chain	*ft_get_in_chain(char *str, int j)
 			block->next = ft_memalloc(sizeof(t_chain));
 			block = block->next;
 		}
+		if (!str[j])
+			break ;
 		j++;
 	}
 	block->next = NULL;
