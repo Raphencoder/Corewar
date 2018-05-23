@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*    ft_get_in_chain.c                                 :+:      :+:    :+:   */
+/*   ft_get_in_chain.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rkrief <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 11:04:44 by rkrief            #+#    #+#             */
-/*   Updated: 2018/05/23 13:01:06 by alecott          ###   ########.fr       */
+/*   Updated: 2018/05/23 16:24:05 by Raphael          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int		ft_take_nb_argument(char *str, int i)
 	int nb_separator;
 
 	nb_separator = 0;
-	while (str[i] && str[i] != '\n')
+	while (str[i] && (str[i] != '\n' && str[i] != COMMENT_CHAR && str[i] != ';'))
 	{
 		if (str[i] == SEPARATOR_CHAR)
 			nb_separator++;
@@ -57,12 +57,8 @@ void	ft_complete_content(t_chain *block, char *str, int *i)
 	j = *i;
 	while (str[*i] > 32 && str[*i] != SEPARATOR_CHAR)
 	{
-		if (str[*i] == DIRECT_CHAR && (str[*i + 1] != LABEL_CHAR &&
-					!ft_isnumber(str + (*i + 1)) && str[*i + 1] != '-' ))
-		{
-			ft_is_an_error(str, *i);
+		if (str[*i] == DIRECT_CHAR)
 			direct++;
-		}
 		if (direct > 1)
 			ft_is_an_error(str, *i);
 		*i = *i + 1;
@@ -114,6 +110,7 @@ int		ft_put_line_in_block(t_chain *block, int *i, char *str)
 	if (nb_arg != op_tab[block->nb_op_tab].nb_args)
 	{
 		ft_putendl("wrong number of argument");
+		ft_putnbr(nb_arg);
 		ft_is_an_error(str, *i);
 	}
 	else if ((block->nb_op_tab == 2 || block->nb_op_tab == 3 || 
@@ -126,6 +123,8 @@ block->nb_op_tab == 10) && !ft_is_lib(str, *i))
 	while (nb_arg)
 	{
 		ft_complete_content(block, str, i);
+		if (!str[*i])
+			break ;
 		*i = *i + 1;
 		nb_arg--;
 		if (!nb_arg)
