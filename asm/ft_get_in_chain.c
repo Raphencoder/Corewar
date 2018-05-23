@@ -6,11 +6,10 @@
 /*   By: rkrief <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 11:04:44 by rkrief            #+#    #+#             */
-/*   Updated: 2018/05/23 10:01:14 by alecott          ###   ########.fr       */
+/*   Updated: 2018/05/23 13:01:06 by alecott          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/libft.h"
 #include "../includes/asm.h"
 
 int		ft_take_nb_argument(char *str, int i)
@@ -232,15 +231,13 @@ t_chain	*ft_get_in_chain(char *str, int j)
 	}
 	block->next = NULL;
 	block = start;
+	return (block);
 	while (block->next)
 	{
 		ft_putstr(" |>");
 		ft_putstr(block->content);
-		ft_putstr(" | ");
-		ft_putstr(block->category);
 		ft_putstr("<| ");
 		block = block->next;
 	}
 	block = start;
-	return (block);
 }

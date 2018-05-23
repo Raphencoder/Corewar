@@ -6,7 +6,7 @@
 /*   By: rkrief <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 18:35:51 by rkrief            #+#    #+#             */
-/*   Updated: 2018/05/22 14:26:07 by rkrief           ###   ########.fr       */
+/*   Updated: 2018/05/23 10:18:05 by alecott          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,6 @@ int main(int argc, char **argv)
 				ft_strdel(&tmp);	
 			}
 	}
-	ft_parsing(getall, header);
+	ft_parsing(getall, header, argv[1]);
 	return (0);
 }

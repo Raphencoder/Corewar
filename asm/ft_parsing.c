@@ -6,7 +6,7 @@
 /*   By: rkrief <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 16:05:57 by rkrief            #+#    #+#             */
-/*   Updated: 2018/05/22 16:51:00 by rkrief           ###   ########.fr       */
+/*   Updated: 2018/05/23 10:14:32 by alecott          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ int		ft_get_name_then_comment(header_t *header, char *str, int i)
 	return (j);
 }
 
-void	ft_parsing(char *str, header_t *header)
+void	ft_parsing(char *str, header_t *header, char *str2)
 {
 	int		i;
 	int		j;
@@ -136,4 +136,5 @@ void	ft_parsing(char *str, header_t *header)
 	ft_putstr("le comment est : ");
 	ft_putendl(header->comment);
 	ft_putendl("fin");
+	ft_asm(str2, block);
 }

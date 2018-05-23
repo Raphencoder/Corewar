@@ -38,7 +38,7 @@ st r1, 211
 st r1, 211
 st r1, 211
 st r1, 211
-st r1, 21 1
+st r1, 211
 st r1, 211
 st r1, 211
 st r1, 211
@@ -88,5 +88,3 @@ live %1
 live %1
 live %1
 zjmp %:loop
-
-
