@@ -6,7 +6,7 @@
 /*   By: rkrief <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 11:04:44 by rkrief            #+#    #+#             */
-/*   Updated: 2018/05/23 16:31:33 by Raphael          ###   ########.fr       */
+/*   Updated: 2018/05/23 17:04:19 by Raphael          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,6 @@ int		ft_put_line_in_block(t_chain *block, int *i, char *str)
 	if (nb_arg != op_tab[block->nb_op_tab].nb_args)
 	{
 		ft_putendl("wrong number of argument");
-		ft_putnbr(nb_arg);
 		ft_is_an_error(str, *i);
 	}
 	else if ((block->nb_op_tab == 2 || block->nb_op_tab == 3 || 
@@ -199,7 +198,7 @@ t_chain	*ft_get_in_chain(char *str, int j)
 	{
 		if (str[j] == '\n')
 			block->nb_lines++;
-		else if (str[j] == '#')
+		else if (str[j] == '#' || str[j] == ';')
 		{
 			ft_pass_comment(str, &j);
 			continue ;
@@ -228,6 +227,11 @@ t_chain	*ft_get_in_chain(char *str, int j)
 		}
 		if (!str[j])
 			break ;
+		if (str[j] == '#' || str[j] == ';')
+		{
+			ft_pass_comment(str, &j);
+			continue ;
+		}
 		j++;
 	}
 	block->next = NULL;
