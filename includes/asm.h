@@ -6,7 +6,7 @@
 /*   By: alecott <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 14:53:02 by alecott           #+#    #+#             */
-/*   Updated: 2018/05/24 16:12:00 by rkrief           ###   ########.fr       */
+/*   Updated: 2018/05/24 17:13:42 by alecott          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,12 @@
 
 typedef struct		s_chain
 {
+	char			*content;
+	char			*category;
+	int				arg_type;
 	unsigned int	nb_col;
 	unsigned int	nb_lines;
-	char			*category;
 	int				nb_op_tab;
-	char			*content;
 	struct s_chain	*next;
 }					t_chain;
 
@@ -49,12 +50,13 @@ void	ft_pass_comment(char *str, int *i);
 void	ft_parsing(char *str, header_t *header, char *str2);
 void	ft_is_an_error(char *str, int i);
 t_chain	*ft_get_in_chain(char *str, int j);
-int     ft_complete_content(t_chain *block, char *str, int *i);
-int     ft_put_line_in_block(t_chain *b, int *i, char *str);
+int		ft_complete_content(t_chain *block, char *str, int *i);
+int		ft_put_line_in_block(t_chain *b, int *i, char *str);
 void	ft_verify_label(char *str, int j, t_chain *block);
 t_op	*ft_get_op_tab(void);
 t_op	*ft_search_op(char *str);
 t_op	*ft_get_op(int opcode);
 void	ft_asm(char *str, t_chain *block);
+t_chain	*ft_arg_type(t_chain *block);
 
 #endif

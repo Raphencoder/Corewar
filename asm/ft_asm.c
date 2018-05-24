@@ -6,7 +6,7 @@
 /*   By: alecott <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/23 10:05:05 by alecott           #+#    #+#             */
-/*   Updated: 2018/05/24 13:36:24 by rkrief           ###   ########.fr       */
+/*   Updated: 2018/05/24 17:23:28 by alecott          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	ft_asm(char *str, t_chain *block)
 	int		fd;
 	t_chain	*start;
 
+	block = ft_arg_type(block);
 	start = block;
 	str = ft_strndup(str, ft_strlen(str) - 2);
 	str = ft_strjoin(str, ".cor");
@@ -51,10 +52,20 @@ void	ft_asm(char *str, t_chain *block)
 		return;
 	while (block->next)
 	{
+		ft_putchar('|');
 		ft_putstr(block->content);
-		ft_putstr("=>");
-		ft_putstr(block->category);
-		ft_putstr("	");
+		ft_putchar('|');
+		if (!ft_strequ(block->content, "\n"))
+		{
+			ft_putstr(" => ");
+			ft_putstr(block->category);
+			if (ft_strequ(block->category, "ARG"))
+			{
+			ft_putstr(" => ");
+			ft_putnbr(block->arg_type);
+			}
+			ft_putstr("		");
+		}
 		block = block->next;
 	}
 //	ft_write_in_cor(fd, block, start);
