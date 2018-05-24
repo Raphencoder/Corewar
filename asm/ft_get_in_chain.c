@@ -6,7 +6,7 @@
 /*   By: rkrief <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 11:04:44 by rkrief            #+#    #+#             */
-/*   Updated: 2018/05/24 14:37:06 by rkrief           ###   ########.fr       */
+/*   Updated: 2018/05/24 15:17:07 by rkrief           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int		ft_is_lib(char *str, int i)
 	return (0);
 }
 
-int		ft_complete_content(t_chain *block, char *str, int *i)
+/*int		ft_complete_content(t_chain *block, char *str, int *i)
 {
 	int	j;
 	int	direct;
@@ -87,7 +87,7 @@ str[*i] != LABEL_CHAR && str[*i] != '-')
 	block->content = ft_strnmdup(str, j, *i);
 	block->category = "ARG";
 	return (1);
-}
+}*/ 
 
 
 int	ft_check_if_instruction(t_chain *block)
