@@ -6,7 +6,7 @@
 /*   By: rkrief <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 16:05:57 by rkrief            #+#    #+#             */
-/*   Updated: 2018/05/23 14:16:22 by alecott          ###   ########.fr       */
+/*   Updated: 2018/05/24 10:42:30 by alecott          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,5 @@ void	ft_parsing(char *str, header_t *header, char *str2)
 	ft_putstr("le comment est : ");
 	ft_putendl(header->comment);
 	ft_putendl("fin");
-	ft_putendl(str2);
-//	ft_asm(str2, block);
+	ft_asm(str2, block);
 }
