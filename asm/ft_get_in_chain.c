@@ -6,105 +6,11 @@
 /*   By: rkrief <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 11:04:44 by rkrief            #+#    #+#             */
-/*   Updated: 2018/05/24 16:17:20 by rkrief           ###   ########.fr       */
+/*   Updated: 2018/05/24 21:48:57 by Raphael          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/asm.h"
-/*
-int		ft_take_nb_argument(char *str, int i)
-{
-	int nb_separator;
-
-	nb_separator = 0;
-	while (str[i] && (str[i] != '\n' && str[i] != COMMENT_CHAR && str[i] != ';'))
-	{
-		if (str[i] == SEPARATOR_CHAR)
-			nb_separator++;
-		i++;
-	}
-	return (nb_separator + 1);
-}
-
-int		ft_is_lib(char *str, int i)
-{
-	if (str[i] != 'r')
-		return (0);
-	i++;
-	if (ft_isdigit(str[i]) && (ft_isdigit(str[i + 1]) || str[i + 1] == ' ' ||
-				str[i + 1] == '\t' || str[i + 1] == SEPARATOR_CHAR))
-		return (1);
-	return (0);
-}
-
-int	ft_check_if_instruction(t_chain *block)
-{
-	int i;
-
-	i = 0;
-	(void)block;
-	while (i < 16)
-	{
-		if (ft_strequ(op_tab[i].str, block->content))
-		{
-			block->nb_op_tab = i;
-			return (1);
-		}
-		i++;
-	}
-	return (0);
-}
-
-int		ft_put_line_in_block(t_chain *block, int *i, char *str)
-{
-	int	nb_arg;
-	int j;
-	int ok;
-	int clone;
-
-	nb_arg = 0;
-	if (str[*i] == '\n')
-		*i = *i + 1;
-	while (str[*i] == ' ' || str[*i] == '\t')
-		*i = *i + 1;
-	j = *i;
-	while (str[*i] && str[*i] >= 'a' && str[*i] <= 'z')
-		*i = *i + 1;
-	block->content = ft_strnmdup(str, j, *i);
-	block->category = "INSTRUCTION";
-	if (!(ft_check_if_instruction(block)))
-		ft_is_an_error(str, *i);
-	while (str[*i] == ' ' || str[*i] == '\t')
-		*i = *i + 1;
-	nb_arg = ft_take_nb_argument(str, *i);
-	if (nb_arg != op_tab[block->nb_op_tab].nb_args)
-	{
-		ft_putendl("Wrong number of argument");
-		ft_is_an_error(str, *i);
-	}
-	else if ((block->nb_op_tab == 2 || block->nb_op_tab == 3 || 
-block->nb_op_tab == 4 || block->nb_op_tab == 16 ||
-block->nb_op_tab == 10) && !ft_is_lib(str, *i))
-		ft_is_an_error(str, *i);
-	block->next = ft_memalloc(sizeof(t_chain));
-	block = block->next;
-	clone = nb_arg;
-	while (nb_arg)
-	{
-		if (!(ok = ft_complete_content(block, str, i)) && !(nb_arg - 1)){
-			break ;}
-		else if (!ok)
-			ft_is_an_error(str, *i);
-		if (!str[*i])
-			break ;
-		*i = *i + 1;
-		nb_arg--;
-		block->next = ft_memalloc(sizeof(t_chain));
-		block = block->next;
-	}
-	return (clone);
-}
-*/
 
 void	ft_put_label_in_block(t_chain *block, int i, char *str, int j)
 {
