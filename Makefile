@@ -6,7 +6,7 @@
 #    By: alecott <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/17 11:04:33 by alecott           #+#    #+#              #
-#    Updated: 2018/05/24 15:16:10 by rkrief           ###   ########.fr        #
+#    Updated: 2018/05/24 16:11:45 by rkrief           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,8 +50,8 @@ ALL_LIB_SRCS = ft_atoi.c ft_isalnum.c ft_isascii.c ft_isprint.c ft_memset.c \
 		  ft_strnmdup.c ft_copy_tab.c 
 
 ALL_ASM_SRCS = ft_verify_label.c op.c ft_get_in_chain.c ft_is_an_error.c \
-			   ft_parsing.c ft_pass_comment.c main.c ft_asm.c ft_complete_content.c
-
+			   ft_parsing.c ft_pass_comment.c main.c ft_asm.c ft_complete_content.c \
+			   ft_put_line_in_block.c
 ALL_CWR_SRCS = 
 
 LIB_SRCS = $(addprefix $(LIB_PATH), $(ALL_LIB_SRCS))
