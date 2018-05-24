@@ -6,7 +6,7 @@
 /*   By: rkrief <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 11:04:44 by rkrief            #+#    #+#             */
-/*   Updated: 2018/05/23 17:04:19 by Raphael          ###   ########.fr       */
+/*   Updated: 2018/05/24 10:39:11 by rkrief           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int		ft_is_lib(char *str, int i)
 	return (0);
 }
 
-void	ft_complete_content(t_chain *block, char *str, int *i)
+int		ft_complete_content(t_chain *block, char *str, int *i)
 {
 	int	j;
 	int	direct;
@@ -52,10 +52,13 @@ void	ft_complete_content(t_chain *block, char *str, int *i)
 		*i = *i + 1;
 	if (str[*i] == 'r' && ft_isdigit(str[*i + 3]))
 		ft_is_an_error(str, *i);
+	if (str[*i] == ';' || str[*i] == COMMENT_CHAR){
+		ft_pass_comment(str, i);
+		return (0);}
 	if (!ft_strchr(LABEL_CHARS, str[*i]) && str[*i] != DIRECT_CHAR && str[*i] != '-')
 		ft_is_an_error(str, *i);
 	j = *i;
-	while (str[*i] > 32 && str[*i] != SEPARATOR_CHAR)
+	while (str[*i] > 32 && (str[*i] != SEPARATOR_CHAR && str[*i] != ';'))
 	{
 		if (str[*i] == DIRECT_CHAR)
 			direct++;
@@ -64,7 +67,8 @@ void	ft_complete_content(t_chain *block, char *str, int *i)
 		*i = *i + 1;
 	}
 	block->content = ft_strnmdup(str, j, *i);
-	block->category = "INSTRUCTION";
+	block->category = "ARG";
+	return (1);
 }
 
 
@@ -121,13 +125,12 @@ block->nb_op_tab == 10) && !ft_is_lib(str, *i))
 	clone = nb_arg;
 	while (nb_arg)
 	{
-		ft_complete_content(block, str, i);
+		if (!(ft_complete_content(block, str, i)))
+			continue ;
 		if (!str[*i])
 			break ;
 		*i = *i + 1;
 		nb_arg--;
-		if (!nb_arg)
-			break ;
 		block->next = ft_memalloc(sizeof(t_chain));
 		block = block->next;
 	}
@@ -221,7 +224,7 @@ t_chain	*ft_get_in_chain(char *str, int j)
 			block->next = ft_memalloc(sizeof(t_chain));
 			block = block->next;
 			block->content = ft_strdup("\n");
-			block->category = "INSTRUCTION";
+			block->category = "ENDL";
 			block->next = ft_memalloc(sizeof(t_chain));
 			block = block->next;
 		}
@@ -234,9 +237,7 @@ t_chain	*ft_get_in_chain(char *str, int j)
 		}
 		j++;
 	}
-	block->next = NULL;
 	block = start;
-	return (block);
 	while (block->next)
 	{
 		ft_putstr(" |>");
@@ -245,4 +246,5 @@ t_chain	*ft_get_in_chain(char *str, int j)
 		block = block->next;
 	}
 	block = start;
+	return (block);
 }
