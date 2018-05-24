@@ -6,7 +6,7 @@
 /*   By: rkrief <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 11:04:44 by rkrief            #+#    #+#             */
-/*   Updated: 2018/05/24 10:42:53 by alecott          ###   ########.fr       */
+/*   Updated: 2018/05/24 13:19:27 by rkrief           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,16 @@ int		ft_complete_content(t_chain *block, char *str, int *i)
 {
 	int	j;
 	int	direct;
+	int	label;
 
 	direct = 0;
+	label = 0;
 	j = 0;
-	while (str[*i] == ' ' || str[*i] == '\t')
+	while (str[*i] && (str[*i] == ' ' || str[*i] == '\t'))
 		*i = *i + 1;
 	if (str[*i] == SEPARATOR_CHAR)
 		*i = *i + 1;
-	while (str[*i] == ' ' || str[*i] == '\t')
+	while (str[*i] && (str[*i] == ' ' || str[*i] == '\t'))
 		*i = *i + 1;
 	if (str[*i] == 'r' && ft_isdigit(str[*i + 3]))
 		ft_is_an_error(str, *i);
@@ -58,11 +60,17 @@ int		ft_complete_content(t_chain *block, char *str, int *i)
 	if (!ft_strchr(LABEL_CHARS, str[*i]) && str[*i] != DIRECT_CHAR && str[*i] != '-')
 		ft_is_an_error(str, *i);
 	j = *i;
-	while (str[*i] > 32 && (str[*i] != SEPARATOR_CHAR && str[*i] != ';'))
+	while (str[*i] && str[*i] > 32 && (str[*i] != SEPARATOR_CHAR && str[*i] != ';'))
 	{
-		if (str[*i] == DIRECT_CHAR)
+		if (direct && !ft_isdigit(str[*i]))
+			ft_is_an_error(str, *i);
+		if (str[*i] == DIRECT_CHAR && (ft_isdigit(str[*i + 1]) || str[*i + 1] == '-'))
 			direct++;
-		if (direct > 1)
+		else if (str[*i] == DIRECT_CHAR && str[*i + 1] == LABEL_CHAR)
+			label++;
+		else if (str[*i] == DIRECT_CHAR)
+			ft_is_an_error(str, *i + 1);
+		if (direct > 1 || label > 1)
 			ft_is_an_error(str, *i);
 		*i = *i + 1;
 	}
@@ -94,6 +102,7 @@ int		ft_put_line_in_block(t_chain *block, int *i, char *str)
 {
 	int	nb_arg;
 	int j;
+	int ok;
 	int clone;
 
 	nb_arg = 0;
@@ -125,8 +134,10 @@ block->nb_op_tab == 10) && !ft_is_lib(str, *i))
 	clone = nb_arg;
 	while (nb_arg)
 	{
-		if (!(ft_complete_content(block, str, i)))
-			continue ;
+		if (!(ok = ft_complete_content(block, str, i)) && !(nb_arg - 1)){
+			break ;}
+		else if (!ok)
+			ft_is_an_error(str, *i);
 		if (!str[*i])
 			break ;
 		*i = *i + 1;
@@ -176,7 +187,7 @@ void	ft_pass_space(char *str, int *j)
 	int i;
 
 	i = 0;
-	while (str[*j] && str[*j] < 32)
+	while (str[*j] && (str[*j] == ' ' || str[*j] == '\t'))
 	{
 		if (str[*j] == '\n')
 			return ;

@@ -6,7 +6,7 @@
 /*   By: rkrief <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 16:05:57 by rkrief            #+#    #+#             */
-/*   Updated: 2018/05/24 10:42:30 by alecott          ###   ########.fr       */
+/*   Updated: 2018/05/24 13:27:26 by rkrief           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int		ft_get_comment_then_name(header_t *header, char *str, int i)
 	if (j == -1)
 		ft_is_an_error(str, i);
 	i = j + 1;
-	if (str[i] != '.' && str[i] != '#' && str[i] > 32)
+	if (str[i] != '.' && str[i] != '#' &&str[i] != ';' && str[i] > 32)
 		ft_is_an_error(str, i);
 	ft_pass_comment(str, &i);
 	tmp = ft_strnmdup(str, i, i + 5);
@@ -91,7 +91,7 @@ int		ft_get_name_then_comment(header_t *header, char *str, int i)
 	if (j == -1)
 		ft_is_an_error(str, i);
 	i = j + 1;
-	if (str[i] != '.' && str[i] != '#' && str[i] > 32)
+	if (str[i] != '.' && str[i] != '#' && str[i] != ';'  && str[i] > 32)
 		ft_is_an_error(str, i);
 	ft_pass_comment(str, &i);
 	tmp = ft_strnmdup(str, i, i + 8);
@@ -112,7 +112,7 @@ void	ft_parsing(char *str, header_t *header, char *str2)
 
 	i = 0;
 	j = 0;
-	if (str[i] == '#')
+	if (str[i] == '#' || str[i] == ';')
 		ft_pass_comment(str, &i);
 	tmp = ft_strnmdup(str, i, i + 5);
 	tmpp = ft_strnmdup(str, i, i + 8);
