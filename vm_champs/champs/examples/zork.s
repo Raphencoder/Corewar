@@ -1,9 +1,9 @@
 .name "zork"
-;dfjsdc
 .comment "I'M ALIIIIVE"
 
-l2:		sti   		r1, %:live, %1 #helogl
+l2:		sti r1, %:live, %1
 		and r1, %0, r1
 
 live:	live %1
-		zjmp %0 
+		zjmp %0
+		ld :deflv,r2

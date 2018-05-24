@@ -6,7 +6,7 @@
 /*   By: rkrief <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 16:05:57 by rkrief            #+#    #+#             */
-/*   Updated: 2018/05/24 13:27:26 by rkrief           ###   ########.fr       */
+/*   Updated: 2018/05/24 13:46:05 by rkrief           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,9 +132,7 @@ void	ft_parsing(char *str, header_t *header, char *str2)
 	ft_verify_label(str, j, block);
 	ft_putstr("le name est : ");
 	ft_putendl(header->prog_name);
-	ft_putendl("fin");
 	ft_putstr("le comment est : ");
 	ft_putendl(header->comment);
-	ft_putendl("fin");
 	ft_asm(str2, block);
 }

@@ -6,7 +6,7 @@
 /*   By: rkrief <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 11:04:44 by rkrief            #+#    #+#             */
-/*   Updated: 2018/05/24 13:19:27 by rkrief           ###   ########.fr       */
+/*   Updated: 2018/05/24 14:37:06 by rkrief           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,9 @@ int		ft_complete_content(t_chain *block, char *str, int *i)
 	int	j;
 	int	direct;
 	int	label;
+	int nb;
 
+	nb = 0;
 	direct = 0;
 	label = 0;
 	j = 0;
@@ -52,20 +54,28 @@ int		ft_complete_content(t_chain *block, char *str, int *i)
 		*i = *i + 1;
 	while (str[*i] && (str[*i] == ' ' || str[*i] == '\t'))
 		*i = *i + 1;
-	if (str[*i] == 'r' && ft_isdigit(str[*i + 3]))
+	if (str[*i] == 'r' && !(nb = ft_atoi(str + *i + 1)))
+		ft_is_an_error(str, *i);
+	if (nb > 99)
 		ft_is_an_error(str, *i);
 	if (str[*i] == ';' || str[*i] == COMMENT_CHAR){
 		ft_pass_comment(str, i);
 		return (0);}
-	if (!ft_strchr(LABEL_CHARS, str[*i]) && str[*i] != DIRECT_CHAR && str[*i] != '-')
+	if (!ft_strchr(LABEL_CHARS, str[*i]) && str[*i] != DIRECT_CHAR &&
+str[*i] != LABEL_CHAR && str[*i] != '-')
 		ft_is_an_error(str, *i);
 	j = *i;
 	while (str[*i] && str[*i] > 32 && (str[*i] != SEPARATOR_CHAR && str[*i] != ';'))
 	{
 		if (direct && !ft_isdigit(str[*i]))
 			ft_is_an_error(str, *i);
-		if (str[*i] == DIRECT_CHAR && (ft_isdigit(str[*i + 1]) || str[*i + 1] == '-'))
+		if (str[*i] == DIRECT_CHAR && (ft_isdigit(str[*i + 1])))
 			direct++;
+		else if (str[*i] == DIRECT_CHAR && str[*i + 1] == '-')
+		{
+			direct++;
+			*i = *i + 1;
+		}
 		else if (str[*i] == DIRECT_CHAR && str[*i + 1] == LABEL_CHAR)
 			label++;
 		else if (str[*i] == DIRECT_CHAR)
@@ -118,7 +128,7 @@ int		ft_put_line_in_block(t_chain *block, int *i, char *str)
 	if (!(ft_check_if_instruction(block)))
 		ft_is_an_error(str, *i);
 	while (str[*i] == ' ' || str[*i] == '\t')
-		*i = *i + 1;	
+		*i = *i + 1;
 	nb_arg = ft_take_nb_argument(str, *i);
 	if (nb_arg != op_tab[block->nb_op_tab].nb_args)
 	{
@@ -170,7 +180,8 @@ int		ft_put_in_block(t_chain *block, int *j, char *str)
 	nb_arg = 0;
 	while (str[*j] && str[*j] != '\n')
 	{
-		if (str[*j] == LABEL_CHAR && str[*j - 1] != DIRECT_CHAR)
+		if (str[*j] == LABEL_CHAR && (str[*j - 1] != DIRECT_CHAR &&
+ft_strchr(LABEL_CHARS, str[*j - 1])))
 		{
 			ft_put_label_in_block(block, i, str, *j);
 			return (0);
