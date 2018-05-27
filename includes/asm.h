@@ -18,7 +18,7 @@
 # include <fcntl.h>
 # include <unistd.h>
 # include <stdlib.h>
-#include "../libft/libft.h"
+# include "../libft/libft.h"
 
 typedef struct		s_chain
 {
@@ -57,6 +57,6 @@ t_op	*ft_get_op_tab(void);
 t_op	*ft_search_op(char *str);
 t_op	*ft_get_op(int opcode);
 void	ft_asm(char *str, t_chain *block);
-t_chain	*ft_arg_type(t_chain *block);
+t_chain	*ft_arg_type(t_chain *block);i
 
 #endif
