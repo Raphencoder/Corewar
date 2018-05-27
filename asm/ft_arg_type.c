@@ -12,6 +12,29 @@
 
 #include "../includes/asm.h"
 
+t_chain		*ft_arg_size(t_chain *block)
+{
+	t_chain	*start;
+	t_op	*op_tab;
+
+	start = block;
+	while (block->next)
+	{
+		if (block->arg_type && (block->arg_type == DIR_CODE || block->arg_type == IND_CODE))
+		{
+			op_tab = ft_search_op(block->content);
+			if (op_tab->label_size)
+				block->size = 2;
+			else
+				block->size = 4;
+		}
+//		else if (block->arg_type && block->arg_type == DIR_CODE)
+//			block->size = 2;
+		else
+			block->size = 1;
+	}
+}
+
 t_chain		*ft_arg_type(t_chain *block)
 {
 	t_chain	*start;
@@ -31,4 +54,5 @@ t_chain		*ft_arg_type(t_chain *block)
 		block = block->next;
 	}
 	return (start);
+	return (ft_arg_size(start));
 }
