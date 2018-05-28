@@ -6,7 +6,7 @@
 /*   By: alecott <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/23 10:05:05 by alecott           #+#    #+#             */
-/*   Updated: 2018/05/28 09:07:10 by alecott          ###   ########.fr       */
+/*   Updated: 2018/05/28 09:40:41 by alecott          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,11 @@ void	ft_asm(char *str, t_chain *block)
 			ft_putstr(block->category);
 			if (ft_strequ(block->category, "ARG"))
 			{
-			ft_putstr(" => ");
-			ft_putnbr(block->arg_type);
+				ft_putstr(" => ");
+				ft_putnbr(block->arg_type);
 			}
+			ft_putstr(" SIZE=>");
+			ft_putnbr(block->size);
 			ft_putstr("		");
 		}
 		block = block->next;
