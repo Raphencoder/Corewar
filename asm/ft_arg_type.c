@@ -6,7 +6,7 @@
 /*   By: alecott <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/24 13:34:51 by alecott           #+#    #+#             */
-/*   Updated: 2018/05/28 09:37:20 by alecott          ###   ########.fr       */
+/*   Updated: 2018/05/28 09:50:38 by alecott          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,5 @@ t_chain		*ft_arg_type(t_chain *block)
 		}
 		block = block->next;
 	}
-//	return (start);
 	return (ft_arg_size(start));
 }

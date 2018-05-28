@@ -6,11 +6,11 @@
 /*   By: alecott <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/24 09:27:01 by alecott           #+#    #+#             */
-/*   Updated: 2018/05/24 13:28:16 by alecott          ###   ########.fr       */
+/*   Updated: 2018/05/28 11:47:57 by alecott          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/asm.h"
+#include "../includes/asm.h"
 
 void	ft_putint_bin(int n, int fd)
 {
@@ -22,8 +22,8 @@ void	ft_putint_bin(int n, int fd)
 
 void	ft_putshort_bin(short n, int fd)
 {
-	ft_putchar((n >> 8) & 0xff);
-	ft_putchar(n & 0xff);
+	ft_putchar_fd((n >> 8) & 0xff, fd);
+	ft_putchar_fd(n & 0xff, fd);
 }
 
 void	ft_putstr_bin(char *str, int fd)
@@ -36,22 +36,4 @@ void	ft_putstr_bin(char *str, int fd)
 		ft_putchar_fd(str[i] & 0xff, fd);
 		i++;
 	}
-}
-
-int		main(int argc, char **argv)
-{
-	int		n;
-	char	*str;
-	int		fd;
-
-	n = 42;
-	str = ".name ";
-	fd = open("test", O_WRONLY | O_CREAT);
-	if (fd < 0)
-	{
-		ft_putendl("open error");
-		return (0);
-	}
-	ft_putstr_bin(str, fd);
-	return (0);
 }

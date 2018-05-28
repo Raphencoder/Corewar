@@ -6,7 +6,7 @@
 /*   By: alecott <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 14:53:02 by alecott           #+#    #+#             */
-/*   Updated: 2018/05/28 09:07:00 by alecott          ###   ########.fr       */
+/*   Updated: 2018/05/28 15:45:53 by alecott          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,12 @@ void	ft_verify_label(char *str, int j, t_chain *block);
 t_op	*ft_get_op_tab(void);
 t_op	*ft_search_op(char *str);
 t_op	*ft_get_op(int opcode);
-void	ft_asm(char *str, t_chain *block);
+void	ft_asm(char *str, t_chain *block, header_t *header);
 t_chain	*ft_arg_type(t_chain *block);
+void	ft_putint_bin(int n, int fd);
+void	ft_putshort_bin(short n, int fd);
+void	ft_putstr_bin(char *str,int fd);
+void	ft_OCP(t_chain *block, int fd);
+void	ft_write_cor(int fd, header_t *header);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: rkrief <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 11:04:44 by rkrief            #+#    #+#             */
-/*   Updated: 2018/05/24 21:48:57 by Raphael          ###   ########.fr       */
+/*   Updated: 2018/05/28 15:49:20 by alecott          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,12 +114,4 @@ t_chain	*ft_get_in_chain(char *str, int j)
 	}
 	block = start;
 	return (block);
-	while (block->next)
-	{
-		ft_putstr(" |>");
-		ft_putstr(block->content);
-		ft_putstr("<| ");
-		block = block->next;
-	}
-	block = start;
 }
