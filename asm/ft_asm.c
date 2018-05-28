@@ -6,7 +6,7 @@
 /*   By: alecott <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/23 10:05:05 by alecott           #+#    #+#             */
-/*   Updated: 2018/05/24 17:23:28 by alecott          ###   ########.fr       */
+/*   Updated: 2018/05/28 09:07:10 by alecott          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	ft_write_in_cor(int fd, t_chain *block, t_chain *start)
 	block = start;
 }
 */
+
 void	ft_asm(char *str, t_chain *block)
 {
 	int		fd;

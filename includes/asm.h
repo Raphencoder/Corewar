@@ -6,7 +6,7 @@
 /*   By: alecott <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 14:53:02 by alecott           #+#    #+#             */
-/*   Updated: 2018/05/24 17:13:42 by alecott          ###   ########.fr       */
+/*   Updated: 2018/05/28 09:07:00 by alecott          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef struct		s_chain
 	char			*content;
 	char			*category;
 	int				arg_type;
+	int				size;
 	unsigned int	nb_col;
 	unsigned int	nb_lines;
 	int				nb_op_tab;
@@ -57,6 +58,6 @@ t_op	*ft_get_op_tab(void);
 t_op	*ft_search_op(char *str);
 t_op	*ft_get_op(int opcode);
 void	ft_asm(char *str, t_chain *block);
-t_chain	*ft_arg_type(t_chain *block);i
+t_chain	*ft_arg_type(t_chain *block);
 
 #endif
