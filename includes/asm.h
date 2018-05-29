@@ -6,7 +6,7 @@
 /*   By: alecott <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 14:53:02 by alecott           #+#    #+#             */
-/*   Updated: 2018/05/29 09:49:07 by alecott          ###   ########.fr       */
+/*   Updated: 2018/05/29 16:43:28 by rkrief           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef struct		s_chain
 {
 	char			*content;
 	char			*category;
+	int				index;
 	int				arg_type;
 	int				size;
 	unsigned int	nb_col;
@@ -64,5 +65,6 @@ void	ft_putshort_bin(short n, int fd);
 void	ft_putstr_bin(char *str,int fd);
 void	ft_OCP(t_chain *block, int fd);
 void	ft_write_cor(int fd, header_t *header, t_chain *block);
+void	ft_nbr_link(t_chain *block);
 
 #endif

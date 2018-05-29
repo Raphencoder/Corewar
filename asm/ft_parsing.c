@@ -6,7 +6,7 @@
 /*   By: rkrief <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 16:05:57 by rkrief            #+#    #+#             */
-/*   Updated: 2018/05/29 13:01:22 by alecott          ###   ########.fr       */
+/*   Updated: 2018/05/29 16:46:19 by rkrief           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,14 +70,19 @@ int		ft_get_comment_then_name(header_t *header, char *str, int i)
 		ft_is_an_error(str, i);
 	i = j + 1;
 	if (str[i] != NAME_CMD_STRING[0] && str[i] != COMMENT_CHAR &&
-str[i] != ';' && str[i] > 32)
+			str[i] != ';' && str[i] > 32)
 		ft_is_an_error(str, i);
-	ft_pass_comment(str, &i);
+	while (str[i] <= 32)
+		i++;
+	if (str[i] == COMMENT_CHAR || str[i] == ';')
+		ft_pass_comment(str, &i);
+	else if (str[i] != NAME_CMD_STRING[0])
+		ft_is_an_error(str, i);
 	tmp = ft_strnmdup(str, i, i + ft_strlen(NAME_CMD_STRING));
 	if (!ft_strequ(NAME_CMD_STRING, tmp))
 		ft_is_an_error(str, i + ft_strlen(NAME_CMD_STRING));
 	if (!(j = ft_complete_name(str, i + ft_strlen(NAME_CMD_STRING),
-header)))
+					header)))
 		ft_is_an_error(str, i);
 	return (j);
 }
@@ -92,14 +97,19 @@ int		ft_get_name_then_comment(header_t *header, char *str, int i)
 		ft_is_an_error(str, i);
 	i = j + 1;
 	if (str[i] != COMMENT_CMD_STRING[0] && str[i] != COMMENT_CHAR &&
-str[i] != ';'  && str[i] > 32)
+			str[i] != ';'  && str[i] > 32)
 		ft_is_an_error(str, i);
-	ft_pass_comment(str, &i);
+	while (str[i] <= 32)
+		i++;
+	if (str[i] == COMMENT_CHAR || str[i] == ';')
+		ft_pass_comment(str, &i);
+	else if (str[i] != NAME_CMD_STRING[0])
+		ft_is_an_error(str, i);
 	tmp = ft_strnmdup(str, i, i + ft_strlen(COMMENT_CMD_STRING));
 	if (!ft_strequ(COMMENT_CMD_STRING, tmp))
 		ft_is_an_error(str, i);
 	if (!(j = ft_complete_comment(str, i + ft_strlen(COMMENT_CMD_STRING),
-header)))
+					header)))
 		ft_is_an_error(str, i);
 	return (j);
 }
@@ -119,7 +129,7 @@ void	ft_parsing(char *str, header_t *header, char *str2)
 	tmp = ft_strnmdup(str, i, i + ft_strlen(NAME_CMD_STRING));
 	tmpp = ft_strnmdup(str, i, i + ft_strlen(COMMENT_CMD_STRING));
 	if (!ft_strequ(NAME_CMD_STRING, tmp) &&
-!ft_strequ(COMMENT_CMD_STRING, tmpp))
+			!ft_strequ(COMMENT_CMD_STRING, tmpp))
 	{
 		if (ft_strequ(NAME_CMD_STRING,tmp))
 			ft_is_an_error(str, ft_strlen(tmpp));
@@ -133,6 +143,7 @@ void	ft_parsing(char *str, header_t *header, char *str2)
 		ft_is_an_error(str, i);
 	block = ft_get_in_chain(str, j);
 	ft_verify_label(str, j, block);
+	ft_nbr_link(block);
 	ft_putstr("le name est : ");
 	ft_putendl(header->prog_name);
 	ft_putstr("le comment est : ");
