@@ -6,11 +6,19 @@
 /*   By: alecott <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/24 13:34:51 by alecott           #+#    #+#             */
-/*   Updated: 2018/05/28 09:50:38 by alecott          ###   ########.fr       */
+/*   Updated: 2018/05/29 12:17:33 by alecott          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/asm.h"
+
+static int	ft_arg_size2(t_chain *block, t_op *op_tab)
+{
+	if (ft_strequ(block->category, "INSTRUCTION") && op_tab->ocp == 1)
+		return (2);
+	else
+		return (1);
+}
 
 t_chain		*ft_arg_size(t_chain *block)
 {
@@ -34,7 +42,7 @@ t_chain		*ft_arg_size(t_chain *block)
 		else if (ft_strequ(block->category, "LABEL"))
 			block->size = 0;
 		else
-			block->size = 1;
+			block->size = ft_arg_size2(block, op_tab);
 		block = block->next;
 	}
 	return (start);

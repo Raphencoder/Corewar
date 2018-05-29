@@ -6,7 +6,7 @@
 /*   By: alecott <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/23 10:05:05 by alecott           #+#    #+#             */
-/*   Updated: 2018/05/28 17:50:14 by alecott          ###   ########.fr       */
+/*   Updated: 2018/05/29 09:49:10 by alecott          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void		ft_asm(char *str, t_chain *block, header_t *header)
 	fd = open(str, O_WRONLY | O_CREAT, S_IROTH | S_IWUSR | S_IRUSR | S_IRGRP);
 	if (fd < 0)
 		return;
-	ft_write_cor(fd, header);
+	ft_write_cor(fd, header, start);
 	while (block->next)
 	{
 		ft_putchar('|');
