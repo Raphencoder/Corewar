@@ -6,7 +6,7 @@
 /*   By: alecott <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/24 13:34:51 by alecott           #+#    #+#             */
-/*   Updated: 2018/05/29 12:29:30 by alecott          ###   ########.fr       */
+/*   Updated: 2018/05/29 15:49:23 by alecott          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,13 @@ t_chain		*ft_arg_size(t_chain *block)
 		if (block->arg_type == DIR_CODE || block->arg_type == IND_CODE)
 		{
 			op_tab = ft_search_op(last_op);
-			if (op_tab->label_size)
+			if (block->arg_type == IND_CODE || op_tab->label_size)
 				block->size = 2;
 			else
 				block->size = 4;
 		}
-		else if (ft_strequ(block->category, "LABEL"))
+		else if (ft_strequ(block->category, "LABEL") ||
+				ft_strequ(block->content, "\n"))
 			block->size = 0;
 		else
 			block->size = ft_arg_size2(block, ft_search_op(block->content));

@@ -6,7 +6,7 @@
 /*   By: alecott <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 14:53:02 by alecott           #+#    #+#             */
-/*   Updated: 2018/05/29 16:43:28 by rkrief           ###   ########.fr       */
+/*   Updated: 2018/05/29 17:39:22 by alecott          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,6 @@ void	ft_putstr_bin(char *str,int fd);
 void	ft_OCP(t_chain *block, int fd);
 void	ft_write_cor(int fd, header_t *header, t_chain *block);
 void	ft_nbr_link(t_chain *block);
+char	*ft_find_label(t_chain *block, t_chain *start);
 
 #endif

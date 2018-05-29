@@ -6,7 +6,7 @@
 /*   By: alecott <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 15:09:07 by alecott           #+#    #+#             */
-/*   Updated: 2018/05/29 13:01:11 by alecott          ###   ########.fr       */
+/*   Updated: 2018/05/29 15:50:43 by alecott          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ static int	ft_total_size(t_chain *block)
 	n = 0;
 	while (block->next)
 	{
-		if (!ft_strequ(block->content, "\n"))
-			n = n + block->size;
+		n = n + block->size;
 		block = block->next;
 	}
 	return (n);
