@@ -6,11 +6,10 @@
 /*   By: rkrief <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 16:05:57 by rkrief            #+#    #+#             */
-/*   Updated: 2018/05/28 18:04:53 by alecott          ###   ########.fr       */
+/*   Updated: 2018/05/29 13:01:22 by alecott          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/libft.h"
 #include "../includes/asm.h"
 
 int		ft_complete_name(char *str, int i, header_t *header)

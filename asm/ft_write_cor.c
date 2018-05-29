@@ -6,7 +6,7 @@
 /*   By: alecott <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 15:09:07 by alecott           #+#    #+#             */
-/*   Updated: 2018/05/29 12:16:51 by alecott          ###   ########.fr       */
+/*   Updated: 2018/05/29 13:01:11 by alecott          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ static int	ft_total_size(t_chain *block)
 			n = n + block->size;
 		block = block->next;
 	}
-	printf("\nsizetotal=%i\n", n);
 	return (n);
 }
 
@@ -33,7 +32,7 @@ void		ft_write_cor(int fd, header_t *header, t_chain *block)
 
 	ft_putint_bin(COREWAR_EXEC_MAGIC, fd);
 	ft_putstr_fd(header->prog_name, fd);
-	i = PROG_NAME_LENGTH - ft_strlen(header->prog_name);
+	i = PROG_NAME_LENGTH + 4 - ft_strlen(header->prog_name);
 	while (i > 0)
 	{
 		ft_putchar_fd(0 & 0xff, fd);
@@ -41,7 +40,7 @@ void		ft_write_cor(int fd, header_t *header, t_chain *block)
 	}
 	ft_putint_bin(ft_total_size(block), fd);
 	ft_putstr_fd(header->comment, fd);
-	i = COMMENT_LENGTH - ft_strlen(header->comment);
+	i = COMMENT_LENGTH + 4 - ft_strlen(header->comment);
 	while (i > 0)
 	{
 		ft_putchar_fd(0 & 0xff, fd);

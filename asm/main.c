@@ -6,11 +6,10 @@
 /*   By: rkrief <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 18:35:51 by rkrief            #+#    #+#             */
-/*   Updated: 2018/05/24 16:31:38 by rkrief           ###   ########.fr       */
+/*   Updated: 2018/05/29 13:01:56 by alecott          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/libft.h"
 #include "../includes/asm.h"
 
 int main(int argc, char **argv)

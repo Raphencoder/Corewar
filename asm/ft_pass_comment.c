@@ -6,11 +6,10 @@
 /*   By: rkrief <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/18 10:42:10 by rkrief            #+#    #+#             */
-/*   Updated: 2018/05/24 13:31:26 by rkrief           ###   ########.fr       */
+/*   Updated: 2018/05/29 13:01:28 by alecott          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/libft.h"
 #include "../includes/asm.h"
 
 void	ft_pass_comment(char *str, int *i)
