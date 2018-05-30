@@ -6,7 +6,7 @@
 /*   By: rkrief <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/22 16:52:40 by rkrief            #+#    #+#             */
-/*   Updated: 2018/05/30 10:07:33 by alecott          ###   ########.fr       */
+/*   Updated: 2018/05/30 11:14:31 by alecott          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ void	ft_verify_label(char *str, int j, t_chain *block)
 		{
 			while (block->next)
 			{
-				if (ft_strequ(block->category, "LABEL") && ft_strequ(block->content, res))
+				if (ft_strequ(block->category, "LABEL") &&
+						ft_strequ(block->content, res))
 					ok = 1;
 				block = block->next;
 			}

@@ -6,13 +6,13 @@
 /*   By: rkrief <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 18:35:51 by rkrief            #+#    #+#             */
-/*   Updated: 2018/05/29 13:01:56 by alecott          ###   ########.fr       */
+/*   Updated: 2018/05/30 11:14:21 by alecott          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/asm.h"
 
-int main(int argc, char **argv)
+int		main(int argc, char **argv)
 {
 	int			fd;
 	char		*str;
@@ -41,7 +41,7 @@ int main(int argc, char **argv)
 			ft_strdel(&tmp);
 			tmp = getall;
 			getall = ft_strjoin(tmp, str);
-			ft_strdel(&tmp);	
+			ft_strdel(&tmp);
 		}
 	}
 	ft_parsing(getall, header, argv[1]);

@@ -6,13 +6,13 @@
 /*   By: rkrief <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/24 15:57:47 by rkrief            #+#    #+#             */
-/*   Updated: 2018/05/24 16:15:33 by rkrief           ###   ########.fr       */
+/*   Updated: 2018/05/30 11:22:35 by alecott          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/asm.h"
 
-int     ft_is_lib(char *str, int i)
+int		ft_is_lib(char *str, int i)
 {
 	if (str[i] != 'r')
 		return (0);
@@ -23,7 +23,7 @@ int     ft_is_lib(char *str, int i)
 	return (0);
 }
 
-int ft_check_if_instruction(t_chain *block)
+int		ft_check_if_instruction(t_chain *block)
 {
 	int i;
 
@@ -41,12 +41,13 @@ int ft_check_if_instruction(t_chain *block)
 	return (0);
 }
 
-int     ft_take_nb_argument(char *str, int i)
+int		ft_take_nb_argument(char *str, int i)
 {
 	int nb_separator;
 
 	nb_separator = 0;
-	while (str[i] && (str[i] != '\n' && str[i] != COMMENT_CHAR && str[i] != ';'))
+	while (str[i] && (str[i] != '\n' &&
+				str[i] != COMMENT_CHAR && str[i] != ';'))
 	{
 		if (str[i] == SEPARATOR_CHAR)
 			nb_separator++;
@@ -55,9 +56,9 @@ int     ft_take_nb_argument(char *str, int i)
 	return (nb_separator + 1);
 }
 
-int	ft_take_instruction_and_nb_arg(char *str, int *i, t_chain *b)
+int		ft_take_instruction_and_nb_arg(char *str, int *i, t_chain *b)
 {
-	int nb_arg;	
+	int nb_arg;
 	int j;
 
 	j = 0;
@@ -81,18 +82,17 @@ int	ft_take_instruction_and_nb_arg(char *str, int *i, t_chain *b)
 		ft_is_an_error(str, *i);
 	}
 	return (nb_arg);
-}	
+}
 
-
-int     ft_put_line_in_block(t_chain *b, int *i, char *str)
+int		ft_put_line_in_block(t_chain *b, int *i, char *str)
 {
 	int ok;
 	int	nb_arg;
 	int clone;
 
 	nb_arg = ft_take_instruction_and_nb_arg(str, i, b);
-	if ((b->nb_op_tab == 2 || b->nb_op_tab == 3 || b->nb_op_tab == 4 || 
-				b->nb_op_tab == 16 || b->nb_op_tab == 10) && !ft_is_lib(str, *i))
+	if ((b->nb_op_tab == 2 || b->nb_op_tab == 3 || b->nb_op_tab == 4 ||
+			b->nb_op_tab == 16 || b->nb_op_tab == 10) && !ft_is_lib(str, *i))
 		ft_is_an_error(str, *i);
 	b->next = ft_memalloc(sizeof(t_chain));
 	b = b->next;

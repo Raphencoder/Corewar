@@ -6,7 +6,7 @@
 /*   By: rkrief <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/24 15:05:32 by rkrief            #+#    #+#             */
-/*   Updated: 2018/05/24 21:57:30 by Raphael          ###   ########.fr       */
+/*   Updated: 2018/05/30 11:23:31 by alecott          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,8 @@ int		ft_check_if_error(char *str, int *i)
 	if (!ft_strchr(LABEL_CHARS, str[*i]) && str[*i] != DIRECT_CHAR &&
 			str[*i] != LABEL_CHAR && str[*i] != '-')
 		ft_is_an_error(str, *i);
-		return (1);
+	return (1);
 }
-
 
 void	ft_check_if_direct(char *str, int *i, int *direct, int *label)
 {
@@ -46,7 +45,7 @@ void	ft_check_if_direct(char *str, int *i, int *direct, int *label)
 	if (str[*i] == DIRECT_CHAR && (ft_isdigit(str[*i + 1])))
 		*direct = *direct + 1;
 	else if (str[*i] == DIRECT_CHAR && str[*i + 1] == '-')
-	{	
+	{
 		*direct = *direct + 1;
 		*i = *i + 1;
 	}
@@ -59,13 +58,7 @@ void	ft_check_if_direct(char *str, int *i, int *direct, int *label)
 	*i = *i + 1;
 }
 
-/*
-**	This function will take the arguments of the instruction and will put each 
-**	argument into a link of the linked list. Every arg is stock in block->content,
-**	and it will check if there is error in the file with ft_check_if_error.
-*/
-
-int     ft_complete_content(t_chain *block, char *str, int *i)
+int		ft_complete_content(t_chain *block, char *str, int *i)
 {
 	int j;
 	int direct;
@@ -77,7 +70,8 @@ int     ft_complete_content(t_chain *block, char *str, int *i)
 	if (!ft_check_if_error(str, i))
 		return (0);
 	j = *i;
-	while (str[*i] && str[*i] > 32 && (str[*i] != SEPARATOR_CHAR && str[*i] != ';'))
+	while (str[*i] && str[*i] > 32 &&
+			(str[*i] != SEPARATOR_CHAR && str[*i] != ';'))
 		ft_check_if_direct(str, i, &direct, &label);
 	block->content = ft_strnmdup(str, j, *i);
 	block->category = "ARG";

@@ -6,7 +6,7 @@
 /*   By: alecott <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/23 10:05:05 by alecott           #+#    #+#             */
-/*   Updated: 2018/05/30 10:29:30 by alecott          ###   ########.fr       */
+/*   Updated: 2018/05/30 11:19:18 by alecott          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	ft_write_instruction(t_chain *block, int fd)
 	op_tab = ft_search_op(block->content);
 	ft_putchar_fd(op_tab->opcode & 0xff, fd);
 	if (op_tab->ocp)
-		ft_OCP(block, fd);
+		ft_ocp(block, fd);
 }
 
 static void	ft_write_arg(t_chain *block, t_chain *start, int fd)
@@ -30,9 +30,9 @@ static void	ft_write_arg(t_chain *block, t_chain *start, int fd)
 	if (block->arg_type == REG_CODE)
 		str = ft_strnmdup(block->content, 1, ft_strlen(block->content));
 	else if (block->arg_type == DIR_CODE && ft_isdigit(block->content[1]))
-			str = ft_strnmdup(block->content, 1, ft_strlen(block->content));
+		str = ft_strnmdup(block->content, 1, ft_strlen(block->content));
 	else if (block->arg_type == IND_CODE && ft_isdigit(block->content[0]))
-			str = block->content;
+		str = block->content;
 	else if ((block->arg_type == DIR_CODE && block->content[1] == LABEL_CHAR)
 		|| (block->arg_type == IND_CODE && block->content[0] == LABEL_CHAR))
 		str = ft_find_label(block, start);
@@ -57,7 +57,7 @@ void		ft_asm(char *str, t_chain *block, header_t *header)
 	fd = open(str, O_WRONLY | O_TRUNC | O_CREAT,
 			S_IROTH | S_IWUSR | S_IRUSR | S_IRGRP);
 	if (fd < 0)
-		return;
+		return ;
 	ft_write_cor(fd, header, start);
 	while (block->next)
 	{

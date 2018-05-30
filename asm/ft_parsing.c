@@ -6,7 +6,7 @@
 /*   By: rkrief <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 16:05:57 by rkrief            #+#    #+#             */
-/*   Updated: 2018/05/30 09:57:58 by alecott          ###   ########.fr       */
+/*   Updated: 2018/05/30 11:11:26 by alecott          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ int		ft_get_name_then_comment(header_t *header, char *str, int i)
 		ft_is_an_error(str, i);
 	i = j + 1;
 	if (str[i] != COMMENT_CMD_STRING[0] && str[i] != COMMENT_CHAR &&
-			str[i] != ';'  && str[i] > 32)
+			str[i] != ';' && str[i] > 32)
 		ft_is_an_error(str, i);
 	while (str[i] <= 32)
 		i++;
@@ -131,10 +131,10 @@ void	ft_parsing(char *str, header_t *header, char *str2)
 	if (!ft_strequ(NAME_CMD_STRING, tmp) &&
 			!ft_strequ(COMMENT_CMD_STRING, tmpp))
 	{
-		if (ft_strequ(NAME_CMD_STRING,tmp))
+		if (ft_strequ(NAME_CMD_STRING, tmp))
 			ft_is_an_error(str, ft_strlen(tmpp));
 		ft_is_an_error(str, ft_strlen(tmp));
-	}	
+	}
 	if (ft_strequ(NAME_CMD_STRING, tmp))
 		j = ft_get_name_then_comment(header, str, i);
 	else if (ft_strequ(COMMENT_CMD_STRING, tmpp))

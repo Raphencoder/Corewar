@@ -6,13 +6,13 @@
 /*   By: alecott <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/29 14:31:33 by alecott           #+#    #+#             */
-/*   Updated: 2018/05/29 18:13:13 by alecott          ###   ########.fr       */
+/*   Updated: 2018/05/30 11:16:29 by alecott          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/asm.h"
 
-static int	ft_PC_label(t_chain *block, char *str)
+static int	ft_pc_label(t_chain *block, char *str)
 {
 	int		n;
 
@@ -22,13 +22,13 @@ static int	ft_PC_label(t_chain *block, char *str)
 		n = n + block->size;
 		if (ft_strequ(block->category, "LABEL") &&
 	ft_strequ(str, ft_strndup(block->content, ft_strlen(block->content) - 1)))
-			break;
+			break ;
 		block = block->next;
 	}
 	return (n);
 }
 
-static int	ft_PC_ins(t_chain *block, t_chain *start)
+static int	ft_pc_ins(t_chain *block, t_chain *start)
 {
 	int		n;
 	t_chain *lst;
@@ -52,18 +52,18 @@ static int	ft_PC_ins(t_chain *block, t_chain *start)
 
 char		*ft_find_label(t_chain *block, t_chain *start)
 {
-	int		PCi;
-	int		PCl;
+	int		pci;
+	int		pcl;
 	char	*str;
 
 	if (block->arg_type == DIR_CODE)
 		str = ft_strsub(block->content, 2, ft_strlen(block->content));
 	else
 		str = ft_strsub(block->content, 1, ft_strlen(block->content));
-	PCi = ft_PC_ins(block, start);
-	PCl = ft_PC_label(start, str);
-	if (PCi <= PCl)
-		return (ft_itoa(PCl - PCi));
+	pci = ft_pc_ins(block, start);
+	pcl = ft_pc_label(start, str);
+	if (pci <= pcl)
+		return (ft_itoa(pcl - pci));
 	else
-		return (ft_itoa((65536 - (PCi - PCl))));
+		return (ft_itoa((65536 - (pci - pcl))));
 }

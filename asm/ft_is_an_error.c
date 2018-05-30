@@ -6,7 +6,7 @@
 /*   By: rkrief <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 17:07:56 by rkrief            #+#    #+#             */
-/*   Updated: 2018/05/30 10:07:35 by alecott          ###   ########.fr       */
+/*   Updated: 2018/05/30 11:17:15 by alecott          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_is_an_error(char *str, int i)
 	int j;
 	int	col;
 	int	nb_line;
-	
+
 	j = 0;
 	col = 1;
 	nb_line = 1;
@@ -37,5 +37,5 @@ void	ft_is_an_error(char *str, int i)
 	ft_putstr(" column ");
 	ft_putnbr(col);
 	ft_putchar('\n');
-	exit (0);
+	exit(0);
 }
