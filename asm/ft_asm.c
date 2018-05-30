@@ -6,7 +6,7 @@
 /*   By: alecott <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/23 10:05:05 by alecott           #+#    #+#             */
-/*   Updated: 2018/05/30 17:08:51 by alecott          ###   ########.fr       */
+/*   Updated: 2018/05/30 17:44:05 by alecott          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,14 @@ static void	ft_write_arg(t_chain *block, t_chain *start, int fd)
 void		ft_asm(char *str, t_chain *block, header_t *header)
 {
 	int		fd;
+	char	*tmp;
 	t_chain	*start;
 
 	block = ft_arg_type(block);
 	start = block;
-	str = ft_strndup(str, ft_strlen(str) - 2);
-	str = ft_strjoin(str, ".cor");
+	tmp = ft_strndup(str, ft_strlen(str) - 2);
+	str = ft_strjoin(tmp, ".cor");
+	ft_strdel(&tmp);
 	fd = open(str, O_WRONLY | O_TRUNC | O_CREAT,
 			S_IROTH | S_IWUSR | S_IRUSR | S_IRGRP);
 	if (fd < 0)
@@ -78,4 +80,5 @@ void		ft_asm(char *str, t_chain *block, header_t *header)
 	}
 	ft_putstr("Writing output program to ");
 	ft_putendl(str);
+	ft_strdel(&str);
 }
