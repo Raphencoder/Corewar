@@ -6,7 +6,7 @@
 /*   By: alecott <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/23 10:05:05 by alecott           #+#    #+#             */
-/*   Updated: 2018/05/30 14:21:40 by alecott          ###   ########.fr       */
+/*   Updated: 2018/05/30 17:08:51 by alecott          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,13 @@ static void	ft_write_instruction(t_chain *block, int fd)
 		ft_ocp(block, fd);
 }
 
+static int	ft_neg(int n)
+{
+	if (n < 0)
+		return (65536 + n);
+	return (n);
+}
+
 static void	ft_write_arg(t_chain *block, t_chain *start, int fd)
 {
 	char	*str;
@@ -29,19 +36,21 @@ static void	ft_write_arg(t_chain *block, t_chain *start, int fd)
 	str = "0";
 	if (block->arg_type == REG_CODE)
 		str = ft_strnmdup(block->content, 1, ft_strlen(block->content));
-	else if (block->arg_type == DIR_CODE && ft_isdigit(block->content[1]))
-		str = ft_strnmdup(block->content, 1, ft_strlen(block->content));
-	else if (block->arg_type == IND_CODE && ft_isdigit(block->content[0]))
+	else if (block->arg_type == DIR_CODE && (ft_isdigit(block->content[1]) ||
+				block->content[1] == '-'))
+		str = ft_strsub(block->content, 1, ft_strlen(block->content));
+	else if (block->arg_type == IND_CODE && (ft_isdigit(block->content[0]) ||
+				block->content[0] == '-'))
 		str = block->content;
 	else if ((block->arg_type == DIR_CODE && block->content[1] == LABEL_CHAR)
 		|| (block->arg_type == IND_CODE && block->content[0] == LABEL_CHAR))
 		str = ft_find_label(block, start);
 	if (block->size == 1)
-		ft_putchar_fd(ft_atoi(str) & 0xff, fd);
+		ft_putchar_fd(ft_neg(ft_atoi(str)) & 0xff, fd);
 	else if (block->size == 2)
-		ft_putshort_bin(ft_atoi(str), fd);
+		ft_putshort_bin(ft_neg(ft_atoi(str)), fd);
 	else if (block->size == 4)
-		ft_putint_bin(ft_atoi(str), fd);
+		ft_putint_bin(ft_neg(ft_atoi(str)), fd);
 	block = start;
 }
 
