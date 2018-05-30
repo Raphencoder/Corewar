@@ -6,13 +6,13 @@
 /*   By: alecott <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/24 13:34:51 by alecott           #+#    #+#             */
-/*   Updated: 2018/05/29 15:49:23 by alecott          ###   ########.fr       */
+/*   Updated: 2018/05/30 10:07:30 by alecott          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/asm.h"
 
-static int	ft_arg_size2(t_chain *block, t_op *op_tab)
+static int		ft_arg_size2(t_chain *block, t_op *op_tab)
 {
 	if (ft_strequ(block->category, "INSTRUCTION") && op_tab->ocp == 1)
 		return (2);
@@ -20,7 +20,7 @@ static int	ft_arg_size2(t_chain *block, t_op *op_tab)
 		return (1);
 }
 
-t_chain		*ft_arg_size(t_chain *block)
+static t_chain	*ft_arg_size(t_chain *block)
 {
 	t_chain	*start;
 	t_op	*op_tab;
@@ -49,7 +49,7 @@ t_chain		*ft_arg_size(t_chain *block)
 	return (start);
 }
 
-t_chain		*ft_arg_type(t_chain *block)
+t_chain			*ft_arg_type(t_chain *block)
 {
 	t_chain	*start;
 

@@ -6,7 +6,7 @@
 /*   By: zaz <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:43:01 by zaz               #+#    #+#             */
-/*   Updated: 2018/05/28 10:20:12 by alecott          ###   ########.fr       */
+/*   Updated: 2018/05/30 10:05:55 by alecott          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,6 @@ t_op	op_tab[17] =
 	{0, 0, {0}, 0, 0, 0, 0, 0}
 };
 
-t_op	*ft_get_op_tab(void)
-{
-	return (op_tab);
-}
-
 t_op	*ft_search_op(char *str)
 {
 	size_t	i;
@@ -52,20 +47,6 @@ t_op	*ft_search_op(char *str)
 	while (i < 17)
 	{
 		if (ft_strequ(op_tab[i].str, str))
-			return (op_tab + i);
-		i++;
-	}
-	return (NULL);
-}
-
-t_op	*ft_get_op(int opcode)
-{
-	size_t	i;
-
-	i = 0;
-	while (i < 17)
-	{
-		if (op_tab[i].opcode == opcode)
 			return (op_tab + i);
 		i++;
 	}

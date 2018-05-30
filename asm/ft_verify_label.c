@@ -6,17 +6,16 @@
 /*   By: rkrief <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/22 16:52:40 by rkrief            #+#    #+#             */
-/*   Updated: 2018/05/24 10:24:55 by rkrief           ###   ########.fr       */
+/*   Updated: 2018/05/30 10:07:33 by alecott          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/asm.h"
-#include "../libft/libft.h"
 
-char    *ft_take_the_res(char *str, int *i, int *j)
+char	*ft_take_the_res(char *str, int *i, int *j)
 {
-	char *res;
-	char *tmp;
+	char	*res;
+	char	*tmp;
 
 	tmp = NULL;
 	res = NULL;
@@ -35,11 +34,11 @@ char    *ft_take_the_res(char *str, int *i, int *j)
 		return (NULL);
 }
 
-void ft_verify_label(char *str, int j, t_chain *block)
+void	ft_verify_label(char *str, int j, t_chain *block)
 {
-	int             i;
-	int             ok;
-	char            *res;
+	int		i;
+	int		ok;
+	char	*res;
 
 	i = 0;
 	ok = 0;
