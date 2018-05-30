@@ -6,7 +6,7 @@
 /*   By: rkrief <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 11:04:44 by rkrief            #+#    #+#             */
-/*   Updated: 2018/05/29 17:30:20 by alecott          ###   ########.fr       */
+/*   Updated: 2018/05/30 21:02:05 by rkrief           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_put_label_in_block(t_chain *block, int i, char *str, int j)
 	int k;
 
 	k = 0;
-	block->category = "LABEL";
+	block->category = ft_strdup("LABEL");
 	if (!ft_strchr(LABEL_CHARS, str[i]))
 		i++;
 	block->content = ft_strnmdup(str, i, j + 1);
@@ -99,7 +99,7 @@ t_chain	*ft_get_in_chain(char *str, int j)
 			block->next = ft_memalloc(sizeof(t_chain));
 			block = block->next;
 			block->content = ft_strdup("\n");
-			block->category = "ENDL";
+			block->category = ft_strdup("ENDL");
 			block->next = ft_memalloc(sizeof(t_chain));
 			block = block->next;
 		}

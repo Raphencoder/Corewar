@@ -6,7 +6,7 @@
 /*   By: rkrief <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/24 15:05:32 by rkrief            #+#    #+#             */
-/*   Updated: 2018/05/30 11:23:31 by alecott          ###   ########.fr       */
+/*   Updated: 2018/05/30 21:01:16 by rkrief           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,6 @@ int		ft_complete_content(t_chain *block, char *str, int *i)
 			(str[*i] != SEPARATOR_CHAR && str[*i] != ';'))
 		ft_check_if_direct(str, i, &direct, &label);
 	block->content = ft_strnmdup(str, j, *i);
-	block->category = "ARG";
+	block->category = ft_strdup("ARG");
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: rkrief <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/24 15:57:47 by rkrief            #+#    #+#             */
-/*   Updated: 2018/05/30 11:22:35 by alecott          ###   ########.fr       */
+/*   Updated: 2018/05/30 21:00:30 by rkrief           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int		ft_take_instruction_and_nb_arg(char *str, int *i, t_chain *b)
 	while (str[*i] && str[*i] >= 'a' && str[*i] <= 'z')
 		*i = *i + 1;
 	b->content = ft_strnmdup(str, j, *i);
-	b->category = "INSTRUCTION";
+	b->category = ft_strdup("INSTRUCTION");
 	if (!(ft_check_if_instruction(b)))
 		ft_is_an_error(str, *i);
 	while (str[*i] == ' ' || str[*i] == '\t')

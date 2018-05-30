@@ -6,11 +6,23 @@
 /*   By: rkrief <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 18:35:51 by rkrief            #+#    #+#             */
-/*   Updated: 2018/05/30 11:14:21 by alecott          ###   ########.fr       */
+/*   Updated: 2018/05/30 21:07:53 by rkrief           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/asm.h"
+
+
+void	ft_free_chain(t_chain *block)
+{
+
+	while (block->next)
+	{
+		ft_strdel(&block->content);
+		ft_strdel(&block->category);
+		block = block->next;
+	}
+}
 
 int		main(int argc, char **argv)
 {
@@ -18,6 +30,7 @@ int		main(int argc, char **argv)
 	char		*str;
 	char		*getall;
 	header_t	*header;
+	t_chain		*block;
 	char		*tmp;
 
 	(void)argc;
@@ -44,6 +57,8 @@ int		main(int argc, char **argv)
 			ft_strdel(&tmp);
 		}
 	}
-	ft_parsing(getall, header, argv[1]);
+	block = ft_parsing(getall, header, argv[1]);
+//	ft_free_chain(block);
+	while (1);
 	return (0);
 }

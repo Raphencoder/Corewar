@@ -6,7 +6,7 @@
 /*   By: alecott <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 14:53:02 by alecott           #+#    #+#             */
-/*   Updated: 2018/05/30 11:06:26 by alecott          ###   ########.fr       */
+/*   Updated: 2018/05/30 20:03:30 by rkrief           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ extern t_op			op_tab[];
 
 int		main(int argc, char **argv);
 void	ft_pass_comment(char *str, int *i);
-void	ft_parsing(char *str, header_t *header, char *str2);
+t_chain	*ft_parsing(char *str, header_t *header, char *str2);
 void	ft_is_an_error(char *str, int i);
 t_chain	*ft_get_in_chain(char *str, int j);
 int		ft_complete_content(t_chain *block, char *str, int *i);

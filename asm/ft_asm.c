@@ -6,7 +6,7 @@
 /*   By: alecott <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/23 10:05:05 by alecott           #+#    #+#             */
-/*   Updated: 2018/05/30 17:44:05 by alecott          ###   ########.fr       */
+/*   Updated: 2018/05/30 20:15:09 by rkrief           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	ft_write_arg(t_chain *block, t_chain *start, int fd)
 {
 	char	*str;
 
-	str = "0";
+	str = NULL;
 	if (block->arg_type == REG_CODE)
 		str = ft_strnmdup(block->content, 1, ft_strlen(block->content));
 	else if (block->arg_type == DIR_CODE && (ft_isdigit(block->content[1]) ||
@@ -41,7 +41,7 @@ static void	ft_write_arg(t_chain *block, t_chain *start, int fd)
 		str = ft_strsub(block->content, 1, ft_strlen(block->content));
 	else if (block->arg_type == IND_CODE && (ft_isdigit(block->content[0]) ||
 				block->content[0] == '-'))
-		str = block->content;
+		str = ft_strdup(block->content);
 	else if ((block->arg_type == DIR_CODE && block->content[1] == LABEL_CHAR)
 		|| (block->arg_type == IND_CODE && block->content[0] == LABEL_CHAR))
 		str = ft_find_label(block, start);
@@ -51,6 +51,7 @@ static void	ft_write_arg(t_chain *block, t_chain *start, int fd)
 		ft_putshort_bin(ft_neg(ft_atoi(str)), fd);
 	else if (block->size == 4)
 		ft_putint_bin(ft_neg(ft_atoi(str)), fd);
+	ft_strdel(&str);
 	block = start;
 }
 
