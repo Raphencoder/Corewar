@@ -6,7 +6,7 @@
 /*   By: alecott <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/29 14:31:33 by alecott           #+#    #+#             */
-/*   Updated: 2018/05/30 11:16:29 by alecott          ###   ########.fr       */
+/*   Updated: 2018/05/30 14:20:39 by alecott          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	ft_pc_ins(t_chain *block, t_chain *start)
 
 	n = 0;
 	lst = start;
-	if (block->index >= 3)
+	if (block->index > 3)
 	{
 		while (lst->next && (lst->index != block->index - 3))
 			lst = lst->next;
@@ -62,6 +62,7 @@ char		*ft_find_label(t_chain *block, t_chain *start)
 		str = ft_strsub(block->content, 1, ft_strlen(block->content));
 	pci = ft_pc_ins(block, start);
 	pcl = ft_pc_label(start, str);
+	printf("\ncontent= %s pci= %i pcl = %i\n", block->content, pci, pcl);
 	if (pci <= pcl)
 		return (ft_itoa(pcl - pci));
 	else
