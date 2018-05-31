@@ -6,7 +6,7 @@
 /*   By: alecott <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/24 13:34:51 by alecott           #+#    #+#             */
-/*   Updated: 2018/05/31 15:23:06 by rkrief           ###   ########.fr       */
+/*   Updated: 2018/05/31 15:55:57 by rkrief           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static void	ft_arg_size(t_chain *block)
 		block = block->next;
 	}
 	ft_strdel(&last_op);
-	block->next = 0;	
+	block->next = 0;
 }
 
 void	ft_arg_type(t_chain *block)

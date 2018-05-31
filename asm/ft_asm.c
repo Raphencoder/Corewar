@@ -6,7 +6,7 @@
 /*   By: alecott <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/23 10:05:05 by alecott           #+#    #+#             */
-/*   Updated: 2018/05/31 15:03:36 by rkrief           ###   ########.fr       */
+/*   Updated: 2018/05/31 15:46:08 by rkrief           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void		ft_asm(char *str, t_chain *block, header_t *header)
 			S_IROTH | S_IWUSR | S_IRUSR | S_IRGRP);
 	if (fd < 0)
 		return ;
-	ft_write_cor(fd, header, start);
+	ft_write_cor(fd, header, *start);
 	while (block)
 	{
 		if (!block->content || !block->category)

@@ -6,7 +6,7 @@
 /*   By: rkrief <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 18:35:51 by rkrief            #+#    #+#             */
-/*   Updated: 2018/05/31 15:36:05 by rkrief           ###   ########.fr       */
+/*   Updated: 2018/05/31 16:36:19 by rkrief           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,29 @@ int		main(int argc, char **argv)
 	header_t	*header;
 	t_chain		*block;
 	char		*tmp;
+	int			i;
 
-	(void)argc;
+	i = 1;
+	if (argc < 2)
+	{
+		ft_putstr("Usage: ./vm_champs/asm [-a] <sourcefile.s>\n    -a : \
+Instead of creating a .cor file, outputs a stripped and annotated version of \
+the code to the standard output\n");
+		exit (0);
+	}
 	header = ft_memalloc(sizeof(header_t));
 	getall = NULL;
-	if (!(fd = open(argv[1], O_RDONLY)))
-		return (0);
-	if (read(fd, 0, 0) < 0)
+	while (argv[i])
 	{
-		ft_putendl("Error while trying to read the file");
+		if (!(fd = open(argv[i], O_RDONLY)))
+			return (0);
+		if (read(fd, 0, 0) < 0 && !argv[i + 1])
+		{
+		ft_putstr("Can't read source file ");
+		ft_putendl(argv[i]);
 		return (0);
+		}
+		i++;
 	}
 	while (get_next_line(fd, &str))
 	{
@@ -68,7 +81,7 @@ int		main(int argc, char **argv)
 			ft_strdel(&tmp);
 		}
 	}
-	block = ft_parsing(getall, header, argv[1]);
+	block = ft_parsing(getall, header, argv[i - 1]);
 	ft_free_chain(block);
 	while (1);
 	return (0);
