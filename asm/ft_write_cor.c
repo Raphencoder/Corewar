@@ -6,26 +6,26 @@
 /*   By: alecott <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 15:09:07 by alecott           #+#    #+#             */
-/*   Updated: 2018/05/29 15:50:43 by alecott          ###   ########.fr       */
+/*   Updated: 2018/05/31 15:26:53 by rkrief           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/asm.h"
 
-static int	ft_total_size(t_chain *block)
+static int	ft_total_size(t_chain block)
 {
 	int		n;
 
 	n = 0;
-	while (block->next)
+	while (block.next)
 	{
-		n = n + block->size;
-		block = block->next;
+		n = n + block.size;
+		block = *block.next;
 	}
 	return (n);
 }
 
-void		ft_write_cor(int fd, header_t *header, t_chain *block)
+void		ft_write_cor(int fd, header_t *header, t_chain block)
 {
 	int		i;
 

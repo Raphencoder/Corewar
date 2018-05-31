@@ -6,7 +6,7 @@
 /*   By: rkrief <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 18:35:51 by rkrief            #+#    #+#             */
-/*   Updated: 2018/05/30 21:07:53 by rkrief           ###   ########.fr       */
+/*   Updated: 2018/05/31 15:36:05 by rkrief           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,20 @@
 
 void	ft_free_chain(t_chain *block)
 {
-
-	while (block->next)
+	t_chain		*tmp;
+	while (block)
 	{
-		ft_strdel(&block->content);
-		ft_strdel(&block->category);
-		block = block->next;
+		tmp = block->next;
+		if (block->content)
+			ft_strdel(&block->content);
+		else
+			break ;
+		if (block->category)
+			ft_strdel(&block->category);
+		free(block);
+		block = tmp;
 	}
+	free(block);
 }
 
 int		main(int argc, char **argv)
@@ -46,7 +53,10 @@ int		main(int argc, char **argv)
 	while (get_next_line(fd, &str))
 	{
 		if (getall == NULL)
+		{
 			getall = ft_strdup(str);
+			ft_strdel(&str);
+		}
 		else
 		{
 			tmp = getall;
@@ -54,11 +64,12 @@ int		main(int argc, char **argv)
 			ft_strdel(&tmp);
 			tmp = getall;
 			getall = ft_strjoin(tmp, str);
+			ft_strdel(&str);
 			ft_strdel(&tmp);
 		}
 	}
 	block = ft_parsing(getall, header, argv[1]);
-//	ft_free_chain(block);
+	ft_free_chain(block);
 	while (1);
 	return (0);
 }

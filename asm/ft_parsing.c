@@ -6,7 +6,7 @@
 /*   By: rkrief <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 16:05:57 by rkrief            #+#    #+#             */
-/*   Updated: 2018/05/30 20:03:13 by rkrief           ###   ########.fr       */
+/*   Updated: 2018/05/31 15:14:37 by rkrief           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ int		ft_get_comment_then_name(header_t *header, char *str, int i)
 	if (!(j = ft_complete_name(str, i + ft_strlen(NAME_CMD_STRING),
 					header)))
 		ft_is_an_error(str, i);
+	ft_strdel(&tmp);
 	return (j);
 }
 
@@ -111,6 +112,7 @@ int		ft_get_name_then_comment(header_t *header, char *str, int i)
 	if (!(j = ft_complete_comment(str, i + ft_strlen(COMMENT_CMD_STRING),
 					header)))
 		ft_is_an_error(str, i);
+	ft_strdel(&tmp);
 	return (j);
 }
 
@@ -145,5 +147,7 @@ t_chain		*ft_parsing(char *str, header_t *header, char *str2)
 	ft_verify_label(str, j, block);
 	ft_nbr_link(block);
 	ft_asm(str2, block, header);
+	ft_strdel(&tmp);
+	ft_strdel(&tmpp);
 	return (block);
 }

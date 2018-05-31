@@ -6,7 +6,7 @@
 /*   By: rkrief <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/24 15:57:47 by rkrief            #+#    #+#             */
-/*   Updated: 2018/05/30 21:00:30 by rkrief           ###   ########.fr       */
+/*   Updated: 2018/05/31 15:42:30 by rkrief           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,5 +110,7 @@ int		ft_put_line_in_block(t_chain *b, int *i, char *str)
 		b->next = ft_memalloc(sizeof(t_chain));
 		b = b->next;
 	}
+	if (!b->content)
+		free(b);
 	return (clone);
 }

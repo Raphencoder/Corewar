@@ -6,7 +6,7 @@
 /*   By: rkrief <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 11:04:44 by rkrief            #+#    #+#             */
-/*   Updated: 2018/05/30 21:02:05 by rkrief           ###   ########.fr       */
+/*   Updated: 2018/05/31 15:43:19 by rkrief           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ t_chain	*ft_get_in_chain(char *str, int j)
 	{
 		if (str[j] == '\n')
 			block->nb_lines++;
-		else if (str[j] == '#' || str[j] == ';')
+		else if (str[j] == COMMENT_CHAR || str[j] == ';')
 		{
 			ft_pass_comment(str, &j);
 			continue ;
@@ -105,7 +105,7 @@ t_chain	*ft_get_in_chain(char *str, int j)
 		}
 		if (!str[j])
 			break ;
-		if (str[j] == '#' || str[j] == ';')
+		if (str[j] == COMMENT_CHAR || str[j] == ';')
 		{
 			ft_pass_comment(str, &j);
 			continue ;

@@ -6,7 +6,7 @@
 /*   By: alecott <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 14:53:02 by alecott           #+#    #+#             */
-/*   Updated: 2018/05/30 20:03:30 by rkrief           ###   ########.fr       */
+/*   Updated: 2018/05/31 15:26:42 by rkrief           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,13 @@ int		ft_put_line_in_block(t_chain *b, int *i, char *str);
 void	ft_verify_label(char *str, int j, t_chain *block);
 t_op	*ft_search_op(char *str);
 void	ft_asm(char *str, t_chain *block, header_t *header);
-t_chain	*ft_arg_type(t_chain *block);
+void	ft_arg_type(t_chain *block);
 void	ft_putint_bin(int n, int fd);
 void	ft_putshort_bin(short n, int fd);
 void	ft_putstr_bin(char *str,int fd);
-void	ft_ocp(t_chain *block, int fd);
-void	ft_write_cor(int fd, header_t *header, t_chain *block);
+void	ft_ocp(t_chain block, int fd);
+void	ft_write_cor(int fd, header_t *header, t_chain block);
 void	ft_nbr_link(t_chain *block);
-char	*ft_find_label(t_chain *block, t_chain *start);
+char	*ft_find_label(t_chain block, t_chain start);
 
 #endif
