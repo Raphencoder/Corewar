@@ -6,22 +6,31 @@
 /*   By: rkrief <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/24 15:05:32 by rkrief            #+#    #+#             */
-/*   Updated: 2018/06/04 10:28:10 by rkrief           ###   ########.fr       */
+/*   Updated: 2018/06/04 17:10:22 by rkrief           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/asm.h"
 
+void	ft_move_frwd(char *str, int *i)
+{
+	while (str[*i] && (str[*i] == ' ' || str[*i] == '\t'))
+		*i = *i + 1;
+	if (str[*i] == SEPARATOR_CHAR)
+		*i = *i + 1;
+	while (str[*i] && (str[*i] == ' ' || str[*i] == '\t'))
+		*i = *i + 1;
+}
 
-int		ft_check_if_register(char *str, int *i)
+int		ft_check_if_register(char *str, int i)
 {
 	int nb;
 
 	nb = 0;
-	*i = *i + 1;
-	if (!ft_isdigit(str[*i]))
+	i = i + 1;
+	if (!ft_isdigit(str[i]))
 		return (0);
-	nb = ft_atoi(str + *i);
+	nb = ft_atoi(str + i);
 	if (nb > 99 || nb == 0)
 		return (0);
 	return (1);
@@ -32,15 +41,10 @@ int		ft_check_if_error(char *str, int *i)
 	int nb;
 
 	nb = 0;
-	while (str[*i] && (str[*i] == ' ' || str[*i] == '\t'))
-		*i = *i + 1;
-	if (str[*i] == SEPARATOR_CHAR)
-		*i = *i + 1;
-	while (str[*i] && (str[*i] == ' ' || str[*i] == '\t'))
-		*i = *i + 1;
+	ft_move_frwd(str, i);
 	if (str[*i] == 'r')
 	{
-		if (!ft_check_if_register(str, i))
+		if (!ft_check_if_register(str, *i))
 			ft_is_an_error(str, *i);
 	}
 	if (str[*i] == ';' || str[*i] == COMMENT_CHAR)
@@ -48,7 +52,7 @@ int		ft_check_if_error(char *str, int *i)
 		ft_pass_comment(str, i);
 		return (0);
 	}
-	if (ft_strchr("abcdefghijklmnopqrstuvwxyz_", str[*i]))
+	if (ft_strchr("abcdefghijklmnopqstuvwxyz_", str[*i]))
 	{
 		if (str[*i - 1] != LABEL_CHAR)
 			ft_is_an_error(str, *i);

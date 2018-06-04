@@ -1,31 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pass_comment.c                                  :+:      :+:    :+:   */
+/*   ft_pass_space.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rkrief <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/18 10:42:10 by rkrief            #+#    #+#             */
-/*   Updated: 2018/06/04 15:40:35 by rkrief           ###   ########.fr       */
+/*   Created: 2018/06/04 16:00:13 by rkrief            #+#    #+#             */
+/*   Updated: 2018/06/04 16:05:24 by rkrief           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/asm.h"
 
-void	ft_pass_comment(char *str, int *i)
+void	ft_pass_space(char *str, int *j)
 {
-	while (str[*i])
+	int i;
+
+	i = 0;
+	while (str[*j] && (str[*j] == ' ' || str[*j] == '\t'))
 	{
-		while (str[*i] && str[*i] != '\n')
-			*i = *i + 1;
-		if (str[*i + 1] && (str[*i + 1] != '#' && str[*i + 1] != ';' &&
-str[*i + 1] != '\n'))
-		{
-			*i = *i + 1;
+		if (str[*j] == '\n')
 			return ;
-		}
-		if (str[*i + 1])
-			*i = *i + 1;
+		*j = *j + 1;
 	}
-	*i = *i - 1;
+	*j = *j - 1;
 }

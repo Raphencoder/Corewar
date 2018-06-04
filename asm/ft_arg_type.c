@@ -6,11 +6,25 @@
 /*   By: alecott <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/24 13:34:51 by alecott           #+#    #+#             */
-/*   Updated: 2018/05/31 15:55:57 by rkrief           ###   ########.fr       */
+/*   Updated: 2018/06/04 13:29:44 by rkrief           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/asm.h"
+
+static	char	*ft_last_op(char *last_op, t_chain block)
+{
+	char *tmp;
+
+	tmp = last_op;
+	if (ft_strequ(block.category, "INSTRUCTION"))
+	{
+		if (last_op)
+			ft_strdel(&last_op);
+		tmp = ft_strdup(block.content);
+	}
+	return (tmp);
+}
 
 static int		ft_arg_size2(t_chain block, t_op *op_tab)
 {
@@ -20,7 +34,7 @@ static int		ft_arg_size2(t_chain block, t_op *op_tab)
 		return (1);
 }
 
-static void	ft_arg_size(t_chain *block)
+static void		ft_arg_size(t_chain *block)
 {
 	t_op	*op_tab;
 	char	*last_op;
@@ -28,12 +42,7 @@ static void	ft_arg_size(t_chain *block)
 	last_op = NULL;
 	while (block->next)
 	{
-		if (ft_strequ(block->category, "INSTRUCTION"))
-		{
-			if (last_op)
-				ft_strdel(&last_op);
-			last_op = ft_strdup(block->content);
-		}
+		last_op = ft_last_op(last_op, *block);
 		if (block->arg_type == DIR_CODE || block->arg_type == IND_CODE)
 		{
 			op_tab = ft_search_op(last_op);
@@ -53,7 +62,7 @@ static void	ft_arg_size(t_chain *block)
 	block->next = 0;
 }
 
-void	ft_arg_type(t_chain *block)
+void			ft_arg_type(t_chain *block)
 {
 	t_chain	*start;
 
@@ -71,6 +80,6 @@ void	ft_arg_type(t_chain *block)
 		}
 		block = block->next;
 	}
-	block->next = 0;	
+	block->next = 0;
 	ft_arg_size(start);
 }

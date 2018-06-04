@@ -6,7 +6,7 @@
 /*   By: alecott <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 14:53:02 by alecott           #+#    #+#             */
-/*   Updated: 2018/05/31 15:26:42 by rkrief           ###   ########.fr       */
+/*   Updated: 2018/06/04 16:03:09 by rkrief           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ void	ft_putint_bin(int n, int fd);
 void	ft_putshort_bin(short n, int fd);
 void	ft_putstr_bin(char *str,int fd);
 void	ft_ocp(t_chain block, int fd);
+void	ft_pass_space(char *str, int *j);
+int		ft_is_lib(char *str, int i);
 void	ft_write_cor(int fd, header_t *header, t_chain block);
 void	ft_nbr_link(t_chain *block);
 char	*ft_find_label(t_chain block, t_chain start);

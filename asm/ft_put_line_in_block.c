@@ -6,21 +6,18 @@
 /*   By: rkrief <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/24 15:57:47 by rkrief            #+#    #+#             */
-/*   Updated: 2018/06/04 10:24:39 by rkrief           ###   ########.fr       */
+/*   Updated: 2018/06/04 17:17:39 by rkrief           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/asm.h"
 
-int		ft_is_lib(char *str, int i)
+t_chain	*ft_inc(int *i, int *nb_arg, t_chain *b)
 {
-	if (str[i] != 'r')
-		return (0);
-	i++;
-	if (ft_isdigit(str[i]) && (ft_isdigit(str[i + 1]) || str[i + 1] == ' ' ||
-				str[i + 1] == '\t' || str[i + 1] == SEPARATOR_CHAR))
-		return (1);
-	return (0);
+	*i = *i + 1;
+	*nb_arg = *nb_arg - 1;
+	b->next = ft_memalloc(sizeof(t_chain));
+	return (b->next);
 }
 
 int		ft_check_if_instruction(t_chain *block)
@@ -101,7 +98,7 @@ int		ft_put_line_in_block(t_chain *b, int *i, char *str)
 
 	nb_arg = ft_take_instruction_and_nb_arg(str, i, b);
 	if ((b->nb_op_tab == 2 || b->nb_op_tab == 3 || b->nb_op_tab == 4 ||
-			b->nb_op_tab == 16 || b->nb_op_tab == 10) && !ft_is_lib(str, *i))
+b->nb_op_tab == 16 || b->nb_op_tab == 10) && !ft_is_lib(str, *i))
 		ft_is_an_error(str, *i);
 	b->next = ft_memalloc(sizeof(t_chain));
 	b = b->next;
@@ -114,10 +111,7 @@ int		ft_put_line_in_block(t_chain *b, int *i, char *str)
 			ft_is_an_error(str, *i);
 		if (!str[*i])
 			break ;
-		*i = *i + 1;
-		nb_arg--;
-		b->next = ft_memalloc(sizeof(t_chain));
-		b = b->next;
+		b = ft_inc(i, &nb_arg, b);
 	}
 	if (!b->content)
 		free(b);

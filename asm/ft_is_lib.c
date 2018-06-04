@@ -1,31 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pass_comment.c                                  :+:      :+:    :+:   */
+/*   ft_put_line_in_bloc.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rkrief <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/18 10:42:10 by rkrief            #+#    #+#             */
-/*   Updated: 2018/06/04 15:40:35 by rkrief           ###   ########.fr       */
+/*   Created: 2018/05/24 15:57:47 by rkrief            #+#    #+#             */
+/*   Updated: 2018/06/04 14:28:12 by rkrief           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/asm.h"
 
-void	ft_pass_comment(char *str, int *i)
+int		ft_is_lib(char *str, int i)
 {
-	while (str[*i])
-	{
-		while (str[*i] && str[*i] != '\n')
-			*i = *i + 1;
-		if (str[*i + 1] && (str[*i + 1] != '#' && str[*i + 1] != ';' &&
-str[*i + 1] != '\n'))
-		{
-			*i = *i + 1;
-			return ;
-		}
-		if (str[*i + 1])
-			*i = *i + 1;
-	}
-	*i = *i - 1;
+	if (str[i] != 'r')
+		return (0);
+	i++;
+	if (ft_isdigit(str[i]) && (ft_isdigit(str[i + 1]) || str[i + 1] == ' ' ||
+str[i + 1] == '\t' || str[i + 1] == SEPARATOR_CHAR))
+		return (1);
+	return (0);
 }

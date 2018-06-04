@@ -6,7 +6,7 @@
 /*   By: rkrief <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 11:04:44 by rkrief            #+#    #+#             */
-/*   Updated: 2018/05/31 15:43:19 by rkrief           ###   ########.fr       */
+/*   Updated: 2018/06/04 17:18:01 by rkrief           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	ft_put_label_in_block(t_chain *block, int i, char *str, int j)
 	int k;
 
 	k = 0;
+	ft_putendl(block->content);
 	block->category = ft_strdup("LABEL");
 	if (!ft_strchr(LABEL_CHARS, str[i]))
 		i++;
@@ -34,7 +35,7 @@ int		ft_put_in_block(t_chain *block, int *j, char *str)
 	while (str[*j] && str[*j] != '\n')
 	{
 		if (str[*j] == LABEL_CHAR && (str[*j - 1] != DIRECT_CHAR &&
-ft_strchr(LABEL_CHARS, str[*j - 1])))
+					ft_strchr(LABEL_CHARS, str[*j - 1])))
 		{
 			ft_put_label_in_block(block, i, str, *j);
 			return (0);
@@ -46,27 +47,47 @@ ft_strchr(LABEL_CHARS, str[*j - 1])))
 	return (nb_arg);
 }
 
-void	ft_pass_space(char *str, int *j)
+t_chain	*ft_else(t_chain *block, char *str, int *j)
 {
-	int i;
+	int	nb_arg;
 
-	i = 0;
-	while (str[*j] && (str[*j] == ' ' || str[*j] == '\t'))
+	nb_arg = 0;
+	nb_arg = ft_put_in_block(block, j, str);
+	while (nb_arg)
 	{
-		if (str[*j] == '\n')
-			return ;
-		*j = *j + 1;
+		block = block->next;
+		nb_arg--;
 	}
+	block->next = ft_memalloc(sizeof(t_chain));
+	block = block->next;
+	block->content = ft_strdup("\n");
+	block->category = ft_strdup("ENDL");
+	block->next = ft_memalloc(sizeof(t_chain));
+	block = block->next;
+	return (block);
+}
+
+t_chain	*ft_begin(char *str, int *j, t_chain *block)
+{
+	if (str[*j] == '\n')
+		block->nb_lines++;
+	else if (str[*j] == COMMENT_CHAR || str[*j] == ';')
+		ft_pass_comment(str, j);
+	else if (str[*j] == ' ' || str[*j] == '\t')
+		ft_pass_space(str, j);
+	else if ((!ft_strchr(LABEL_CHARS, str[*j])) && str[*j] != DIRECT_CHAR)
+		ft_is_an_error(str, *j);
+	else
+		block = ft_else(block, str, j);
+	return (block);
 }
 
 t_chain	*ft_get_in_chain(char *str, int j)
 {
 	t_chain		*block;
 	void		*start;
-	int			nb_arg;
 	int			i;
 
-	nb_arg = 0;
 	j++;
 	block = ft_memalloc(sizeof(t_chain));
 	block->next = 0;
@@ -74,42 +95,11 @@ t_chain	*ft_get_in_chain(char *str, int j)
 	i = 0;
 	while (str[j])
 	{
-		if (str[j] == '\n')
-			block->nb_lines++;
-		else if (str[j] == COMMENT_CHAR || str[j] == ';')
-		{
-			ft_pass_comment(str, &j);
-			continue ;
-		}
-		else if (str[j] == ' ' || str[j] == '\t')
-		{
-			ft_pass_space(str, &j);
-			continue ;
-		}
-		else if ((!ft_strchr(LABEL_CHARS, str[j])) && str[j] != DIRECT_CHAR)
-			ft_is_an_error(str, j);
-		else
-		{
-			nb_arg = ft_put_in_block(block, &j, str);
-			while (nb_arg)
-			{
-				block = block->next;
-				nb_arg--;
-			}
-			block->next = ft_memalloc(sizeof(t_chain));
-			block = block->next;
-			block->content = ft_strdup("\n");
-			block->category = ft_strdup("ENDL");
-			block->next = ft_memalloc(sizeof(t_chain));
-			block = block->next;
-		}
+		block = ft_begin(str, &j, block);
 		if (!str[j])
 			break ;
 		if (str[j] == COMMENT_CHAR || str[j] == ';')
-		{
 			ft_pass_comment(str, &j);
-			continue ;
-		}
 		j++;
 	}
 	block = start;

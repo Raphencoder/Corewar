@@ -6,7 +6,7 @@
 /*   By: alecott <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/29 14:31:33 by alecott           #+#    #+#             */
-/*   Updated: 2018/05/31 11:08:32 by rkrief           ###   ########.fr       */
+/*   Updated: 2018/06/04 13:30:13 by rkrief           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	ft_pc_label(t_chain block, char *str)
 			ft_strdel(&tmp);
 		n = n + block.size;
 		if (ft_strequ(block.category, "LABEL") &&
-	ft_strequ(str, tmp = ft_strndup(block.content, ft_strlen(block.content) - 1)))
+ft_strequ(str, tmp = ft_strndup(block.content, ft_strlen(block.content) - 1)))
 			break ;
 		block = *block.next;
 	}

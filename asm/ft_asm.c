@@ -6,11 +6,18 @@
 /*   By: alecott <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/23 10:05:05 by alecott           #+#    #+#             */
-/*   Updated: 2018/05/31 15:46:08 by rkrief           ###   ########.fr       */
+/*   Updated: 2018/06/04 13:36:54 by rkrief           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/asm.h"
+
+static void	ft_write(char *str)
+{
+	ft_putstr("Writing output program to ");
+	ft_putendl(str);
+	ft_strdel(&str);
+}
 
 static void	ft_write_instruction(t_chain block, int fd)
 {
@@ -66,21 +73,17 @@ void		ft_asm(char *str, t_chain *block, header_t *header)
 	str = ft_strjoin(tmp, ".cor");
 	ft_strdel(&tmp);
 	fd = open(str, O_WRONLY | O_TRUNC | O_CREAT,
-			S_IROTH | S_IWUSR | S_IRUSR | S_IRGRP);
+S_IROTH | S_IWUSR | S_IRUSR | S_IRGRP);
 	if (fd < 0)
 		return ;
 	ft_write_cor(fd, header, *start);
-	while (block)
+	while (block && (block->content || block->category))
 	{
-		if (!block->content || !block->category)
-			break ;
 		if (ft_strequ(block->category, "INSTRUCTION"))
 			ft_write_instruction(*block, fd);
 		else if (ft_strequ(block->category, "ARG"))
 			ft_write_arg(*block, *start, fd);
 		block = block->next;
 	}
-	ft_putstr("Writing output program to ");
-	ft_putendl(str);
-	ft_strdel(&str);
+	ft_write(str);
 }

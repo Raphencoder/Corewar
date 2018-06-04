@@ -6,7 +6,7 @@
 /*   By: rkrief <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 16:05:57 by rkrief            #+#    #+#             */
-/*   Updated: 2018/05/31 16:07:11 by rkrief           ###   ########.fr       */
+/*   Updated: 2018/06/04 16:57:08 by rkrief           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,11 +144,7 @@ t_chain		*ft_parsing(char *str, header_t *header, char *str2)
 	tmpp = ft_strnmdup(str, i, i + ft_strlen(COMMENT_CMD_STRING));
 	if (!ft_strequ(NAME_CMD_STRING, tmp) &&
 			!ft_strequ(COMMENT_CMD_STRING, tmpp))
-	{
-		if (ft_strequ(NAME_CMD_STRING, tmp))
-			ft_is_an_error(str, ft_strlen(tmpp));
 		ft_is_an_error(str, ft_strlen(tmp));
-	}
 	if (ft_strequ(NAME_CMD_STRING, tmp))
 		j = ft_get_name_then_comment(header, str, i);
 	else if (ft_strequ(COMMENT_CMD_STRING, tmpp))

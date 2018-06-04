@@ -6,16 +6,16 @@
 /*   By: rkrief <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 18:35:51 by rkrief            #+#    #+#             */
-/*   Updated: 2018/05/31 16:36:19 by rkrief           ###   ########.fr       */
+/*   Updated: 2018/06/04 17:04:40 by rkrief           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/asm.h"
 
-
 void	ft_free_chain(t_chain *block)
 {
 	t_chain		*tmp;
+
 	while (block)
 	{
 		tmp = block->next;
@@ -31,6 +31,41 @@ void	ft_free_chain(t_chain *block)
 	free(block);
 }
 
+void	ft_into_the_while(char **getall, char *str)
+{
+	char *tmp;
+
+	tmp = NULL;
+	if (*getall == NULL)
+	{
+		*getall = ft_strdup(str);
+		ft_strdel(&str);
+	}
+	else
+	{
+		tmp = *getall;
+		*getall = ft_strjoin(tmp, "\n");
+		ft_strdel(&tmp);
+		tmp = *getall;
+		*getall = ft_strjoin(tmp, str);
+		ft_strdel(&str);
+		ft_strdel(&tmp);
+	}
+}
+
+void	ft_check_error_parse(int *fd, int *i, char **argv)
+{
+	if (!(*fd = open(argv[*i], O_RDONLY)))
+		exit(0);
+	if (read(*fd, 0, 0) < 0 && !argv[*i + 1])
+	{
+		ft_putstr("Can't read source file ");
+		ft_putendl(argv[*i]);
+		exit(0);
+	}
+	*i = *i + 1;
+}
+
 int		main(int argc, char **argv)
 {
 	int			fd;
@@ -38,7 +73,6 @@ int		main(int argc, char **argv)
 	char		*getall;
 	header_t	*header;
 	t_chain		*block;
-	char		*tmp;
 	int			i;
 
 	i = 1;
@@ -47,42 +81,24 @@ int		main(int argc, char **argv)
 		ft_putstr("Usage: ./vm_champs/asm [-a] <sourcefile.s>\n    -a : \
 Instead of creating a .cor file, outputs a stripped and annotated version of \
 the code to the standard output\n");
-		exit (0);
+		exit(0);
 	}
 	header = ft_memalloc(sizeof(header_t));
 	getall = NULL;
 	while (argv[i])
-	{
-		if (!(fd = open(argv[i], O_RDONLY)))
-			return (0);
-		if (read(fd, 0, 0) < 0 && !argv[i + 1])
-		{
-		ft_putstr("Can't read source file ");
-		ft_putendl(argv[i]);
-		return (0);
-		}
-		i++;
-	}
+		ft_check_error_parse(&fd, &i, argv);
 	while (get_next_line(fd, &str))
-	{
-		if (getall == NULL)
-		{
-			getall = ft_strdup(str);
-			ft_strdel(&str);
-		}
-		else
-		{
-			tmp = getall;
-			getall = ft_strjoin(tmp, "\n");
-			ft_strdel(&tmp);
-			tmp = getall;
-			getall = ft_strjoin(tmp, str);
-			ft_strdel(&str);
-			ft_strdel(&tmp);
-		}
-	}
+		ft_into_the_while(&getall, str);
 	block = ft_parsing(getall, header, argv[i - 1]);
+	t_chain *start;
+	start = block;
+	while (start)
+	{
+		ft_putstr("|>");
+		ft_putendl(start->content);
+		ft_putstr("<|");
+		start = start->next;
+	}
 	ft_free_chain(block);
-	while (1);
 	return (0);
 }
