@@ -6,7 +6,7 @@
 /*   By: rkrief <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/22 16:52:40 by rkrief            #+#    #+#             */
-/*   Updated: 2018/05/30 20:00:39 by rkrief           ###   ########.fr       */
+/*   Updated: 2018/06/04 09:59:30 by rkrief           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,10 @@ void	ft_verify_label(char *str, int j, t_chain *block)
 	int		i;
 	int		ok;
 	char	*res;
+	t_chain	*start;
 
 	i = 0;
+	start = block;
 	ok = 0;
 	res = NULL;
 	while (str[j])
@@ -64,6 +66,8 @@ void	ft_verify_label(char *str, int j, t_chain *block)
 			}
 		}
 		j++;
+		ok = 0;
+		block = start;
 	}
 	ft_strdel(&res);
 }
