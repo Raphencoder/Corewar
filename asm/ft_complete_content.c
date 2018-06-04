@@ -6,7 +6,7 @@
 /*   By: rkrief <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/24 15:05:32 by rkrief            #+#    #+#             */
-/*   Updated: 2018/06/04 09:44:45 by rkrief           ###   ########.fr       */
+/*   Updated: 2018/06/04 10:28:10 by rkrief           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int		ft_check_if_error(char *str, int *i)
 	if (ft_strchr("abcdefghijklmnopqrstuvwxyz_", str[*i]))
 	{
 		if (str[*i - 1] != LABEL_CHAR)
-			return (0);
+			ft_is_an_error(str, *i);
 	}
 	if (!ft_strchr(LABEL_CHARS, str[*i]) && str[*i] != DIRECT_CHAR &&
 			str[*i] != LABEL_CHAR && str[*i] != '-')

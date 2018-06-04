@@ -6,7 +6,7 @@
 /*   By: rkrief <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/22 16:52:40 by rkrief            #+#    #+#             */
-/*   Updated: 2018/06/04 09:59:30 by rkrief           ###   ########.fr       */
+/*   Updated: 2018/06/04 10:19:41 by rkrief           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,13 @@ char	*ft_take_the_res(char *str, int *i, int *j)
 
 	tmp = NULL;
 	res = NULL;
-	if (str[*j] == DIRECT_CHAR && str[*j + 1] == LABEL_CHAR)
+	if ((str[*j] == DIRECT_CHAR && str[*j + 1] == LABEL_CHAR) ||
+(str[*j] == LABEL_CHAR && ft_strchr(LABEL_CHARS, str[*j + 1])))
 	{
-		*i = *j + 2;
+		if (str[*j] == LABEL_CHAR)
+			*i = *j + 1;
+		else
+			*i = *j + 2;
 		while (str[*j] && (str[*j] > 32 && str[*j] != SEPARATOR_CHAR))
 			*j = *j + 1;
 		res = ft_strnmdup(str, *i, *j);

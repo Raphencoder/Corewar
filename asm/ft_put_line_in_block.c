@@ -6,7 +6,7 @@
 /*   By: rkrief <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/24 15:57:47 by rkrief            #+#    #+#             */
-/*   Updated: 2018/05/31 15:42:30 by rkrief           ###   ########.fr       */
+/*   Updated: 2018/06/04 10:24:39 by rkrief           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,24 @@ int		ft_check_if_instruction(t_chain *block)
 int		ft_take_nb_argument(char *str, int i)
 {
 	int nb_separator;
+	int	smth;
 
+	smth = 0;
 	nb_separator = 0;
 	while (str[i] && (str[i] != '\n' &&
 				str[i] != COMMENT_CHAR && str[i] != ';'))
 	{
 		if (str[i] == SEPARATOR_CHAR)
+		{
 			nb_separator++;
+			smth = 0;
+		}
+		if (ft_strchr(LABEL_CHARS, str[i]))
+			smth++;
 		i++;
 	}
+	if (smth == 0)
+		return (-100);
 	return (nb_separator + 1);
 }
 

@@ -2,7 +2,7 @@
 .name "qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq"
 
 start:
-	st r1, :d6
+	st r1, 6
 	live %0
 	ld %10, r2
 	ld %0, r3
