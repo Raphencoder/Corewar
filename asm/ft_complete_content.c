@@ -12,7 +12,7 @@
 
 #include "../includes/asm.h"
 
-void	ft_move_frwd(char *str, int *i)
+static void	ft_move_frwd(char *str, int *i)
 {
 	while (str[*i] && (str[*i] == ' ' || str[*i] == '\t'))
 		*i = *i + 1;
@@ -22,7 +22,7 @@ void	ft_move_frwd(char *str, int *i)
 		*i = *i + 1;
 }
 
-int		ft_check_if_register(char *str, int i)
+static int	ft_check_if_register(char *str, int i)
 {
 	int nb;
 
@@ -36,7 +36,7 @@ int		ft_check_if_register(char *str, int i)
 	return (1);
 }
 
-int		ft_check_if_error(char *str, int *i)
+static int	ft_check_if_error(char *str, int *i)
 {
 	int nb;
 
@@ -63,7 +63,7 @@ int		ft_check_if_error(char *str, int *i)
 	return (1);
 }
 
-void	ft_check_if_direct(char *str, int *i, int *direct, int *label)
+static void	ft_check_if_direct(char *str, int *i, int *direct, int *label)
 {
 	if (*direct && !ft_isdigit(str[*i]))
 		ft_is_an_error(str, *i);
