@@ -14,9 +14,6 @@
 
 void	ft_put_label_in_block(t_chain *block, int i, char *str, int j)
 {
-	int k;
-
-	k = 0;
 	ft_putendl(block->content);
 	block->category = ft_strdup("LABEL");
 	if (!ft_strchr(LABEL_CHARS, str[i]))
@@ -86,13 +83,11 @@ t_chain	*ft_get_in_chain(char *str, int j)
 {
 	t_chain		*block;
 	void		*start;
-	int			i;
 
 	j++;
 	block = ft_memalloc(sizeof(t_chain));
 	block->next = 0;
 	start = block;
-	i = 0;
 	while (str[j])
 	{
 		block = ft_begin(str, &j, block);

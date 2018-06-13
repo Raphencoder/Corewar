@@ -38,9 +38,6 @@ static int	ft_check_if_register(char *str, int i)
 
 static int	ft_check_if_error(char *str, int *i)
 {
-	int nb;
-
-	nb = 0;
 	ft_move_frwd(str, i);
 	if (str[*i] == 'r')
 	{

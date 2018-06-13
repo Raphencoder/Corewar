@@ -14,9 +14,6 @@
 
 void	ft_pass_space(char *str, int *j)
 {
-	int i;
-
-	i = 0;
 	while (str[*j] && (str[*j] == ' ' || str[*j] == '\t'))
 	{
 		if (str[*j] == '\n')
