@@ -28,7 +28,7 @@ void	ft_free_chain(t_chain *block)
 		free(block);
 		block = tmp;
 	}
-	free(block);
+//	free(block);
 }
 
 void	ft_into_the_while(char **getall, char *str)
@@ -72,7 +72,6 @@ int		main(int argc, char **argv)
 	char		*str;
 	char		*getall;
 	header_t	*header;
-	t_chain		*block;
 	int			i;
 
 	i = 1;
@@ -89,16 +88,6 @@ the code to the standard output\n");
 		ft_check_error_parse(&fd, &i, argv);
 	while (get_next_line(fd, &str))
 		ft_into_the_while(&getall, str);
-	block = ft_parsing(getall, header, argv[i - 1]);
-	t_chain *start;
-	start = block;
-	while (start)
-	{
-		ft_putstr("|>");
-		ft_putendl(start->content);
-		ft_putstr("<|");
-		start = start->next;
-	}
-	ft_free_chain(block);
+	ft_parsing(getall, header, argv[i - 1]);
 	return (0);
 }
