@@ -6,7 +6,7 @@
 /*   By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/03 11:22:38 by abouvero          #+#    #+#             */
-/*   Updated: 2018/06/19 13:50:53 by rkrief           ###   ########.fr       */
+/*   Updated: 2018/06/19 14:28:29 by rkrief           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ static void	exec_processes(t_process *process, t_vm *vm)
 	}
 }
 
-void		ft_visu(t_vm *vm, int i, WINDOW *win, WINDOW *box, unsigned char *clone)
+void		ft_visu(t_vm *vm, int i, WINDOW *win, WINDOW *box, unsigned char *clone, int cpc)
 {
 	int ch;
 	int	j;
@@ -110,35 +110,27 @@ void		ft_visu(t_vm *vm, int i, WINDOW *win, WINDOW *box, unsigned char *clone)
 	wrefresh(win);
 	box(box, 0, 0);
 	mvwprintw(win, 0, 0, "cycle numero : %d\n", vm->cycle);
-	attron(UNDERLINE);
-		
-	attroff(UNDERLINE);
+	if (cpc != vm->processes->pc && vm->cycle != 0)
+	{
+		attron(A_UNDERLINE);
+		mvwprintw(win, vm->processes->pc / 200, vm->processes->pc/ 80, "%.2x", vm->map[vm->processes->pc]); 
+		attroff(A_UNDERLINE);
+	}
 	while (j < MEM_SIZE)
 	{
+		(void)clone;
 		if (x > 200)
 		{
 			x = 0;
 			y++;
 		}		
-		if (clone[j] != vm->map[j] || vm->cycle == 0)
-		{
-			if (vm->cycle != 0)
-				wprintw(win, "gere");
 			wprintw(win, "%.2x", vm->map[j++]);
 			if (!(j % 64) && j != 0)
 				wprintw(win, "\n");
 			else
 				wprintw(win, " ");
-			x++;
-		}
-		else{
-			j++; x++;}
-		if (clone[j] != vm->map[j] && vm->cycle != 0)
-			wprintw(win, "gere");
-
 		wrefresh(win);
 	}
-	usleep(i);
 }
 
 int			run(t_vm *vm)
@@ -160,6 +152,7 @@ int			run(t_vm *vm)
 	init_instr_tab(vm);
 	ctd = CYCLE_TO_DIE;
 	initscr();
+	curs_set(0);
 	height = 80;
 	width =	200;
 	start_y = 5;
@@ -183,7 +176,7 @@ int			run(t_vm *vm)
 				ctd -= CYCLE_DELTA;
 			}
 		}
-		ft_visu(vm, i, win, box, clone);
+		ft_visu(vm, i, win, box, clone, cpc);
 		clone = vm->map;
 		cpc = vm->processes->pc;
 		exec_processes(vm->processes, vm);
