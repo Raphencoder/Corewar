@@ -6,7 +6,7 @@
 /*   By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/03 11:22:38 by abouvero          #+#    #+#             */
-/*   Updated: 2018/06/12 16:00:58 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/06/19 13:50:53 by rkrief           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ static int	exec_process(t_process *process, t_vm *vm)
 		process->cycles_left = g_op_tab[opc - 1].nb_cycle - 1;
 		return (0);
 	}
-//	ft_printf("OCP : %d\n", opc);
+	//	ft_printf("OCP : %d\n", opc);
 	vm->instr_tab[opc - 1](instr_params(vm, process, opc));
-//	ft_printf("NEW PC : %d\n", process->pc);
+	//	ft_printf("NEW PC : %d\n", process->pc);
 	return (1);
 }
 
@@ -81,12 +81,17 @@ static void	exec_processes(t_process *process, t_vm *vm)
 	}
 }
 
-void		ft_visu(t_vm *vm, int i)
+void		ft_visu(t_vm *vm, int i, WINDOW *win, WINDOW *box, unsigned char *clone)
 {
 	int ch;
 	int	j;
+	int	y;
+	int x;
 
+	x = 0;
 	j = 0;
+	i = 0;
+	y = 1;
 	nodelay(stdscr,TRUE);
 	ch = getch();
 	if (ch == 95)
@@ -96,19 +101,42 @@ void		ft_visu(t_vm *vm, int i)
 	if (i <= 0)
 		i = 30000;
 	if (ch == 3)
+	{
+		clear();
 		exit (0);
+	}
 	if (ch == 45)
 		i = 2000;
-	clear();
-	printw("cicle numero : %d\n", vm->cycle);
+	wrefresh(win);
+	box(box, 0, 0);
+	mvwprintw(win, 0, 0, "cycle numero : %d\n", vm->cycle);
+	attron(UNDERLINE);
+		
+	attroff(UNDERLINE);
 	while (j < MEM_SIZE)
 	{
-		printw("%.2x", vm->map[j++]);
-		if (!(j % 64) && j != 0)
-			printw("\n");
-		else
-			printw(" ");
-		refresh();
+		if (x > 200)
+		{
+			x = 0;
+			y++;
+		}		
+		if (clone[j] != vm->map[j] || vm->cycle == 0)
+		{
+			if (vm->cycle != 0)
+				wprintw(win, "gere");
+			wprintw(win, "%.2x", vm->map[j++]);
+			if (!(j % 64) && j != 0)
+				wprintw(win, "\n");
+			else
+				wprintw(win, " ");
+			x++;
+		}
+		else{
+			j++; x++;}
+		if (clone[j] != vm->map[j] && vm->cycle != 0)
+			wprintw(win, "gere");
+
+		wrefresh(win);
 	}
 	usleep(i);
 }
@@ -118,16 +146,31 @@ int			run(t_vm *vm)
 	int		ctd;
 	int		check;
 	int		i;
+	WINDOW	*win;
+	WINDOW	*box;
+	int		height;
+	int		width;
+	int		start_y;
+	int		start_x;
+	unsigned char *clone;
+	int		cpc;
 
 	i = 300;
 	check = 0;
 	init_instr_tab(vm);
 	ctd = CYCLE_TO_DIE;
 	initscr();
-	raw();
+	height = 80;
+	width =	200;
+	start_y = 5;
+	start_x = 20;
+	win = newwin(height, width, start_y, start_x);
+	box = newwin(height + 10, width + 10, 2, 10); 
+	refresh();
+	wrefresh(win);
 	while (vm->processes_nbr && ctd > 0)
 	{
-//		ft_printf("CYCLE : %d\n", vm->cycle);
+		//		ft_printf("CYCLE : %d\n", vm->cycle);
 		if (vm->cycle == vm->dump)
 			return (mem_dump(vm->map));
 		if (!(vm->cycle % ctd) && vm->cycle)
@@ -140,11 +183,12 @@ int			run(t_vm *vm)
 				ctd -= CYCLE_DELTA;
 			}
 		}
-		ft_visu(vm, i);
+		ft_visu(vm, i, win, box, clone);
+		clone = vm->map;
+		cpc = vm->processes->pc;
 		exec_processes(vm->processes, vm);
 		vm->cycle++;
 	}
 	endwin();
-	ft_putendl("HELLLLLOOOOOOO");
 	return (1);
 }
