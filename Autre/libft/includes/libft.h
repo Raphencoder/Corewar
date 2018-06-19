@@ -72,6 +72,7 @@ char			*ft_noleaks_strjoin(char *s1, char *s2);
 char			*ft_strtrim(char const *s);
 int				ft_count_words(char const *s, char separator);
 char			**ft_strsplit(char const *s, char c);
+char			*ft_itoa_base(int nbr, int base);
 char			*ft_itoa(int n);
 void			ft_putchar(char c);
 void			ft_putstr(char const *s);

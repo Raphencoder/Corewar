@@ -110,12 +110,12 @@ void		ft_visu(t_vm *vm, int i, WINDOW *win, WINDOW *box, unsigned char *clone, i
 	wrefresh(win);
 	box(box, 0, 0);
 	mvwprintw(win, 0, 0, "cycle numero : %d\n", vm->cycle);
-	if (cpc != vm->processes->pc && vm->cycle != 0)
-	{
+	/*	if (cpc != vm->processes->pc && vm->cycle != 0)
+		{
 		attron(A_UNDERLINE);
 		mvwprintw(win, vm->processes->pc / 200, vm->processes->pc/ 80, "%.2x", vm->map[vm->processes->pc]); 
 		attroff(A_UNDERLINE);
-	}
+		}*/
 	while (j < MEM_SIZE)
 	{
 		(void)clone;
@@ -123,14 +123,37 @@ void		ft_visu(t_vm *vm, int i, WINDOW *win, WINDOW *box, unsigned char *clone, i
 		{
 			x = 0;
 			y++;
-		}		
-			wprintw(win, "%.2x", vm->map[j++]);
+		}
+//		char *res;
+//		char *res1;
+//		res = ft_itoa_base(vm->map[j], 16);
+//		res1 = ft_itoa_base(clone[j], 16);
+///		if (!ft_strequ(res, res1))
+//		{
+			mvwprintw(win, y, x, "%.2x", vm->map[j++]);
+			x += 2;
+			if (x > 200)
+			{
+				x = 0;
+				y++;
+			}
 			if (!(j % 64) && j != 0)
-				wprintw(win, "\n");
+				mvwprintw(win, y, x, "\n");
 			else
-				wprintw(win, " ");
+				mvwprintw(win, y, x, " ");
+			x += 1;
+//		}
+//		else{
+//				
+//				if (ft_strequ(res, " ") || ft_strequ(res, "\n"))
+//							x += 1;
+//				else
+//					x += 2;
+//				j++;
+//			}
 		wrefresh(win);
 	}
+	(void)cpc;
 }
 
 int			run(t_vm *vm)
@@ -155,7 +178,7 @@ int			run(t_vm *vm)
 	curs_set(0);
 	height = 80;
 	width =	200;
-	start_y = 5;
+	start_y = 1;
 	start_x = 20;
 	win = newwin(height, width, start_y, start_x);
 	box = newwin(height + 10, width + 10, 2, 10); 
