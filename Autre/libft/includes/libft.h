@@ -33,6 +33,7 @@ wchar_t			*ft_wstrdup(const wchar_t *s1);
 char			*ft_noleaks_strndup(char *s1, size_t n);
 char			*ft_strcpy(char *dst, const char *src);
 char			*ft_strncpy(char *dst, const char *src, size_t len);
+char        	*ft_strndup(const char *s1, size_t n);
 char			*ft_strcat(char *s1, const char *s2);
 wchar_t			*ft_wstrcat(wchar_t *s1, const wchar_t *s2);
 char			*ft_strncat(char *s1, const char *s2, size_t n);

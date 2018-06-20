@@ -124,12 +124,14 @@ void		ft_visu(t_vm *vm, int i, WINDOW *win, WINDOW *box, unsigned char *clone, i
 			x = 0;
 			y++;
 		}
-//		char *res;
-//		char *res1;
-//		res = ft_itoa_base(vm->map[j], 16);
-//		res1 = ft_itoa_base(clone[j], 16);
-///		if (!ft_strequ(res, res1))
-//		{
+		char *res;
+		char *res1;
+		res = ft_itoa_base(vm->map[j], 16);
+		res = ft_strndup(res, 2);
+		res1 = ft_itoa_base(clone[j], 16);
+		res1 = ft_strndup(res1, 2);
+		if (!ft_strequ(res, res1) || vm->cycle == 0)
+		{
 			mvwprintw(win, y, x, "%.2x", vm->map[j++]);
 			x += 2;
 			if (x > 200)
@@ -142,7 +144,11 @@ void		ft_visu(t_vm *vm, int i, WINDOW *win, WINDOW *box, unsigned char *clone, i
 			else
 				mvwprintw(win, y, x, " ");
 			x += 1;
-//		}
+		}
+		else {
+			j++;
+			x += 1;	
+				}
 //		else{
 //				
 //				if (ft_strequ(res, " ") || ft_strequ(res, "\n"))
