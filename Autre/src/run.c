@@ -122,7 +122,7 @@ int			run(t_vm *vm)
 		if (vm->cycle == vm->ctd)
 			check_vm(vm, &check);
 		exec_process(vm->processes, vm);
-		visu_run(vm, win, visu, score, test);
+		visu_run(*vm, win, visu, score, test);
 		if (vm->tt_cycle == vm->dump)
 			return (mem_dump(vm->map));
 		vm->cycle++;
