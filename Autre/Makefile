@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: abouvero <abouvero@student.42.fr>          +#+  +:+       +#+         #
+#    By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/25 17:38:12 by abouvero          #+#    #+#              #
-#    Updated: 2018/06/19 11:57:31 by rkrief           ###   ########.fr        #
+#    Updated: 2018/06/20 17:28:38 by mfonteni         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ SRC_NAME = main.c \
 	   get_champ.c \
 	   init_champs.c \
 	   init.c \
+	   init_score.c \
 	   process.c \
 	   option.c \
 	   init_tools.c \
@@ -27,6 +28,8 @@ SRC_NAME = main.c \
 	   getters.c \
 	   convert.c \
 	   instr_params_check.c \
+	   init_visu.c \
+	   visu_run.c \
 	   op.c
 OBJ_NAME = $(SRC_NAME:.c=.o)
 OBJ_PATH = obj
@@ -34,7 +37,7 @@ CPPFLAGS = -Iinclude
 LIBFT = libft/libft.a
 LIBDIR = libft
 CC = gcc
-CFLAGS = -Werror -Wall -Wextra #-fsanitize=address -g3 -lncurses
+CFLAGS = -Werror -Wall -Wextra #-fsanitize=address -g3
 
 INC_PATH = include
 SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))

@@ -6,7 +6,7 @@
 /*   By: abouvero <abouvero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/30 17:17:57 by abouvero          #+#    #+#             */
-/*   Updated: 2018/06/12 12:16:26 by abouvero         ###   ########.fr       */
+/*   Updated: 2018/06/13 16:50:49 by abouvero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,14 +78,17 @@ int			opt(char **av, int ac, int *i, t_vm *vm)
 
 	num = 0;
 	while (*av[*i] == '-')
-	{
 		if (known_opt(av[*i]))
-			if (is_opt(av[*i], (*i + 1 == ac || !is_dig_neg(av[*i + 1])
+			if (!ft_strcmp(av[*i], "-v"))
+			{
+				if (!activate_visu(vm, i, ac))
+					return (-2);
+			}
+			else if (is_opt(av[*i], (*i + 1 == ac || !is_dig_neg(av[*i + 1])
 									? 0 : av[*i + 1]), vm, &num) != -1)
 				if (*i + 2 == ac)
 				{
-					if (!vm->champ)
-						ft_dprintf(2, "No champ loaded\n");
+					!vm->champ ? ft_dprintf(2, "No champ loaded\n") : 0;
 					return (-2);
 				}
 				else
@@ -94,6 +97,5 @@ int			opt(char **av, int ac, int *i, t_vm *vm)
 				return (-1);
 		else
 			return (illegal_opt(av[*i], -1));
-	}
 	return (num);
 }

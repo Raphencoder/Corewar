@@ -6,12 +6,12 @@
 /*   By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/03 11:22:38 by abouvero          #+#    #+#             */
-/*   Updated: 2018/06/20 16:06:13 by rkrief           ###   ########.fr       */
+/*   Updated: 2018/06/20 16:37:37 by rkrief           ###   ########.fr       */
+/*   Updated: 2018/06/20 14:36:17 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/corewar.h"
-#include <ncurses.h>
 
 static void	init_instr_tab(t_vm *vm)
 {
@@ -37,21 +37,30 @@ static int	exec_process(t_process *process, t_vm *vm)
 {
 	unsigned char	opc;
 
-	opc = vm->map[process->pc];
-	if (opc < 1 || opc > 16)
-		return (decal_pc(process, 1, 0));
-	if (process->cycles_left == -1)
-	{
-		process->cycles_left = g_op_tab[opc - 1].nb_cycle - 1;
+	if (!process)
 		return (0);
+	while (process)
+	{
+		if (process->cycles_left > 1)
+			process->cycles_left--;
+		else
+		{
+			opc = vm->map[process->pc % MEM_SIZE];
+			if (opc < 1 || opc > 16)
+				decal_pc((instr_params(vm, process, opc)), 1, 0);
+			else if (process->cycles_left == -1)
+				process->cycles_left = g_op_tab[opc - 1].nb_cycle - 1;
+			else
+			//	ft_printf("Process %d|execs %s|\n", process->id, g_op_tab[opc -1].name);
+				vm->instr_tab[opc - 1](instr_params(vm, process, opc));
+			//ft_printf("NEW PC : %d\n", process->pc);
+		}
+		process = process->next;
 	}
-	//	ft_printf("OCP : %d\n", opc);
-	vm->instr_tab[opc - 1](instr_params(vm, process, opc));
-	//	ft_printf("NEW PC : %d\n", process->pc);
 	return (1);
 }
 
-int	mem_dump(unsigned char *map)
+static int	mem_dump(unsigned char *map)
 {
 	int		i;
 
@@ -67,112 +76,58 @@ int	mem_dump(unsigned char *map)
 	return (1);
 }
 
-static void	exec_processes(t_process *process, t_vm *vm)
+static void	check_vm(t_vm *vm, int *check)
 {
-	if (!process)
-		return ;
-	while (process)
-	{
-		if (process->cycles_left > 0)
-			process->cycles_left--;
-		else
-			exec_process(process, vm);
-		process = process->next;
-	}
-}
+	t_champ *ch;
 
-void		ft_visu(t_vm *vm, int i, WINDOW *win)
-{
-	int ch;
-	int	j;
-	int pc;
-	int pcx;
-	int pcy;
-	unsigned char pchar;
-
-	j = 0;
-	i = 0;
-	pc = vm->processes->pc;
-	nodelay(stdscr,TRUE);
-	ch = getch();
-	if (ch == 95)
-		i = i - 1000;
-	if (ch == 43)
-		i = i + 1000;
-	if (i <= 0)
-		i = 30000;
-	if (ch == 3)
+	ch = vm->champ;
+	//INFO("CHECKS");
+	check_process(vm);
+	if (*check == MAX_CHECKS || vm->lives >= NBR_LIVE)
 	{
-		clear();
-		exit (0);
+		*check = 0;
+		vm->ctd -= CYCLE_DELTA;
+//		ft_printf("Cycle to die is now %d\n", vm->ctd);
 	}
-	if (ch == 45)
-		i = 2000;
-	mvwprintw(win, 0, 0, "cycle numero : %d\n", vm->cycle);
-	while (j < MEM_SIZE)
+	vm->cycle = 0;
+	vm->lives = 0;
+	*check += 1;
+	while (ch)
 	{
-		wprintw(win, "%.2x", vm->map[j++]);
-		if (!(j % 64) && j != 0)
-			wprintw(win, "\n");
-		else
-			wprintw(win, " ");
+		ch->lives = 0;
+		ch = ch->next;
 	}
-	pcx = 20 + (pc * 3);
-	pcy = 2;
-	if ((pc > 64) && pc != 0)
-	{
-		pcx = 20 + (pc / 64 * 3);
-		pcy = 2 + pc / 65;
-	}
-	pchar = vm->map[pc];
-	attron(A_STANDOUT);
-	mvprintw(pcy, pcx, "%.2x", vm->map[pc]);
-	attroff(A_STANDOUT);
-	usleep(i);
-	wrefresh(win);
 }
 
 int			run(t_vm *vm)
 {
-	int		ctd;
 	int		check;
-	int		i;
 	WINDOW	*win;
-	int		height;
-	int		width;
-	int		start_y;
-	int		start_x;
+	WINDOW	*score;
+	WINDOW	*test;
+	t_visu	*visu;
 
-	i = 300;
 	check = 0;
+	win = NULL;
+	visu = ft_memalloc(sizeof(t_visu));
+	visu->slow = 30000;
 	init_instr_tab(vm);
-	ctd = CYCLE_TO_DIE;
-	initscr();
-	curs_set(0);
-	height = 90;
-	width =	200;
-	start_y = 1;
-	start_x = 20;
-	win = newwin(height, width, start_y, start_x);
-	wrefresh(win);
-	while (vm->processes_nbr && ctd > 0)
+	win = init_visu(visu);
+	score = init_score(visu);	
+	vm->ctd = CYCLE_TO_DIE;
+	test = subwin(stdscr, LINES, COLS * 0.1, 0, COLS * 0.9);
+	while (vm->processes_nbr && vm->ctd > 0)
 	{
-		//		ft_printf("CYCLE : %d\n", vm->cycle);
-		if (vm->cycle == vm->dump)
+//		ft_printf("It is now cycle %d\n", vm->tt_cycle);
+		if (vm->cycle == vm->ctd)
+			check_vm(vm, &check);
+		exec_process(vm->processes, vm);
+		visu_run(vm, win, visu, score, test);
+		if (vm->tt_cycle == vm->dump)
 			return (mem_dump(vm->map));
-		if (!(vm->cycle % ctd) && vm->cycle)
-		{
-			check_process(vm);
-			if (++check == MAX_CHECKS || vm->lives >= NBR_LIVE)
-			{
-				vm->lives = 0;
-				check = 0;
-				ctd -= CYCLE_DELTA;
-			}
-		}
-		ft_visu(vm, i, win);
-		exec_processes(vm->processes, vm);
 		vm->cycle++;
+		vm->tt_cycle++;
+//		ft_printf("{CYAN}processes nb:%d{EOC}\n", vm->processes_nbr);
 	}
 	endwin();
 	return (1);

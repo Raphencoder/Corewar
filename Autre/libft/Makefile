@@ -23,7 +23,6 @@ SRC = ft_atoi.c \
 	  ft_isupper.c \
 	  ft_isprint.c \
 	  ft_itoa.c \
-	  ft_itoa_base.c \
 	  ft_lstadd.c \
 	  ft_lstdel.c \
 	  ft_lstdelone.c \
@@ -68,7 +67,6 @@ SRC = ft_atoi.c \
 	  ft_strncmp.c \
 	  ft_strncpy.c \
 	  ft_strnequ.c \
-	  ft_strndup.c \
 	  ft_strnew.c \
 	  ft_strnstr.c \
 	  ft_strrchr.c \

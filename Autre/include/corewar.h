@@ -6,7 +6,7 @@
 /*   By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/09 17:40:13 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/06/12 16:12:36 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/06/20 16:34:46 by rkrief           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 #include "../libft/includes/libft.h"
 #include "op.h"
 #include <ncurses.h>
-#include <unistd.h>
 #include <fcntl.h>
 
 /********************DEBUG KINGDOM*********************/
@@ -25,9 +24,6 @@
 #define INFO(message) ft_printf("{BLUE}%s{EOC}\n", message)
 #define INFONUM(message) ft_printf("{BLUE}%d{EOC}\n", message)
 /******************************************************/
-
-//REMOVE
-int	mem_dump(unsigned char *map);
 
 typedef struct			s_champ
 {
@@ -47,6 +43,7 @@ typedef struct			s_process
 	int					carry;
 	int					reg[REG_NUMBER];
 	int					cycles_left;
+	int 				id;
 	struct s_process	*next;
 }						t_process;
 
@@ -71,11 +68,28 @@ typedef struct			s_vm
 	int					dump;
 	int					processes_nbr;
 	int					cycle;
+	int					tt_cycle;
+	int					visu;
 	unsigned char		*map;
 	int 				(*instr_tab[16])(t_instr);
 	struct s_champ		*champ;
 	struct s_process	*processes;
+	int					ctd;
 }						t_vm;
+
+typedef struct			s_visu
+{
+	int					height;
+	int					width;
+	int					start_x;
+	int					start_y;
+	int					slow;
+}						t_visu;
+
+//visu
+WINDOW	*init_visu(t_visu *visu);
+WINDOW	*init_score(t_visu *visu);
+void    visu_run(t_vm vm, WINDOW *win, t_visu *visu, WINDOW *score, WINDOW *test);
 
 //run.c
 int 					run(t_vm *vm);
@@ -116,10 +130,10 @@ int						opt(char **av, int ac, int *i, t_vm *vm);
 int						known_opt(char *opt);
 int						check_inputs(void);
 int						list_length(t_champ *champ);
+int						activate_visu(t_vm *vm, int *i, int ac);
 
 //instr_params.c
-t_param					*decode_param_type(unsigned char ocp);
-t_param					*get_params(t_vm *vm, t_process *process, int opcode);
+t_param					*get_params(t_instr instr);
 t_instr					instr_params(t_vm *vm, t_process *process, int opc);
 int						continue_process(t_vm *vm, t_process *process);
 
@@ -133,10 +147,10 @@ int						byte_to_int(unsigned char *map, int cursor,
 						int amount_of_bytes);
 int						int_to_bytes(int n, int cursor, unsigned char *map);
 int						free_params(t_instr instr, int ret);
-void					convert_params(t_instr instr, int limit);
-void					convert_params_unrestrained(t_instr instr, int limit);
-int						decal_pc(t_process *process, int decal, int ret);
-void					convert_params_start(t_instr instr, int start,
+int					convert_params(t_instr instr, int limit);
+int					convert_params_unrestrained(t_instr instr, int limit);
+int						decal_pc(t_instr instr, int decal, int ret);
+int					convert_params_start(t_instr instr, int start,
 						int limit);
 int						valid_reg(int reg);
 int						get_address(int value);

@@ -6,7 +6,7 @@
 /*   By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/08 11:11:55 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/05/30 19:35:19 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/06/20 18:28:02 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ wchar_t			*ft_wstrdup(const wchar_t *s1);
 char			*ft_noleaks_strndup(char *s1, size_t n);
 char			*ft_strcpy(char *dst, const char *src);
 char			*ft_strncpy(char *dst, const char *src, size_t len);
-char        	*ft_strndup(const char *s1, size_t n);
 char			*ft_strcat(char *s1, const char *s2);
 wchar_t			*ft_wstrcat(wchar_t *s1, const wchar_t *s2);
 char			*ft_strncat(char *s1, const char *s2, size_t n);
@@ -73,7 +72,6 @@ char			*ft_noleaks_strjoin(char *s1, char *s2);
 char			*ft_strtrim(char const *s);
 int				ft_count_words(char const *s, char separator);
 char			**ft_strsplit(char const *s, char c);
-char			*ft_itoa_base(int nbr, int base);
 char			*ft_itoa(int n);
 void			ft_putchar(char c);
 void			ft_putstr(char const *s);

@@ -6,7 +6,7 @@
 /*   By: abouvero <abouvero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/06 11:12:03 by abouvero          #+#    #+#             */
-/*   Updated: 2018/06/12 11:39:05 by abouvero         ###   ########.fr       */
+/*   Updated: 2018/06/13 16:44:33 by abouvero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,22 @@ int		known_opt(char *opt)
 {
 	if (!ft_strcmp(opt, "-n") || !ft_strcmp(opt, "-dump"))
 		return (1);
+	if (!ft_strcmp(opt, "-v"))
+		return (1);
 	return (0);
+}
+
+int		activate_visu(t_vm *vm, int *i, int ac)
+{
+	vm->visu = 1;
+	if (*i + 1 == ac)
+	{
+		if (!vm->champ)
+			ft_dprintf(2, "No champ loaded\n");
+		return (0);
+	}
+	*i += 1;
+	return (1);
 }
 
 int		check_inputs(void)

@@ -6,31 +6,22 @@
 /*   By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/09 17:40:13 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/06/12 17:36:36 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/06/15 16:10:30 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/corewar.h"
 
-//TODO: test if unsigned long is valid with all cases
 int	byte_to_int(unsigned char *map, int cursor, int amount_of_bytes)
 {
-	unsigned long	size;
+	int	ret;
 	int	i;
 
 	i = -1;
-	size = 0;
-	// ft_printf("{YELLOW}amount:%d{EOC}\n", amount_of_bytes);
-
+	ret = 0;
 	while (++i < amount_of_bytes)
-	{
-		size |= map[(cursor + i) % MEM_SIZE];
-		// ft_printf("{YELLOW}%d{EOC}", map[(cursor + i)]);
-		// ft_putchar('\n');
-		size <<= 8;
-	}
-//	ft_printf("byte_to_int returns:%d\n", size >> 8);
-	return (size >> 8);
+		ret = (ret << 8) | map[get_address(cursor + i)];
+	return (amount_of_bytes == 2 ? (short)ret : ret);
 }
 
 int get_address(int value)
@@ -42,13 +33,22 @@ int get_address(int value)
 
 int	int_to_bytes(int n, int cursor, unsigned char *map)
 {
-	int decal;
-
 	if (!map)
 		return (0);
-	decal = -1;
-	while (++decal < 4)
-		map[(cursor + decal) % MEM_SIZE] = (n >> (24 - (decal * 8))) & 0xFF;
+	map[get_address(cursor + 3)] = (unsigned char)(n & 0x000000FF);
+    map[get_address(cursor + 2)] = (unsigned char)((n & 0x0000FF00) >> 8);
+    map[get_address(cursor + 1)] = (unsigned char)((n & 0x00FF0000) >> 16);
+    map[get_address(cursor + 0)] = (unsigned char)((n & 0xff000000) >> 24);
 	return (1);
 }
 
+int type_to_size(int type, int opc)
+{
+	if (type == T_DIR)
+		return (g_op_tab[opc - 1].oct ? 2 : DIR_SIZE);
+	else if (type == T_IND)
+		return (IND_SIZE);
+	else if (type == T_REG)
+		return (1);
+	return (0);
+}
