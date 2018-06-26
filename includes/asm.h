@@ -24,6 +24,7 @@ typedef struct		s_chain
 {
 	char			*content;
 	char			*category;
+	int				line;
 	int				index;
 	int				arg_type;
 	int				size;
@@ -54,7 +55,7 @@ void	ft_is_an_error(char *str, int i);
 t_chain	*ft_get_in_chain(char *str, int j);
 int		ft_complete_content(t_chain *block, char *str, int *i);
 int		ft_put_line_in_block(t_chain *b, int *i, char *str);
-void	ft_verify_label(char *str, int j, t_chain *block);
+void	ft_verify_label(char *str, t_chain *block);
 t_op	*ft_search_op(char *str);
 void	ft_asm(char *str, t_chain *block, header_t *header);
 void	ft_arg_type(t_chain *block);

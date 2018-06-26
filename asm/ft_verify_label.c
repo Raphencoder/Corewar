@@ -12,18 +12,10 @@
 
 #include "../includes/asm.h"
 
-void	ft_initialize(int *i, int *ok, char **res)
+void	ft_initialize(int *ok, char **res)
 {
-	*i = 0;
 	*ok = 0;
 	*res = NULL;
-}
-
-t_chain	*ft_increment(int *j, int *ok, t_chain *start)
-{
-	*j = *j + 1;
-	*ok = 0;
-	return (start);
 }
 
 void	ft_is_not_ok(int ok, char *res, int i, char *str)
@@ -37,57 +29,61 @@ void	ft_is_not_ok(int ok, char *res, int i, char *str)
 	}
 }
 
-char	*ft_take_the_res(char *str, int *i, int *j)
+char	*ft_take_the_resy(t_chain *ex)
 {
-	char	*res;
-	char	*tmp;
+	char *res;
+	char *tmp;
+	int	len;
 
-	tmp = NULL;
+	if (ex->content)
+		len = ft_strlen(ex->content);
+	else
+		return (NULL);
 	res = NULL;
-	if ((str[*j] == DIRECT_CHAR && str[*j + 1] == LABEL_CHAR) ||
-			(str[*j] == LABEL_CHAR && ft_strchr(LABEL_CHARS, str[*j + 1])))
+	if (ex->content[0] == ':' || (ex->content[0] == '%' && ex->content[1] == ':'))
 	{
-		if (str[*j] == LABEL_CHAR)
-			*i = *j + 1;
+		if (ex->content[0] == ':')
+			res = ft_strnmdup(ex->content, 1, len);
 		else
-			*i = *j + 2;
-		while (str[*j] && (str[*j] > 32 && str[*j] != SEPARATOR_CHAR))
-			*j = *j + 1;
-		res = ft_strnmdup(str, *i, *j);
+			res = ft_strnmdup(ex->content, 2, len);
 		tmp = res;
 		res = ft_strjoin(tmp, ":");
 		ft_strdel(&tmp);
-		return (res);
 	}
-	else
-		return (NULL);
+	return (res);
 }
 
-void	ft_verify_label(char *str, int j, t_chain *block)
+void	ft_verify_label(char *str, t_chain *block)
 {
-	int		i;
 	int		ok;
 	char	*res;
 	t_chain	*start;
+	t_chain	*ex;
 
-	ft_initialize(&i, &ok, &res);
+	ex = block;
 	start = block;
-	while (str[j])
+	ft_initialize(&ok, &res);
+	while (ex)
 	{
 		if (res)
 			ft_strdel(&res);
-		if ((res = ft_take_the_res(str, &i, &j)))
-		{
-			while (block->next)
+		if ((res = ft_take_the_resy(ex)))
+		{	
+			while (block)
 			{
 				if (ft_strequ(block->category, "LABEL") &&
 						ft_strequ(block->content, res))
-					ok = 1;
+					{
+						block = start;
+						ok = 1;
+						break ;
+					}
 				block = block->next;
 			}
-			ft_is_not_ok(ok, res, i, str);
+			ft_is_not_ok(ok, res, ex->line, str);
 		}
-		block = ft_increment(&j, &ok, start);
+		ex = ex->next;
+		ok = 0;
 	}
 	ft_strdel(&res);
 }

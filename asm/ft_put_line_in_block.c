@@ -16,7 +16,8 @@ t_chain	*ft_inc(int *i, int *nb_arg, t_chain *b)
 {
 	*i = *i + 1;
 	*nb_arg = *nb_arg - 1;
-	b->next = ft_memalloc(sizeof(t_chain));
+	if (!(b->next = ft_memalloc(sizeof(t_chain))))
+		exit (0);
 	return (b->next);
 }
 
@@ -100,7 +101,8 @@ int		ft_put_line_in_block(t_chain *b, int *i, char *str)
 	if ((b->nb_op_tab == 2 || b->nb_op_tab == 3 || b->nb_op_tab == 4 ||
 b->nb_op_tab == 16 || b->nb_op_tab == 10) && !ft_is_lib(str, *i))
 		ft_is_an_error(str, *i);
-	b->next = ft_memalloc(sizeof(t_chain));
+	if (!(b->next = ft_memalloc(sizeof(t_chain))))
+		exit (0);	
 	b = b->next;
 	clone = nb_arg;
 	while (nb_arg)

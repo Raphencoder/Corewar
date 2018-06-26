@@ -97,5 +97,6 @@ int		ft_complete_content(t_chain *block, char *str, int *i)
 		ft_check_if_direct(str, i, &direct, &label);
 	block->content = ft_strnmdup(str, j, *i);
 	block->category = ft_strdup("ARG");
+	block->line = j;
 	return (1);
 }

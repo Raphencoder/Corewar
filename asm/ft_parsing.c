@@ -152,7 +152,7 @@ t_chain		*ft_parsing(char *str, header_t *header, char *str2)
 	else
 		ft_is_an_error(str, i);
 	block = ft_get_in_chain(str, j);
-	ft_verify_label(str, j, block);
+	ft_verify_label(str, block);
 	ft_nbr_link(block);
 	ft_asm(str2, block, header);
 	ft_strdel(&tmp);

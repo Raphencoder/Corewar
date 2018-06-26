@@ -14,7 +14,6 @@
 
 void	ft_put_label_in_block(t_chain *block, int i, char *str, int j)
 {
-	ft_putendl(block->content);
 	block->category = ft_strdup("LABEL");
 	if (!ft_strchr(LABEL_CHARS, str[i]))
 		i++;
@@ -31,12 +30,16 @@ int		ft_put_in_block(t_chain *block, int *j, char *str)
 	nb_arg = 0;
 	while (str[*j] && str[*j] != '\n')
 	{
+		if (str[*j] == COMMENT_CHAR)
+			ft_pass_comment(str, j);
 		if (str[*j] == LABEL_CHAR && (str[*j - 1] != DIRECT_CHAR &&
 					ft_strchr(LABEL_CHARS, str[*j - 1])))
 		{
 			ft_put_label_in_block(block, i, str, *j);
 			return (0);
 		}
+		if (str[*j] <= 32)
+			break ;
 		*j = *j + 1;
 	}
 	nb_arg = ft_put_line_in_block(block, &i, str);
@@ -55,11 +58,13 @@ t_chain	*ft_else(t_chain *block, char *str, int *j)
 		block = block->next;
 		nb_arg--;
 	}
-	block->next = ft_memalloc(sizeof(t_chain));
+	if (!(block->next = ft_memalloc(sizeof(t_chain))))
+		exit (0);
 	block = block->next;
 	block->content = ft_strdup("\n");
 	block->category = ft_strdup("ENDL");
-	block->next = ft_memalloc(sizeof(t_chain));
+	if (!(block->next = ft_memalloc(sizeof(t_chain))))
+		exit(0);
 	block = block->next;
 	return (block);
 }
@@ -85,7 +90,8 @@ t_chain	*ft_get_in_chain(char *str, int j)
 	void		*start;
 
 	j++;
-	block = ft_memalloc(sizeof(t_chain));
+	if (!(block = ft_memalloc(sizeof(t_chain))))
+		exit (0);
 	block->next = 0;
 	start = block;
 	while (str[j])
