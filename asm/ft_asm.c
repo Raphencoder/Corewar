@@ -6,7 +6,7 @@
 /*   By: alecott <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/23 10:05:05 by alecott           #+#    #+#             */
-/*   Updated: 2018/06/04 13:36:54 by rkrief           ###   ########.fr       */
+/*   Updated: 2018/06/27 11:29:24 by alecott          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,14 @@ static void	ft_write_instruction(t_chain block, int fd)
 		ft_ocp(block, fd);
 }
 
-static int	ft_neg(int n)
+static int	ft_neg(int n, t_chain block)
 {
 	if (n < 0)
-		return (65536 + n);
+	{
+		n = 65536 + n;
+		if (block.size == 4)
+		n = 4294901760 + n;
+	}
 	return (n);
 }
 
@@ -49,15 +53,15 @@ static void	ft_write_arg(t_chain block, t_chain start, int fd)
 	else if (block.arg_type == IND_CODE && (ft_isdigit(block.content[0]) ||
 				block.content[0] == '-'))
 		str = ft_strdup(block.content);
-	else if ((block.arg_type == DIR_CODE && block.content[1] == LABEL_CHAR)
+		else if ((block.arg_type == DIR_CODE && block.content[1] == LABEL_CHAR)
 		|| (block.arg_type == IND_CODE && block.content[0] == LABEL_CHAR))
 		str = ft_find_label(block, start);
 	if (block.size == 1)
-		ft_putchar_fd(ft_neg(ft_atoi(str)) & 0xff, fd);
+		ft_putchar_fd(ft_neg(ft_atoi(str), block) & 0xff, fd);
 	else if (block.size == 2)
-		ft_putshort_bin(ft_neg(ft_atoi(str)), fd);
+		ft_putshort_bin(ft_neg(ft_atoi(str), block), fd);
 	else if (block.size == 4)
-		ft_putint_bin(ft_neg(ft_atoi(str)), fd);
+		ft_putint_bin(ft_neg(ft_atoi(str), block), fd);
 	ft_strdel(&str);
 }
 
