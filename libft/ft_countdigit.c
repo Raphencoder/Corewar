@@ -1,47 +1,52 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnew.c                                        :+:      :+:    :+:   */
+/*   ft_countdigit.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/10 11:43:57 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/06/28 14:51:30 by rkrief           ###   ########.fr       */
+/*   Created: 2017/11/16 17:08:48 by mfonteni          #+#    #+#             */
+/*   Updated: 2018/06/28 14:47:30 by rkrief           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
-#include <stdlib.h>
 #include "libft.h"
 
-char	*ft_strnew(size_t size)
+int	ft_countdigit(int n)
 {
-	unsigned int	count;
-	char			*str;
+	int count;
 
 	count = 0;
-	if ((str = (char*)malloc(sizeof(char) * (size + 1))) == NULL)
-		return (NULL);
-	while (count < size + 1)
+	while (n > 9 || n < -9)
 	{
-		str[count] = '\0';
+		n = n / 10;
 		count++;
 	}
-	return (str);
+	return (count + 1);
 }
 
-wchar_t	*ft_wstrnew(size_t size)
+int	ft_max_countdigit_base(intmax_t n, int base)
 {
-	unsigned int	count;
-	wchar_t			*str;
+	int count;
 
 	count = 0;
-	if ((str = (wchar_t*)malloc(sizeof(wchar_t) * (size + 1))) == NULL)
-		return (NULL);
-	while (count < size + 1)
+	while (n)
 	{
-		str[count] = '\0';
+		n = n / base;
 		count++;
 	}
-	return (str);
+	return (count + 1);
+}
+
+int	ft_umax_countdigit_base(uintmax_t n, int base)
+{
+	int count;
+
+	count = 0;
+	while (n)
+	{
+		n = n / base;
+		count++;
+	}
+	return (count + 1);
 }
