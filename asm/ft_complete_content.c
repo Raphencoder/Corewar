@@ -6,7 +6,7 @@
 /*   By: rkrief <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/24 15:05:32 by rkrief            #+#    #+#             */
-/*   Updated: 2018/06/28 11:21:31 by alecott          ###   ########.fr       */
+/*   Updated: 2018/06/28 11:58:17 by rkrief           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,6 @@ static int	ft_check_if_register(char *str, int i)
 
 	nb = 0;
 	i = i + 1;
-	if (str[i] == '0' &&
-(str[i + 1] == SEPARATOR_CHAR || str[i + 1] == ' ' || str[i + 1] == '\n'))
-		return (1);
 	if (!ft_isdigit(str[i]))
 		return (0);
 	nb = ft_atoi(str + i);

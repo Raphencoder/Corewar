@@ -6,7 +6,7 @@
 /*   By: rkrief <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 16:05:57 by rkrief            #+#    #+#             */
-/*   Updated: 2018/06/28 11:26:26 by alecott          ###   ########.fr       */
+/*   Updated: 2018/06/28 12:11:53 by rkrief           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,8 +138,18 @@ t_chain		*ft_parsing(char *str, header_t *header, char *str2)
 	j = 0;
 	if (!str || !str[i] || !ft_isascii(str[i]))
 		ft_is_an_error(str, i);
+while (str[i] <= 32 || str[i] == COMMENT_CHAR || str[i] == ';')
+{	
 	if (str[i] == COMMENT_CHAR || str[i] == ';')
 		ft_pass_comment(str, &i);
+	if (str[i] <= 32)
+	{
+		ft_pass_space(str, &i);
+		i++;
+	}
+	if (str[i] == '\n')
+		i++;
+}
 	tmp = ft_strnmdup(str, i, i + ft_strlen(NAME_CMD_STRING));
 	tmpp = ft_strnmdup(str, i, i + ft_strlen(COMMENT_CMD_STRING));
 	if (!ft_strequ(NAME_CMD_STRING, tmp) &&
