@@ -6,7 +6,7 @@
 #    By: alecott <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/17 11:04:33 by alecott           #+#    #+#              #
-#    Updated: 2018/06/28 14:26:44 by rkrief           ###   ########.fr        #
+#    Updated: 2018/06/28 15:15:55 by rkrief           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,12 +47,13 @@ ALL_LIB_SRCS = ft_atoi.c ft_isalnum.c ft_isascii.c ft_isprint.c ft_memset.c \
 		  ft_count_words.c ft_strrev.c ft_isupper.c ft_itoa.c \
 		  get_next_line.c ft_strsubinv.c ft_tablen.c ft_realloc.c ft_tabjoin.c \
 		  ft_tabchr.c ft_tabstr.c ft_puttab.c ft_tabdup.c ft_strndup.c \
-		  ft_strnmdup.c ft_copy_tab.c
+		  ft_strnmdup.c ft_copy_tab.c \
 
 ALL_ASM_SRCS = ft_verify_label.c op.c ft_get_in_chain.c ft_is_an_error.c \
 			   ft_parsing.c ft_pass_comment.c main.c ft_asm.c ft_complete_content.c \
 			   ft_put_line_in_block.c ft_arg_type.c ft_ocp.c ft_putint_bin.c \
 			   ft_write_cor.c ft_pass_space.c ft_nbr_link.c ft_find_label.c ft_is_lib.c \
+			   ft_checkbegin.c \
 
 ALL_CWR_SRCS = 
 

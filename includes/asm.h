@@ -6,7 +6,7 @@
 /*   By: alecott <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 14:53:02 by alecott           #+#    #+#             */
-/*   Updated: 2018/06/28 15:01:20 by rkrief           ###   ########.fr       */
+/*   Updated: 2018/06/28 15:10:24 by rkrief           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ t_chain				*ft_parsing(char *str, t_header *header, char *str2);
 void				ft_is_an_error(char *str, int i);
 t_chain				*ft_get_in_chain(char *str, int j);
 int					ft_complete_content(t_chain *block, char *str, int *i);
+int					ft_checkbegin(char *str, int *i);
 int					ft_put_line_in_block(t_chain *b, int *i, char *str);
 void				ft_verify_label(char *str, t_chain *block);
 t_op				*ft_search_op(char *str);

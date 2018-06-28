@@ -6,7 +6,7 @@
 /*   By: rkrief <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 16:05:57 by rkrief            #+#    #+#             */
-/*   Updated: 2018/06/28 14:53:59 by alecott          ###   ########.fr       */
+/*   Updated: 2018/06/28 15:14:20 by rkrief           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,33 +131,18 @@ t_chain		*ft_parsing(char *str, t_header *header, char *str2)
 	int		i;
 	int		j;
 	t_chain	*block;
-	char	*tmp;
-	char	*tmpp;
+	char	*t;
+	char	*tp;
 
 	i = 0;
-	j = 0;
-	if (!str || !str[i] || !ft_isascii(str[i]))
-		ft_is_an_error(str, i);
-	while (str[i] <= 32 || str[i] == COMMENT_CHAR || str[i] == ';')
-	{
-		if (str[i] == COMMENT_CHAR || str[i] == ';')
-			ft_pass_comment(str, &i);
-		if (str[i] <= 32)
-		{
-			ft_pass_space(str, &i);
-			i++;
-		}
-		if (str[i] == '\n')
-			i++;
-	}
-	tmp = ft_strnmdup(str, i, i + ft_strlen(NAME_CMD_STRING));
-	tmpp = ft_strnmdup(str, i, i + ft_strlen(COMMENT_CMD_STRING));
-	if (!ft_strequ(NAME_CMD_STRING, tmp) &&
-			!ft_strequ(COMMENT_CMD_STRING, tmpp))
-		ft_is_an_error(str, ft_strlen(tmp));
-	if (ft_strequ(NAME_CMD_STRING, tmp))
+	j = ft_checkbegin(str, &i);
+	t = ft_strnmdup(str, i, i + ft_strlen(NAME_CMD_STRING));
+	tp = ft_strnmdup(str, i, i + ft_strlen(COMMENT_CMD_STRING));
+	if (!ft_strequ(NAME_CMD_STRING, t) && !ft_strequ(COMMENT_CMD_STRING, tp))
+		ft_is_an_error(str, ft_strlen(t));
+	if (ft_strequ(NAME_CMD_STRING, t))
 		j = ft_get_name_then_comment(header, str, i);
-	else if (ft_strequ(COMMENT_CMD_STRING, tmpp))
+	else if (ft_strequ(COMMENT_CMD_STRING, tp))
 		j = ft_get_comment_then_name(header, str, i);
 	else
 		ft_is_an_error(str, i);
@@ -165,7 +150,7 @@ t_chain		*ft_parsing(char *str, t_header *header, char *str2)
 	ft_verify_label(str, block);
 	ft_nbr_link(block);
 	ft_asm(str2, block, header);
-	ft_strdel(&tmp);
-	ft_strdel(&tmpp);
+	ft_strdel(&t);
+	ft_strdel(&tp);
 	return (block);
 }
