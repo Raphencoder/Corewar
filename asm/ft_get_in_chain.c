@@ -6,7 +6,7 @@
 /*   By: rkrief <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 11:04:44 by rkrief            #+#    #+#             */
-/*   Updated: 2018/06/28 13:22:51 by rkrief           ###   ########.fr       */
+/*   Updated: 2018/06/28 14:56:40 by rkrief           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,6 @@ t_chain	*ft_get_in_chain(char *str, int j)
 			ft_pass_comment(str, &j);
 		j++;
 	}
-
 	block = start;
 	return (block);
 }

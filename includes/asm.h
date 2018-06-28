@@ -6,7 +6,7 @@
 /*   By: alecott <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 14:53:02 by alecott           #+#    #+#             */
-/*   Updated: 2018/06/28 13:09:43 by alecott          ###   ########.fr       */
+/*   Updated: 2018/06/28 15:01:20 by rkrief           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,14 @@ typedef struct		s_chain
 	int				nb_op_tab;
 	struct s_chain	*next;
 }					t_chain;
+
+typedef struct		s_main
+{
+	int				fd;
+	char			*str;
+	char			*getall;
+	int				nb;
+}					t_main;
 
 int					main(int argc, char **argv);
 void				ft_pass_comment(char *str, int *i);

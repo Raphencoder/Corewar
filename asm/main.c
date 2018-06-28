@@ -6,7 +6,7 @@
 /*   By: rkrief <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 18:35:51 by rkrief            #+#    #+#             */
-/*   Updated: 2018/06/28 14:14:49 by rkrief           ###   ########.fr       */
+/*   Updated: 2018/06/28 15:02:27 by rkrief           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,14 +65,11 @@ void	ft_check_error_parse(int *fd, int *i, char **argv)
 
 int		main(int argc, char **argv)
 {
-	int			fd;
-	char		*str;
-	char		*getall;
 	t_chain		*block;
 	t_header	header;
-	int			i;
+	t_main		main;
 
-	i = 1;
+	main.nb = 1;
 	if (argc < 2)
 	{
 		ft_putstr("Usage: ./vm_champs/asm [-a] <sourcefile.s>\n    -a : \
@@ -80,13 +77,13 @@ Instead of creating a .cor file, outputs a stripped and annotated version of \
 the code to the standard output\n");
 		exit(0);
 	}
-	getall = NULL;
-	while (argv[i])
-		ft_check_error_parse(&fd, &i, argv);
-	while (get_next_line(fd, &str))
-		ft_into_the_while(&getall, str);
-	block = ft_parsing(getall, &header, argv[i - 1]);
-	ft_strdel(&getall);
+	main.getall = NULL;
+	while (argv[main.nb])
+		ft_check_error_parse(&main.fd, &main.nb, argv);
+	while (get_next_line(main.fd, &main.str))
+		ft_into_the_while(&main.getall, main.str);
+	block = ft_parsing(main.getall, &header, argv[main.nb - 1]);
+	ft_strdel(&main.getall);
 	ft_free_chain(block);
 	return (0);
 }
