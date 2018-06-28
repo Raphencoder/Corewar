@@ -6,13 +6,13 @@
 /*   By: rkrief <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 16:05:57 by rkrief            #+#    #+#             */
-/*   Updated: 2018/06/28 13:21:57 by alecott          ###   ########.fr       */
+/*   Updated: 2018/06/28 12:11:53 by rkrief           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/asm.h"
 
-int			ft_complete_name(char *str, int i, t_header *header)
+int			ft_complete_name(char *str, int i, header_t *header)
 {
 	int j;
 
@@ -41,7 +41,7 @@ int			ft_complete_name(char *str, int i, t_header *header)
 	return (i);
 }
 
-int			ft_complete_comment(char *str, int i, t_header *header)
+int			ft_complete_comment(char *str, int i, header_t *header)
 {
 	int j;
 
@@ -70,7 +70,7 @@ int			ft_complete_comment(char *str, int i, t_header *header)
 	return (i);
 }
 
-int			ft_get_comment_then_name(t_header *header, char *str, int i)
+int			ft_get_comment_then_name(header_t *header, char *str, int i)
 {
 	char	*tmp;
 	int		j;
@@ -98,7 +98,7 @@ int			ft_get_comment_then_name(t_header *header, char *str, int i)
 	return (j);
 }
 
-int			ft_get_name_then_comment(t_header *header, char *str, int i)
+int			ft_get_name_then_comment(header_t *header, char *str, int i)
 {
 	char	*tmp;
 	int		j;
@@ -126,7 +126,7 @@ int			ft_get_name_then_comment(t_header *header, char *str, int i)
 	return (j);
 }
 
-t_chain		*ft_parsing(char *str, t_header *header, char *str2)
+t_chain		*ft_parsing(char *str, header_t *header, char *str2)
 {
 	int		i;
 	int		j;
