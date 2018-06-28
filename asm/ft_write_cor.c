@@ -6,7 +6,7 @@
 /*   By: alecott <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 15:09:07 by alecott           #+#    #+#             */
-/*   Updated: 2018/05/31 15:26:53 by rkrief           ###   ########.fr       */
+/*   Updated: 2018/06/28 12:58:28 by alecott          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	ft_total_size(t_chain block)
 	return (n);
 }
 
-void		ft_write_cor(int fd, header_t *header, t_chain block)
+void		ft_write_cor(int fd, t_header *header, t_chain block)
 {
 	int		i;
 
