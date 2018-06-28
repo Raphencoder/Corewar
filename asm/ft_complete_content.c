@@ -6,7 +6,7 @@
 /*   By: rkrief <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/24 15:05:32 by rkrief            #+#    #+#             */
-/*   Updated: 2018/06/27 10:34:06 by rkrief           ###   ########.fr       */
+/*   Updated: 2018/06/28 11:21:31 by alecott          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ static void	ft_check_if_direct(char *str, int *i, int *direct, int *label)
 	*i = *i + 1;
 }
 
-int		ft_complete_content(t_chain *block, char *str, int *i)
+int			ft_complete_content(t_chain *block, char *str, int *i)
 {
 	int j;
 	int direct;

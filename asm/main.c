@@ -6,7 +6,7 @@
 /*   By: rkrief <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 18:35:51 by rkrief            #+#    #+#             */
-/*   Updated: 2018/06/27 11:21:58 by alecott          ###   ########.fr       */
+/*   Updated: 2018/06/28 11:22:01 by alecott          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	ft_free_chain(t_chain *block)
 		free(block);
 		block = tmp;
 	}
-//	free(block);
 }
 
 void	ft_into_the_while(char **getall, char *str)

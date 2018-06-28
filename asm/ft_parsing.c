@@ -6,13 +6,13 @@
 /*   By: rkrief <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 16:05:57 by rkrief            #+#    #+#             */
-/*   Updated: 2018/06/04 16:57:08 by rkrief           ###   ########.fr       */
+/*   Updated: 2018/06/28 11:26:26 by alecott          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/asm.h"
 
-int		ft_complete_name(char *str, int i, header_t *header)
+int			ft_complete_name(char *str, int i, header_t *header)
 {
 	int j;
 
@@ -27,7 +27,7 @@ int		ft_complete_name(char *str, int i, header_t *header)
 		if (j > 128)
 		{
 			ft_putendl("Champion name too long (Max length 128)");
-			exit (0);
+			exit(0);
 		}
 		if (str[i] == 34)
 			break ;
@@ -41,7 +41,7 @@ int		ft_complete_name(char *str, int i, header_t *header)
 	return (i);
 }
 
-int		ft_complete_comment(char *str, int i, header_t *header)
+int			ft_complete_comment(char *str, int i, header_t *header)
 {
 	int j;
 
@@ -56,7 +56,7 @@ int		ft_complete_comment(char *str, int i, header_t *header)
 		if (j > 2048)
 		{
 			ft_putendl("Champion comment too long (Max length 2048)");
-			exit (0);
+			exit(0);
 		}
 		if (str[i] == 34)
 			break ;
@@ -70,7 +70,7 @@ int		ft_complete_comment(char *str, int i, header_t *header)
 	return (i);
 }
 
-int		ft_get_comment_then_name(header_t *header, char *str, int i)
+int			ft_get_comment_then_name(header_t *header, char *str, int i)
 {
 	char	*tmp;
 	int		j;
@@ -98,7 +98,7 @@ int		ft_get_comment_then_name(header_t *header, char *str, int i)
 	return (j);
 }
 
-int		ft_get_name_then_comment(header_t *header, char *str, int i)
+int			ft_get_name_then_comment(header_t *header, char *str, int i)
 {
 	char	*tmp;
 	int		j;

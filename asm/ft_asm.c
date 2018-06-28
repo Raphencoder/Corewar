@@ -6,7 +6,7 @@
 /*   By: alecott <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/23 10:05:05 by alecott           #+#    #+#             */
-/*   Updated: 2018/06/27 11:29:24 by alecott          ###   ########.fr       */
+/*   Updated: 2018/06/28 11:20:28 by alecott          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	ft_neg(int n, t_chain block)
 	{
 		n = 65536 + n;
 		if (block.size == 4)
-		n = 4294901760 + n;
+			n = 4294901760 + n;
 	}
 	return (n);
 }
@@ -53,7 +53,7 @@ static void	ft_write_arg(t_chain block, t_chain start, int fd)
 	else if (block.arg_type == IND_CODE && (ft_isdigit(block.content[0]) ||
 				block.content[0] == '-'))
 		str = ft_strdup(block.content);
-		else if ((block.arg_type == DIR_CODE && block.content[1] == LABEL_CHAR)
+	else if ((block.arg_type == DIR_CODE && block.content[1] == LABEL_CHAR)
 		|| (block.arg_type == IND_CODE && block.content[0] == LABEL_CHAR))
 		str = ft_find_label(block, start);
 	if (block.size == 1)

@@ -6,7 +6,7 @@
 /*   By: rkrief <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 11:04:44 by rkrief            #+#    #+#             */
-/*   Updated: 2018/06/04 17:18:01 by rkrief           ###   ########.fr       */
+/*   Updated: 2018/06/28 11:21:08 by alecott          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ t_chain	*ft_else(t_chain *block, char *str, int *j)
 		nb_arg--;
 	}
 	if (!(block->next = ft_memalloc(sizeof(t_chain))))
-		exit (0);
+		exit(0);
 	block = block->next;
 	block->content = ft_strdup("\n");
 	block->category = ft_strdup("ENDL");
@@ -91,7 +91,7 @@ t_chain	*ft_get_in_chain(char *str, int j)
 
 	j++;
 	if (!(block = ft_memalloc(sizeof(t_chain))))
-		exit (0);
+		exit(0);
 	block->next = 0;
 	start = block;
 	while (str[j])

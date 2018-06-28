@@ -6,7 +6,7 @@
 /*   By: rkrief <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/24 15:57:47 by rkrief            #+#    #+#             */
-/*   Updated: 2018/06/04 17:17:39 by rkrief           ###   ########.fr       */
+/*   Updated: 2018/06/28 11:26:43 by alecott          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_chain	*ft_inc(int *i, int *nb_arg, t_chain *b)
 	*i = *i + 1;
 	*nb_arg = *nb_arg - 1;
 	if (!(b->next = ft_memalloc(sizeof(t_chain))))
-		exit (0);
+		exit(0);
 	return (b->next);
 }
 
@@ -102,7 +102,7 @@ int		ft_put_line_in_block(t_chain *b, int *i, char *str)
 b->nb_op_tab == 16 || b->nb_op_tab == 10) && !ft_is_lib(str, *i))
 		ft_is_an_error(str, *i);
 	if (!(b->next = ft_memalloc(sizeof(t_chain))))
-		exit (0);	
+		exit(0);
 	b = b->next;
 	clone = nb_arg;
 	while (nb_arg)
