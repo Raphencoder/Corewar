@@ -6,7 +6,7 @@
 /*   By: alecott <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/29 14:31:33 by alecott           #+#    #+#             */
-/*   Updated: 2018/06/27 10:53:42 by alecott          ###   ########.fr       */
+/*   Updated: 2018/06/28 15:46:43 by rkrief           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ char		*ft_find_label(t_chain block, t_chain start)
 	int		pci;
 	int		pcl;
 	char	*str;
+	int		ret;
 
 	str = NULL;
 	if (block.arg_type == DIR_CODE)
@@ -71,7 +72,9 @@ char		*ft_find_label(t_chain block, t_chain start)
 	pcl = ft_pc_label(start, str);
 	ft_strdel(&str);
 	if (pci <= pcl)
-		return (ft_itoa(pcl - pci));
+		ret = pcl - pci;
 	else
-		return (ft_itoa((65536 - (pci - pcl))));
+		ret = (65536 - (pci - pcl));
+	str = ft_itoa(ret);
+	return (str);
 }
