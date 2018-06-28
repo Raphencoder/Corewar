@@ -6,7 +6,7 @@
 /*   By: rkrief <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/24 15:57:47 by rkrief            #+#    #+#             */
-/*   Updated: 2018/06/28 14:11:57 by rkrief           ###   ########.fr       */
+/*   Updated: 2018/06/28 16:59:02 by rkrief           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ int		ft_take_nb_argument(char *str, int i)
 		if (str[i] == SEPARATOR_CHAR)
 		{
 			nb_separator++;
+			if (smth == 0)
+				ft_is_an_error(str, i);
 			smth = 0;
 		}
 		if (ft_strchr(LABEL_CHARS, str[i]))

@@ -13,7 +13,7 @@ live2:
 	live 	%4
 zjmp	%:endwhile		;if (carry)
 fork	%:forks
-ld	%0, r4			;carry = 1
+ld 	, r4			;carry = 1
 zjmp	%:forks
 #EndWhile
 endwhile:
@@ -22,3 +22,17 @@ ld	%0, r4			;carry = 1
 live:
 live %4
 zjmp %:live
+
+
+
+
+
+
+
+
+
+
+
+
+
+             ;                 lfjvlfkrelkg
