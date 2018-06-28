@@ -6,7 +6,7 @@
 /*   By: rkrief <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 18:35:51 by rkrief            #+#    #+#             */
-/*   Updated: 2018/06/28 14:11:36 by rkrief           ###   ########.fr       */
+/*   Updated: 2018/06/28 14:14:49 by rkrief           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int		main(int argc, char **argv)
 	char		*str;
 	char		*getall;
 	t_chain		*block;
-	t_header	*header;
+	t_header	header;
 	int			i;
 
 	i = 1;
