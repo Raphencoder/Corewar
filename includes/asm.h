@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   corewar.h                                          :+:      :+:    :+:   */
+/*   asm.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alecott <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 14:53:02 by alecott           #+#    #+#             */
-/*   Updated: 2018/06/28 16:39:56 by rkrief           ###   ########.fr       */
+/*   Updated: 2018/06/28 18:20:05 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ASM_H
 # define ASM_H
 
-# include "op.h"
+# include "../../includes/op.h"
 # include <stdio.h>
 # include <fcntl.h>
 # include <unistd.h>
