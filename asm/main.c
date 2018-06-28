@@ -6,7 +6,7 @@
 /*   By: rkrief <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 18:35:51 by rkrief            #+#    #+#             */
-/*   Updated: 2018/06/28 11:22:01 by alecott          ###   ########.fr       */
+/*   Updated: 2018/06/28 12:55:20 by alecott          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int		main(int argc, char **argv)
 	int			fd;
 	char		*str;
 	char		*getall;
-	header_t	*header;
+	t_header	*header;
 	int			i;
 
 	i = 1;
@@ -81,7 +81,7 @@ Instead of creating a .cor file, outputs a stripped and annotated version of \
 the code to the standard output\n");
 		exit(0);
 	}
-	header = ft_memalloc(sizeof(header_t));
+	header = ft_memalloc(sizeof(t_header));
 	getall = NULL;
 	while (argv[i])
 		ft_check_error_parse(&fd, &i, argv);

@@ -6,7 +6,7 @@
 /*   By: rkrief <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/24 15:57:47 by rkrief            #+#    #+#             */
-/*   Updated: 2018/06/28 11:26:43 by alecott          ###   ########.fr       */
+/*   Updated: 2018/06/28 12:59:40 by alecott          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int		ft_check_if_instruction(t_chain *block)
 	(void)block;
 	while (i < 16)
 	{
-		if (ft_strequ(op_tab[i].str, block->content))
+		if (ft_strequ(g_op_tab[i].str, block->content))
 		{
 			block->nb_op_tab = i;
 			return (1);
@@ -83,7 +83,7 @@ int		ft_take_instruction_and_nb_arg(char *str, int *i, t_chain *b)
 	while (str[*i] == ' ' || str[*i] == '\t')
 		*i = *i + 1;
 	nb_arg = ft_take_nb_argument(str, *i);
-	if (nb_arg != op_tab[b->nb_op_tab].nb_args)
+	if (nb_arg != g_op_tab[b->nb_op_tab].nb_args)
 	{
 		ft_putendl("Wrong number of argument");
 		ft_is_an_error(str, *i);

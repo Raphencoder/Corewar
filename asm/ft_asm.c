@@ -6,7 +6,7 @@
 /*   By: alecott <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/23 10:05:05 by alecott           #+#    #+#             */
-/*   Updated: 2018/06/28 11:20:28 by alecott          ###   ########.fr       */
+/*   Updated: 2018/06/28 12:58:04 by alecott          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static void	ft_write_arg(t_chain block, t_chain start, int fd)
 	ft_strdel(&str);
 }
 
-void		ft_asm(char *str, t_chain *block, header_t *header)
+void		ft_asm(char *str, t_chain *block, t_header *header)
 {
 	int		fd;
 	char	*tmp;

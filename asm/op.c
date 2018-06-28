@@ -6,13 +6,13 @@
 /*   By: zaz <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:43:01 by zaz               #+#    #+#             */
-/*   Updated: 2018/05/30 11:09:19 by alecott          ###   ########.fr       */
+/*   Updated: 2018/06/28 12:14:11 by alecott          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/asm.h"
 
-t_op	op_tab[17] =
+t_op	g_op_tab[17] =
 {
 	{"live", 1, {T_DIR}, 1, 10, "alive", 0, 0},
 	{"ld", 2, {T_DIR | T_IND, T_REG}, 2, 5, "load", 1, 0},
@@ -46,8 +46,8 @@ t_op	*ft_search_op(char *str)
 	i = 0;
 	while (i < 17)
 	{
-		if (ft_strequ(op_tab[i].str, str))
-			return (op_tab + i);
+		if (ft_strequ(g_op_tab[i].str, str))
+			return (g_op_tab + i);
 		i++;
 	}
 	return (NULL);

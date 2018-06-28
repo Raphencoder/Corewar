@@ -6,7 +6,7 @@
 /*   By: alecott <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/23 13:20:35 by alecott           #+#    #+#             */
-/*   Updated: 2018/05/23 13:47:55 by alecott          ###   ########.fr       */
+/*   Updated: 2018/06/28 13:11:33 by alecott          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,4 @@ char		*ft_itoa_base(int nbr, int base)
 		nbr = nbr / base;
 	}
 	return (str);
-}
-
-int		main(int argc, char **argv)
-{
-	if (argc == 3)
-		ft_putendl(ft_itoa_base(ft_atoi(argv[1]), ft_atoi(argv[2])));
-	return (0);
 }
