@@ -6,7 +6,7 @@
 /*   By: rkrief <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 18:35:51 by rkrief            #+#    #+#             */
-/*   Updated: 2018/06/28 12:55:20 by alecott          ###   ########.fr       */
+/*   Updated: 2018/06/28 14:14:49 by rkrief           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ void	ft_free_chain(t_chain *block)
 		tmp = block->next;
 		if (block->content)
 			ft_strdel(&block->content);
-		else
-			break ;
 		if (block->category)
 			ft_strdel(&block->category);
 		free(block);
@@ -70,7 +68,8 @@ int		main(int argc, char **argv)
 	int			fd;
 	char		*str;
 	char		*getall;
-	t_header	*header;
+	t_chain		*block;
+	t_header	header;
 	int			i;
 
 	i = 1;
@@ -81,12 +80,13 @@ Instead of creating a .cor file, outputs a stripped and annotated version of \
 the code to the standard output\n");
 		exit(0);
 	}
-	header = ft_memalloc(sizeof(t_header));
 	getall = NULL;
 	while (argv[i])
 		ft_check_error_parse(&fd, &i, argv);
 	while (get_next_line(fd, &str))
 		ft_into_the_while(&getall, str);
-	ft_parsing(getall, header, argv[i - 1]);
+	block = ft_parsing(getall, &header, argv[i - 1]);
+	ft_strdel(&getall);
+	ft_free_chain(block);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: rkrief <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/24 15:05:32 by rkrief            #+#    #+#             */
-/*   Updated: 2018/06/28 11:58:17 by rkrief           ###   ########.fr       */
+/*   Updated: 2018/06/28 14:43:05 by rkrief           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ int			ft_complete_content(t_chain *block, char *str, int *i)
 	j = *i;
 	while (str[*i] && str[*i] > 32 &&
 			(str[*i] != SEPARATOR_CHAR && str[*i] != ';'))
-		ft_check_if_direct(str, i, &direct, &label);
+	ft_check_if_direct(str, i, &direct, &label);
 	block->content = ft_strnmdup(str, j, *i);
 	block->category = ft_strdup("ARG");
 	block->line = j;

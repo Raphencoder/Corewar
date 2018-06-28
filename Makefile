@@ -6,11 +6,11 @@
 #    By: alecott <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/17 11:04:33 by alecott           #+#    #+#              #
-#    Updated: 2018/06/28 11:19:21 by alecott          ###   ########.fr        #
+#    Updated: 2018/06/28 14:26:44 by rkrief           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CFLAGS = -Wall -Werror -Wextra -g -fsanitize=address
+CFLAGS = -Wall -Werror -Wextra -g 
 
 LIB_PATH = ./libft/
 

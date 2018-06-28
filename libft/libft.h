@@ -6,7 +6,7 @@
 /*   By: alecott <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 08:48:09 by alecott           #+#    #+#             */
-/*   Updated: 2018/05/23 13:43:43 by alecott          ###   ########.fr       */
+/*   Updated: 2018/06/28 14:48:37 by rkrief           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,9 @@ int				ft_isdigit(int c);
 int				ft_isalnum(int c);
 int				ft_isascii(int c);
 int				ft_isprint(int c);
+int				ft_countdigit(int n);
+int				ft_max_countdigit_base(intmax_t n, int base);
+int				ft_umax_countdigit_base(uintmax_t n, int base);
 int				ft_toupper(int c);
 int				ft_isnumber(char *str);
 int				ft_tolower(int c);
