@@ -73,7 +73,7 @@ wall:
 
 beegees_gen:
 	live	%4239423
-	fork	%:beegees_gen
+	fork	%:begees_gen
 	ld		%0, r16
 
 beegees:

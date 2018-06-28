@@ -6,7 +6,7 @@
 /*   By: rkrief <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/22 16:52:40 by rkrief            #+#    #+#             */
-/*   Updated: 2018/06/28 11:25:43 by alecott          ###   ########.fr       */
+/*   Updated: 2018/06/28 15:32:06 by rkrief           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,15 +54,32 @@ char	*ft_take_the_resy(t_chain *ex)
 	return (res);
 }
 
+t_chain	*ft_next(t_chain *block, char *res, int *ok)
+{
+	t_chain *start;
+
+	start = block;
+	while (block)
+	{
+		if (ft_strequ(block->category, "LABEL") &&
+				ft_strequ(block->content, res))
+		{
+			block = start;
+			*ok = 1;
+			break ;
+		}
+		block = block->next;
+	}
+	return (block);
+}
+
 void	ft_verify_label(char *str, t_chain *block)
 {
 	int		ok;
 	char	*res;
-	t_chain	*start;
 	t_chain	*ex;
 
 	ex = block;
-	start = block;
 	ft_initialize(&ok, &res);
 	while (ex)
 	{
@@ -70,17 +87,7 @@ void	ft_verify_label(char *str, t_chain *block)
 			ft_strdel(&res);
 		if ((res = ft_take_the_resy(ex)))
 		{
-			while (block)
-			{
-				if (ft_strequ(block->category, "LABEL") &&
-						ft_strequ(block->content, res))
-				{
-					block = start;
-					ok = 1;
-					break ;
-				}
-				block = block->next;
-			}
+			block = ft_next(block, res, &ok);
 			ft_is_not_ok(ok, res, ex->line, str);
 		}
 		ex = ex->next;
