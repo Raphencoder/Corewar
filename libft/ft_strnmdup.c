@@ -6,7 +6,7 @@
 /*   By: alecott <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/30 08:50:08 by alecott           #+#    #+#             */
-/*   Updated: 2018/06/28 14:06:05 by rkrief           ###   ########.fr       */
+/*   Updated: 2018/06/28 14:41:48 by rkrief           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*ft_strnmdup(char *str, int start, int end)
 	int		i;
 
 	i = 0;
-	if ((clone = (char*)ft_memalloc(sizeof(char) * (end - start + 1))) == 0)
+	if ((clone = (char*)ft_memalloc(sizeof(char) * (end - start + 2))) == 0)
 		return (0);
 	while (start < end)
 	{
